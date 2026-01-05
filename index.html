@@ -6,6 +6,20 @@
     <title>FL | 正在生長的實驗</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "FL | 正在生長的實驗",
+      "url": "https://freelife.example.com",
+      "description": "FL是一個由一人與AI共同打造的實驗網站，紀錄真實的建造過程，追求自由生活的可能性。",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://freelife.example.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -30,6 +44,18 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Community Choice Banner (Dynamic) -->
+    <div id="community-choice-banner" class="hidden fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-xl border-l-4 border-green-500 z-40 animate-grow max-w-sm">
+        <div class="flex justify-between items-start mb-2">
+            <h4 class="font-bold text-gray-800 text-sm"><i class="fas fa-fire text-red-500 mr-1"></i> 社群熱議中</h4>
+            <button onclick="document.getElementById('community-choice-banner').remove()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
+        </div>
+        <p id="top-idea-text" class="text-gray-600 text-sm mb-3">載入中...</p>
+        <a href="vote.html" class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full hover:bg-green-200 transition font-bold block text-center">
+            去投票支持 <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <header class="text-center pt-32 pb-20 bg-gradient-to-b from-green-100 to-gray-50 px-4 animate-grow">
@@ -141,5 +167,25 @@
         </div>
     </footer>
 
+    <script>
+        // Check for trending ideas and show banner
+        document.addEventListener('DOMContentLoaded', () => {
+            const ideas = JSON.parse(localStorage.getItem('fl-ideas')) || [];
+            if (ideas.length > 0) {
+                // Find top voted idea
+                const topIdea = ideas.reduce((prev, current) => (prev.votes > current.votes) ? prev : current);
+                
+                if (topIdea.votes > 0) {
+                    const banner = document.getElementById('community-choice-banner');
+                    const text = document.getElementById('top-idea-text');
+                    
+                    text.textContent = `大家最想要：「${topIdea.text}」(${topIdea.votes}票)`;
+                    banner.classList.remove('hidden');
+                }
+            }
+        });
+    </script>
 </body>
+<!-- AddThis Script -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-placeholder"></script>
 </html>

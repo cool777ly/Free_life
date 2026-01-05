@@ -143,17 +143,39 @@
             localStorage.setItem('fl-comments', JSON.stringify(comments));
         }
 
+        // Gamification: User Level System (Local Only)
+        let userStats = JSON.parse(localStorage.getItem('fl-user-stats')) || { commentCount: 0, level: 1 };
+        
+        function updateUserLevel() {
+            userStats.commentCount++;
+            // Simple logic: Level up every 3 comments
+            const newLevel = Math.floor(userStats.commentCount / 3) + 1;
+            if (newLevel > userStats.level) {
+                userStats.level = newLevel;
+                alert(`🎉 恭喜！你的社群等級提升到了 Lv.${newLevel}！`);
+            }
+            localStorage.setItem('fl-user-stats', JSON.stringify(userStats));
+            renderUserStats();
+        }
+
+        function renderUserStats() {
+            // Can be added to UI later, for now just console or hidden tracking
+            console.log('User Stats:', userStats);
+        }
+
         // Add Comment
         function addComment(name, tag, text) {
             const newComment = {
                 id: Date.now(),
-                name: name || '匿名訪客',
+                name: name || `訪客 (Lv.${userStats.level})`, // Add level to name if anonymous
                 tag: tag,
                 text: text,
-                timestamp: Date.now()
+                timestamp: Date.now(),
+                level: userStats.level // Store level with comment
             };
             comments.unshift(newComment); // Add to top
             saveAndRenderComments();
+            updateUserLevel(); // Trigger gamification
         }
 
         // Save & Render
@@ -178,6 +200,14 @@
                 default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
             }
         }
+        
+        // Get Level Badge
+        function getLevelBadge(level) {
+            if (!level) return '';
+            if (level >= 10) return '<span class="ml-2 text-xs bg-purple-100 text-purple-800 px-1 rounded border border-purple-200">👑 FL 大使</span>';
+            if (level >= 5) return '<span class="ml-2 text-xs bg-indigo-100 text-indigo-800 px-1 rounded border border-indigo-200">⭐ 活躍成員</span>';
+            return `<span class="ml-2 text-xs bg-gray-100 text-gray-600 px-1 rounded border border-gray-200">Lv.${level}</span>`;
+        }
 
         // Render
         function renderComments() {
@@ -192,6 +222,10 @@
             comments.forEach(comment => {
                 const div = document.createElement('div');
                 div.className = 'bg-white p-6 rounded-xl shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700';
+                
+                // Add level badge if exists
+                const levelBadge = comment.level ? getLevelBadge(comment.level) : '';
+                
                 div.innerHTML = `
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex items-center gap-3">
@@ -199,7 +233,9 @@
                                 <i class="fas fa-user"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800 dark:text-gray-200">${comment.name}</h4>
+                                <h4 class="font-bold text-gray-800 dark:text-gray-200 flex items-center">
+                                    ${comment.name} ${levelBadge}
+                                </h4>
                                 <span class="text-xs text-gray-400">${formatDate(comment.timestamp)}</span>
                             </div>
                         </div>
