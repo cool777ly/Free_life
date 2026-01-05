@@ -26,13 +26,19 @@
                         <a class="nav-link active" href="index.html">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#philosophy">理念</a>
+                        <a class="nav-link" href="origin.html">起點</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="build_log.html">建造日誌</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="stories.html">故事</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="submit.html">投稿</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="message_board.html">留言板</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">聯絡我們</a>
@@ -60,8 +66,8 @@
                         </p>
                     </div>
                     <div class="d-flex justify-content-center gap-3">
-                        <a href="stories.html" class="btn btn-primary btn-lg px-4">查看建造紀錄</a>
-                        <a href="contact.html" class="btn btn-outline-secondary btn-lg px-4">一起把它變好</a>
+                        <a href="build_log.html" class="btn btn-primary btn-lg px-4">查看建造紀錄</a>
+                        <a href="message_board.html" class="btn btn-outline-secondary btn-lg px-4">一起把它變好</a>
                     </div>
                 </div>
             </div>
@@ -115,23 +121,24 @@
                     <h2 class="mb-0">最新紀錄</h2>
                     <p class="text-muted mt-2 mb-0">產品功能與開發心得</p>
                 </div>
-                <a href="stories.html" class="btn btn-outline-primary">查看全部</a>
+                <a href="build_log.html" class="btn btn-outline-primary">查看全部日誌</a>
             </div>
             <div class="row g-4" id="featured-stories-container">
-                <!-- Stories will be injected via JS -->
-                <!-- Static placeholders tailored to the new theme -->
+                <!-- Build Log Previews -->
                 <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body">
-                            <span class="badge bg-primary mb-2">開發日誌</span>
-                            <h5 class="card-title">Hello World: 實驗開始</h5>
-                            <p class="card-text text-muted">決定開始這個專案的第一天。配置了環境，與 AI 進行了第一次關於架構的對話。</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <small class="text-muted">Day 1</small>
-                                <span class="text-primary"><i class="fas fa-arrow-right"></i></span>
+                    <a href="build_log.html" class="text-decoration-none text-dark">
+                        <div class="card h-100 border-0 shadow-sm hover-card">
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">2026-01-05</span>
+                                <h5 class="card-title">開始：這是一個誠實的起點</h5>
+                                <p class="card-text text-muted">今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼...</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <small class="text-muted">Day 1</small>
+                                    <span class="text-primary"><i class="fas fa-arrow-right"></i></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
                     <div class="card h-100 border-0 shadow-sm">
@@ -166,7 +173,13 @@
     <!-- Footer -->
     <footer class="text-center py-4">
         <div class="container">
-            <p class="mb-0 text-muted">&copy; 2024 FL. Built with AI, Driven by Curiosity.</p>
+            <div class="mb-3">
+                <span class="text-muted small">🚧 網站持續進化中 | This site is evolving | 這裡正在施工</span>
+            </div>
+            <p class="mb-2 text-muted small">
+                <a href="origin.html" class="text-decoration-none text-muted">為什麼會有這個網站？</a>
+            </p>
+            <p class="mb-0 text-muted small">&copy; 2024 FL. Last updated: 2026-01-05</p>
         </div>
     </footer>
 

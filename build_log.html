@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>故事 - FL | 擁抱自由</title>
+    <title>建造日誌 - FL | 真實建造紀錄</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -29,10 +29,10 @@
                         <a class="nav-link" href="origin.html">起點</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="build_log.html">建造日誌</a>
+                        <a class="nav-link active" href="build_log.html">建造日誌</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="stories.html">故事</a>
+                        <a class="nav-link" href="stories.html">故事</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="submit.html">投稿</a>
@@ -40,14 +40,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="message_board.html">留言板</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">聯絡我們</a>
-                    </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="搜尋故事..." aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
-                </form>
             </div>
         </div>
     </nav>
@@ -55,35 +48,54 @@
     <!-- Header -->
     <header class="bg-light py-5 mt-5">
         <div class="container text-center">
-            <h1 class="display-5 fw-bold text-primary">自由故事</h1>
-            <p class="lead text-muted">探索來自我們社群的關於解放和個人成長的勵志故事。</p>
+            <h1 class="display-5 fw-bold text-primary">建造日誌</h1>
+            <p class="lead text-muted">不追求完美，只記錄真實。這裡是 FL 成長的足跡。</p>
         </div>
     </header>
 
-    <!-- Stories Grid -->
+    <!-- Build Logs Section -->
     <section class="py-5">
         <div class="container">
-            <!-- Filter/Sort Options could go here -->
-            <div class="d-flex justify-content-end mb-4">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-secondary active">最新</button>
-                    <button type="button" class="btn btn-outline-secondary">最高票</button>
-                </div>
-            </div>
-
-            <div class="row g-4" id="stories-grid">
-                <!-- Content will be loaded dynamically via script.js -->
-                <div class="col-12 text-center py-5 loading-spinner">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">載入中...</span>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    
+                    <!-- Log Entry Template -->
+                    <!-- 
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="badge bg-secondary">YYYY-MM-DD</span>
+                                <small class="text-muted">Day X</small>
+                            </div>
+                            <h3 class="card-title h4 mb-3">日誌標題</h3>
+                            <div class="card-text text-muted">
+                                <p>內容段落...</p>
+                            </div>
+                        </div>
                     </div>
+                    -->
+
+                    <!-- First Log Entry -->
+                    <div class="card mb-4 border-0 shadow-sm fade-in">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="badge bg-primary">2026-01-05</span> <!-- 使用當前日期 -->
+                                <small class="text-muted">Day 1</small>
+                            </div>
+                            <h3 class="card-title h4 mb-3">開始：這是一個誠實的起點</h3>
+                            <div class="card-text text-secondary">
+                                <p>今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼。它現在還很簡陋，很多功能只是「看起來能用」，但我決定先讓它存在。不完美沒關係，因為這才剛開始。</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-4">
+    <footer class="text-center py-4 border-top mt-5">
         <div class="container">
             <div class="mb-3">
                 <span class="text-muted small">🚧 網站持續進化中 | This site is evolving | 這裡正在施工</span>
@@ -96,12 +108,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="script.js"></script>
-    <script>
-        // Temporary script to simulate loading stories until main script is ready
-        document.addEventListener('DOMContentLoaded', () => {
-             // In a real scenario, script.js would handle this. 
-             // I'll leave the logic for script.js to keep it centralized.
-        });
-    </script>
 </body>
 </html>
