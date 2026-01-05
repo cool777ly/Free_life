@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote | 參與決策 - FL</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="參與FL網站的決策過程，投票決定下一個功能或設計方向。這是一個由一人與AI共同打造的實驗網站。">
+    <meta name="keywords" content="網站投票, 功能決策, AI共創, FL, Free Life, 參與式設計">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Vote | 參與決策 - FL">
+    <meta property="og:description" content="你的每一票，都決定了 FL 下一步生長的方向。來投票決定下一個功能吧！">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">FL</h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
+                <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
+                <li><a href="vote.html" class="hover:text-green-200 transition border-b-2 border-white">投票</a></li>
+                <!-- Future Link -->
+                <li><span class="text-green-400 cursor-not-allowed" title="即將開放">社群</span></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-green-800 mb-4">參與決策</h1>
+            <p class="text-lg text-gray-600">你的每一票，都決定了 FL 下一步生長的方向。</p>
+        </div>
+    </header>
+
+    <!-- Voting Section -->
+    <section class="max-w-3xl mx-auto py-8 px-4">
+        
+        <!-- Submission Form -->
+        <div class="bg-white p-6 rounded-xl shadow-md mb-10 border-t-4 border-green-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i> 提交新想法
+            </h2>
+            <p class="text-gray-600 mb-4 text-sm">你有什麼好點子？告訴我們，讓社群來決定是否實現它。</p>
+            <form id="idea-form" class="flex gap-2">
+                <input id="idea-input" type="text" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="e.g., 添加夜間模式、增加用戶聊天室..." required>
+                <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-sm">
+                    提交
+                </button>
+            </form>
+        </div>
+
+        <!-- Voting List -->
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center border-b pb-4">
+                <i class="fas fa-poll text-green-600 mr-3"></i> 進行中的投票
+            </h2>
+            
+            <div id="idea-list" class="space-y-4">
+                <!-- Ideas will be injected here via JS -->
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> 載入中...
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="mb-4">
+                <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-sm">🚧 網站持續進化中 | This site is evolving</span>
+            </div>
+            <p class="mb-2 text-sm">
+                <a href="origin.html" class="hover:text-white transition underline">為什麼會有這個網站？</a>
+            </p>
+            <p class="text-xs">&copy; 2026 FL. Last updated: 2026-01-05</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Voting Logic -->
+    <script>
+        // Default initial ideas to populate if empty
+        const defaultIdeas = [
+            { text: "完整的故事留言板功能", votes: 5, timestamp: Date.now() },
+            { text: "網站深色模式 (Dark Mode)", votes: 3, timestamp: Date.now() - 1000 },
+            { text: "個人會員中心", votes: 8, timestamp: Date.now() - 2000 }
+        ];
+
+        // Load ideas from LocalStorage or use defaults
+        let ideas = JSON.parse(localStorage.getItem('fl-ideas'));
+        
+        if (!ideas || ideas.length === 0) {
+            ideas = defaultIdeas;
+            localStorage.setItem('fl-ideas', JSON.stringify(ideas));
+        }
+
+        // Add new idea
+        function addIdea(ideaText) {
+            // Prevent empty or duplicate
+            if (!ideaText.trim()) return;
+            
+            ideas.push({ 
+                text: ideaText, 
+                votes: 0, 
+                timestamp: Date.now() 
+            });
+            saveAndRender();
+        }
+
+        // Vote for an idea
+        function vote(index) {
+            ideas[index].votes++;
+            saveAndRender();
+            
+            // Simple animation feedback (optional enhancement)
+            const btn = document.getElementById(`vote-btn-${index}`);
+            if(btn) {
+                btn.innerHTML = '<i class="fas fa-check"></i> 已投';
+                btn.classList.add('bg-green-800');
+                setTimeout(() => {
+                    renderIdeas(); // Re-render to sort
+                }, 500);
+            }
+        }
+
+        // Save to LocalStorage and update UI
+        function saveAndRender() {
+            localStorage.setItem('fl-ideas', JSON.stringify(ideas));
+            renderIdeas();
+        }
+
+        // Render the list
+        function renderIdeas() {
+            const list = document.getElementById('idea-list');
+            list.innerHTML = '';
+            
+            // Sort by votes (descending)
+            const sortedIdeas = [...ideas].sort((a, b) => b.votes - a.votes);
+
+            if (sortedIdeas.length === 0) {
+                list.innerHTML = '<p class="text-center text-gray-500 py-4">目前還沒有想法，快來提交第一個！</p>';
+                return;
+            }
+
+            sortedIdeas.forEach((idea, index) => {
+                // Find original index to update correct item
+                const originalIndex = ideas.indexOf(idea);
+                
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-4 border rounded-lg hover:bg-green-50 transition group';
+                
+                // Rank styling
+                let rankClass = "bg-gray-200 text-gray-600";
+                if (index === 0) rankClass = "bg-yellow-100 text-yellow-700 border border-yellow-300";
+                else if (index === 1) rankClass = "bg-gray-200 text-gray-700";
+                else if (index === 2) rankClass = "bg-orange-100 text-orange-700";
+
+                item.innerHTML = `
+                    <div class="flex items-center gap-4 flex-1">
+                        <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm ${rankClass}">
+                            #${index + 1}
+                        </span>
+                        <div class="flex-1">
+                            <h3 class="font-medium text-lg text-gray-800">${idea.text}</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 ml-4">
+                        <span class="font-bold text-green-700 text-lg w-8 text-center">${idea.votes}</span>
+                        <button id="vote-btn-${originalIndex}" onclick="vote(${originalIndex})" 
+                            class="bg-green-100 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm font-bold">
+                            <i class="fas fa-thumbs-up"></i> 投票
+                        </button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        // Form submission handler
+        document.getElementById('idea-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('idea-input');
+            addIdea(input.value);
+            input.value = ''; // Clear input
+        });
+
+        // Initial render
+        renderIdeas();
+    </script>
+</body>
+</html>
