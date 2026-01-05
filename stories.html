@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故事 - FL | 擁抱自由</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">FL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#rules">規則</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="stories.html">故事</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submit.html">投稿</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">聯絡我們</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="搜尋故事..." aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-light py-5 mt-5">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold text-primary">自由故事</h1>
+            <p class="lead text-muted">探索來自我們社群的關於解放和個人成長的勵志故事。</p>
+        </div>
+    </header>
+
+    <!-- Stories Grid -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Filter/Sort Options could go here -->
+            <div class="d-flex justify-content-end mb-4">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-secondary active">最新</button>
+                    <button type="button" class="btn btn-outline-secondary">最高票</button>
+                </div>
+            </div>
+
+            <div class="row g-4" id="stories-grid">
+                <!-- Content will be loaded dynamically via script.js -->
+                <div class="col-12 text-center py-5 loading-spinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">載入中...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 FL. 版權所有。</p>
+            <small class="text-muted">為自由而設計。</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    <script>
+        // Temporary script to simulate loading stories until main script is ready
+        document.addEventListener('DOMContentLoaded', () => {
+             // In a real scenario, script.js would handle this. 
+             // I'll leave the logic for script.js to keep it centralized.
+        });
+    </script>
+</body>
+</html>

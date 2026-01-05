@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿 - FL | 擁抱自由</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">FL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#rules">規則</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stories.html">故事</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="submit.html">投稿</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">聯絡我們</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-light py-5 mt-5">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold text-primary">分享你的故事</h1>
+            <p class="lead text-muted">用你的自由和成長之旅激勵他人。</p>
+        </div>
+    </header>
+
+    <!-- Submission Form -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm p-4">
+                        <form id="submit-story-form">
+                            <div class="mb-3">
+                                <label for="storyTitle" class="form-label">故事標題</label>
+                                <input type="text" class="form-control" id="storyTitle" placeholder="例如：我飛翔的那一天" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="storyContent" class="form-label">你的經歷</label>
+                                <textarea class="form-control" id="storyContent" rows="6" placeholder="分享你關於自由和成長的個人故事..." required></textarea>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="authorName" class="form-label">姓名 (選填)</label>
+                                    <input type="text" class="form-control" id="authorName" placeholder="匿名">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="authorEmail" class="form-label">電子郵件 (選填)</label>
+                                    <input type="email" class="form-control" id="authorEmail" placeholder="用於通知">
+                                </div>
+                            </div>
+
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="rulesCheck" required>
+                                <label class="form-check-label" for="rulesCheck">我同意社群規則並確認此故事符合自由主題。</label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i> 提交故事
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 FL. 版權所有。</p>
+            <small class="text-muted">為自由而設計。</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>

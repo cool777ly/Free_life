@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡我們 - FL | 擁抱自由</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">FL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#rules">規則</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stories.html">故事</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="submit.html">投稿</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">聯絡我們</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-light py-5 mt-5">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold text-primary">聯絡我們</h1>
+            <p class="lead text-muted">有問題或反饋？我們很樂意聽取您的意見。</p>
+        </div>
+    </header>
+
+    <!-- Contact Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm p-4">
+                        <h3 class="mb-4">發送訊息給我們</h3>
+                        <form>
+                            <div class="mb-3">
+                                <label for="contactName" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="contactName" placeholder="您的姓名">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactEmail" class="form-label">電子郵件</label>
+                                <input type="email" class="form-control" id="contactEmail" placeholder="your@email.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">訊息</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="我們可以如何幫助您？"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">發送訊息</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 bg-transparent">
+                        <div class="card-body">
+                            <h3 class="mb-4">聯絡資訊</h3>
+                            <div class="d-flex mb-4">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-envelope fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>電子郵件</h5>
+                                    <p class="text-muted">contact@freelife.example.com</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-map-marker-alt fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>地點</h5>
+                                    <p class="text-muted">在開闊的天空下某處，<br>地球</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="me-3 text-primary">
+                                    <i class="fas fa-clock fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>時間</h5>
+                                    <p class="text-muted">永遠為自由而開放。</p>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <h5 class="mt-4 mb-3">關注我們</h5>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="btn btn-outline-primary rounded-circle"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn btn-outline-primary rounded-circle"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="btn btn-outline-primary rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 FL. 版權所有。</p>
+            <small class="text-muted">為自由而設計。</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
