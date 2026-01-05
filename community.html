@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | FL 社群</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FL 社群討論區 - 一個人機共創的交流空間。在這裡討論網站功能、分享想法，並參與投票決策。">
+    <meta name="keywords" content="FL社群, 網站討論, 功能建議, 開發者交流, AI共創">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 簡單生長動畫 */
+        @keyframes grow { from { transform: scale(0.98); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .animate-grow { animation: grow 0.8s ease-out; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Navigation -->
+    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50 dark:bg-green-900">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">FL</h1>
+            <ul class="flex space-x-6 items-center">
+                <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
+                <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
+                <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
+                <li><a href="community.html" class="hover:text-green-200 transition border-b-2 border-white">社群</a></li>
+                <li>
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4 animate-grow dark:from-green-900 dark:to-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-green-800 mb-4 dark:text-green-400">人機共創社群</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">這裡不只是一個留言板，而是 FL 生長的養分來源。</p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8 max-w-6xl animate-grow" style="animation-delay: 0.2s;">
+        
+        <!-- Left Column: Discussion Board -->
+        <div class="flex-grow lg:w-2/3">
+            
+            <!-- Post Form -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8 border-t-4 border-green-500 dark:bg-gray-800 dark:border-green-400">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
+                    <i class="fas fa-pen-nib text-green-600 mr-2"></i> 發起討論
+                </h2>
+                <form id="post-form" class="space-y-4">
+                    <div class="flex gap-4">
+                        <input id="post-name" type="text" class="w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="你的暱稱" required>
+                        <select id="post-tag" class="w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            <option value="討論">💬 討論</option>
+                            <option value="建議">💡 建議</option>
+                            <option value="Bug">🐛 Bug</option>
+                            <option value="閒聊">☕ 閒聊</option>
+                        </select>
+                    </div>
+                    <textarea id="post-content" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="想聊聊關於 FL 的什麼？" required></textarea>
+                    <button type="submit" class="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-sm dark:bg-green-500 dark:hover:bg-green-600">
+                        發布
+                    </button>
+                </form>
+            </div>
+
+            <!-- Posts List -->
+            <div id="posts-container" class="space-y-6">
+                <!-- Posts will be injected here -->
+                <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> 載入討論中...
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Sidebar (Hot Ideas & Info) -->
+        <div class="lg:w-1/3 space-y-8">
+            
+            <!-- Hot Ideas Widget -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
+                    <i class="fas fa-fire text-red-500 mr-2"></i> 正在熱議的功能
+                </h3>
+                <p class="text-xs text-gray-500 mb-4 dark:text-gray-400">數據來自 <a href="vote.html" class="text-green-600 hover:underline">投票頁</a> 的 LocalStorage</p>
+                
+                <ul id="sidebar-hot-ideas" class="space-y-3">
+                    <!-- Ideas injected via JS -->
+                    <li class="text-center text-sm text-gray-400 py-4">暫無熱門想法</li>
+                </ul>
+                
+                <a href="vote.html" class="block text-center mt-6 text-sm text-green-600 font-bold hover:text-green-800 transition border-t pt-4 border-gray-100 dark:border-gray-700">
+                    去投票頁支持更多 <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Community Stats (Fake for now, but fun) -->
+            <div class="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-xl shadow-inner dark:from-gray-800 dark:to-gray-800 border border-green-100 dark:border-gray-700">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 dark:text-gray-100">社群狀態</h3>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-green-600" id="total-posts">0</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">討論總數</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-blue-600" id="online-users">1</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">在線建造者</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12 dark:bg-gray-950">
+        <div class="container mx-auto px-4">
+            <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-05</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Dark Mode ---
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('fl-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('fl-theme') === 'dark' || (!('fl-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // --- Community Posts Logic (LocalStorage) ---
+        const defaultPosts = [
+            { id: 1, name: 'FL_Admin', tag: '公告', content: '歡迎來到社群討論區！請理性發言，共同維護這個實驗空間。', timestamp: Date.now(), likes: 10 },
+            { id: 2, name: 'Visitor_001', tag: '建議', content: '我覺得投票頁可以增加「反對」選項，這樣數據更真實？', timestamp: Date.now() - 3600000, likes: 2 }
+        ];
+
+        let posts = JSON.parse(localStorage.getItem('fl_community_posts')) || defaultPosts;
+
+        function savePosts() {
+            localStorage.setItem('fl_community_posts', JSON.stringify(posts));
+            renderPosts();
+            updateStats();
+        }
+
+        function addPost(name, tag, content) {
+            const newPost = {
+                id: Date.now(),
+                name: name,
+                tag: tag,
+                content: content,
+                timestamp: Date.now(),
+                likes: 0
+            };
+            posts.unshift(newPost);
+            savePosts();
+        }
+
+        function likePost(id) {
+            const post = posts.find(p => p.id === id);
+            if (post) {
+                post.likes++;
+                savePosts();
+            }
+        }
+
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function getTagColor(tag) {
+            switch(tag) {
+                case '公告': return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
+                case '建議': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
+                case 'Bug': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+                default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+            }
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+
+            if (posts.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-500 py-8">暫無討論，成為第一個發言的人吧！</p>';
+                return;
+            }
+
+            posts.forEach(post => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-5 rounded-xl shadow-sm border border-gray-100 transition hover:shadow-md dark:bg-gray-800 dark:border-gray-700';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 dark:bg-gray-700 dark:text-gray-300 font-bold">
+                                ${post.name.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 dark:text-gray-200 text-sm">${post.name}</h4>
+                                <span class="text-xs text-gray-400">${formatDate(post.timestamp)}</span>
+                            </div>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded-full ${getTagColor(post.tag)}">${post.tag}</span>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 pl-13 ml-13 md:pl-0 md:ml-13 leading-relaxed">${post.content}</p>
+                    <div class="flex justify-end items-center border-t border-gray-50 pt-3 dark:border-gray-700">
+                        <button onclick="likePost(${post.id})" class="text-gray-400 hover:text-red-500 transition flex items-center gap-1 text-sm group">
+                            <i class="fas fa-heart group-hover:scale-110 transform transition"></i> <span>${post.likes}</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // --- Sidebar Hot Ideas Logic ---
+        function renderSidebarIdeas() {
+            const ideas = JSON.parse(localStorage.getItem('fl_ideas')) || [];
+            const list = document.getElementById('sidebar-hot-ideas');
+            
+            // Filter > 0 votes and sort
+            const hotIdeas = ideas.filter(i => i.votes > 0).sort((a, b) => b.votes - a.votes).slice(0, 5);
+
+            if (hotIdeas.length > 0) {
+                list.innerHTML = '';
+                hotIdeas.forEach((idea, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex justify-between items-center text-sm p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-700 transition cursor-pointer';
+                    li.onclick = () => window.location.href = 'vote.html'; // Click to vote
+                    
+                    let icon = `<span class="text-gray-400 w-5 text-center font-mono">${index + 1}</span>`;
+                    if (index === 0) icon = '<span class="text-yellow-500 w-5 text-center"><i class="fas fa-crown"></i></span>';
+                    
+                    li.innerHTML = `
+                        <div class="flex items-center gap-2 truncate mr-2">
+                            ${icon}
+                            <span class="truncate text-gray-700 dark:text-gray-300">${idea.text}</span>
+                        </div>
+                        <span class="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded text-xs dark:bg-green-900/30 dark:text-green-400">${idea.votes}</span>
+                    `;
+                    list.appendChild(li);
+                });
+            }
+        }
+
+        // --- Stats Logic ---
+        function updateStats() {
+            document.getElementById('total-posts').textContent = posts.length;
+            // Online users is fake for now, maybe random 1-5?
+            document.getElementById('online-users').textContent = Math.floor(Math.random() * 5) + 1;
+        }
+
+        // --- Init ---
+        document.getElementById('post-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('post-name').value;
+            const tag = document.getElementById('post-tag').value;
+            const content = document.getElementById('post-content').value;
+            
+            addPost(name, tag, content);
+            document.getElementById('post-content').value = ''; // Clear content only
+        });
+
+        // Run on load
+        renderPosts();
+        renderSidebarIdeas();
+        updateStats();
+
+    </script>
+</body>
+</html>

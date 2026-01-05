@@ -34,6 +34,9 @@
                             800: '#166534',
                             900: '#14532d',
                         }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
@@ -46,21 +49,30 @@
         /* 簡單生長動畫 */
         @keyframes grow { from { transform: scale(0.98); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .animate-grow { animation: grow 0.8s ease-out; }
+        
+        /* 投票彈跳動畫 */
+        @keyframes bounce-vote { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.05); } 
+        }
+        .voted-animation { animation: bounce-vote 0.4s ease-in-out; }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+<body class="bg-gradient-to-br from-green-50 via-white to-green-50 font-sans text-gray-800 transition-colors duration-300 min-h-screen flex flex-col dark:from-gray-900 dark:via-gray-900 dark:to-green-900 dark:text-gray-100">
 
     <!-- Navigation -->
-    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50 dark:bg-green-900">
+    <nav class="bg-green-700 text-white p-4 shadow-lg fixed w-full top-0 z-50 dark:bg-green-900 backdrop-blur-sm bg-opacity-95">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-wider">FL</h1>
-            <ul class="flex space-x-6 items-center">
+            <h1 class="text-2xl font-bold tracking-wider flex items-center">
+                <i class="fas fa-leaf mr-2"></i> FL
+            </h1>
+            <ul class="flex space-x-6 items-center text-sm md:text-base">
                 <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
                 <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
-                <li><a href="vote.html" class="hover:text-green-200 transition border-b-2 border-white">投票</a></li>
+                <li><a href="vote.html" class="hover:text-green-200 transition border-b-2 border-white font-semibold">投票</a></li>
                 <li><a href="message_board.html" class="hover:text-green-200 transition">留言板</a></li>
                 <li>
-                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition" title="切換深色模式">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:inline"></i>
                     </button>
@@ -69,277 +81,216 @@
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="text-center pt-32 pb-8 bg-gradient-to-b from-green-100 to-gray-50 px-4 animate-grow dark:from-green-900 dark:to-gray-900">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl font-bold text-green-800 mb-4 dark:text-green-400">參與決策</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300">你的每一票，都決定了 FL 下一步生長的方向。</p>
-        </div>
-    </header>
-
-    <!-- Voting Section -->
-    <section class="max-w-3xl mx-auto py-8 px-4 animate-grow" style="animation-delay: 0.2s;">
-        
-        <!-- Rules Section -->
-        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-10 rounded-r-lg shadow-sm dark:bg-yellow-900/20 dark:border-yellow-600">
-            <h2 class="text-xl font-bold mb-3 flex items-center text-yellow-800 dark:text-yellow-200">
-                <i class="fas fa-scroll mr-2"></i> 投票規則（2026-01-05 實驗版）
-            </h2>
-            <ul class="list-disc pl-6 space-y-2 text-sm text-yellow-900 dark:text-yellow-100/90">
-                <li>每位用戶（同一瀏覽器）只能對每個想法投 1 票（使用 LocalStorage 記錄）</li>
-                <li>無法撤銷投票（保持真實性，請慎重選擇！）</li>
-                <li>投票數據目前只存在用戶本地（不同裝置/瀏覽器視為不同用戶，未來會上雲）</li>
-                <li>當某想法累計超過 10 票，我會手動實現它，並記錄在建造日誌</li>
-                <li>歡迎提交新想法！但請保持與「自由生活 + 人機共創」主題相關</li>
-                <li>作弊（清除 LocalStorage 重新投）會被記錄為「人類本性實驗的一部分」😂</li>
-            </ul>
-        </div>
-
-        <!-- Submission Form -->
-        <div class="bg-white p-6 rounded-xl shadow-md mb-10 border-t-4 border-green-500 dark:bg-gray-800 dark:border-green-400">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
-                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i> 提交新想法
-            </h2>
-            <p class="text-gray-600 mb-4 text-sm dark:text-gray-400">你有什麼好點子？告訴我們，讓社群來決定是否實現它。</p>
-            <form id="idea-form" class="flex gap-2">
-                <input id="idea-input" type="text" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="例如：整合簡單 AI 聊天室..." required>
-                <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-sm dark:bg-green-500 dark:hover:bg-green-600">
-                    提交
-                </button>
-            </form>
-        </div>
-
-        <!-- Voting List -->
-        <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-800">
-            <div class="flex justify-between items-center mb-6 border-b pb-4 dark:border-gray-700">
-                <h2 class="text-2xl font-bold text-gray-800 flex items-center dark:text-gray-100">
-                    <i class="fas fa-poll text-green-600 mr-3 dark:text-green-400"></i> 目前熱門想法
-                </h2>
-                <button onclick="shareVote()" class="text-sm bg-blue-100 text-blue-600 px-3 py-1 rounded-full hover:bg-blue-200 transition dark:bg-blue-900 dark:text-blue-300">
-                    <i class="fas fa-share-alt mr-1"></i> 分享投票
-                </button>
-            </div>
+    <!-- Main Content -->
+    <main class="flex-grow pt-24 px-4 pb-12">
+        <div class="max-w-3xl mx-auto animate-grow">
             
-            <div id="idea-list" class="space-y-4">
-                <!-- Ideas will be injected here via JS -->
-                <div class="text-center py-8 text-gray-500 dark:text-gray-400">
-                    <i class="fas fa-spinner fa-spin mr-2"></i> 載入中...
+            <!-- Page Title -->
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-green-800 mb-3 dark:text-green-400">決策實驗室</h1>
+                <p class="text-gray-600 dark:text-gray-300">這裡沒有黑箱，只有社群的意志。你的點擊決定 FL 的下一行代碼。</p>
+            </div>
+
+            <!-- Rules Section (v0.1) -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-10 rounded-r-xl shadow-sm dark:bg-yellow-900/20 dark:border-yellow-500">
+                <h2 class="text-lg font-bold mb-3 flex items-center text-yellow-800 dark:text-yellow-200">
+                    <i class="fas fa-clipboard-list mr-2"></i> 投票規則 v0.1
+                </h2>
+                <ul class="list-none space-y-2 text-sm text-yellow-900 dark:text-yellow-100/90">
+                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> 每位用戶（同一瀏覽器）對每個想法限投 1 票。</li>
+                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> <strong>無法撤銷</strong>：請慎重使用你的權利。</li>
+                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> <strong>數據真實</strong>：直接存於 LocalStorage，這是一個去中心化的信任實驗。</li>
+                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> <strong>行動承諾</strong>：累計超過 10 票的想法，將被標記為「計劃中」並優先開發。</li>
+                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> 作弊行為（如清除緩存刷票）將被視為對人類本性的測試 😂</li>
+                </ul>
+            </div>
+
+            <!-- Submission Form -->
+            <div class="bg-white p-6 rounded-2xl shadow-lg mb-10 border border-green-100 dark:bg-gray-800 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
+                    <i class="fas fa-plus-circle text-green-600 mr-2"></i> 發起新提案
+                </h2>
+                <form id="idea-form" class="flex flex-col md:flex-row gap-3">
+                    <input id="idea-input" type="text" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="例如：增加「番茄鐘」功能..." required>
+                    <button type="submit" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-md active:transform active:scale-95 dark:bg-green-500 dark:hover:bg-green-600 whitespace-nowrap">
+                        提交想法
+                    </button>
+                </form>
+            </div>
+
+            <!-- Voting List -->
+            <div class="space-y-6" id="idea-list">
+                <!-- Ideas injected by JS -->
+                <div class="text-center py-12">
+                    <i class="fas fa-circle-notch fa-spin text-3xl text-green-500"></i>
+                    <p class="mt-4 text-gray-500">正在讀取社群智慧...</p>
                 </div>
             </div>
+
         </div>
+    </main>
 
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12 dark:bg-gray-950">
-        <div class="container mx-auto px-4">
-            <div class="mb-4">
-                <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-sm">🚧 網站持續進化中 | This site is evolving</span>
+    <!-- Footer with Social Share -->
+    <footer class="bg-gray-800 text-gray-400 py-10 mt-auto dark:bg-gray-950">
+        <div class="container mx-auto px-4 text-center">
+            
+            <div class="mb-8">
+                <h3 class="text-white font-bold mb-4 text-lg">讓更多人參與實驗</h3>
+                <button onclick="shareToX()" class="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-full font-bold transition shadow-lg inline-flex items-center gap-2 border border-gray-700">
+                    <i class="fab fa-x-twitter text-xl"></i> 分享到 X
+                </button>
+                <p class="text-xs mt-2 text-gray-500">自動帶入 Hashtag #FreeLifeExperiment</p>
             </div>
-            <p class="mb-2 text-sm">
-                <a href="origin.html" class="hover:text-white transition underline">為什麼會有這個網站？</a>
-            </p>
-            <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-05</p>
+
+            <div class="border-t border-gray-700 pt-6">
+                <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-xs mb-3">
+                    🚧 網站持續進化中 | System Status: Evolving
+                </span>
+                <p class="text-xs">&copy; 2026 FL. Built with Human-AI Collaboration.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Voting Logic -->
+    <!-- JavaScript Logic -->
     <script>
-        // Dark Mode Logic
+        // --- Dark Mode ---
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('fl-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         }
-
-        // Init Theme
         if (localStorage.getItem('fl-theme') === 'dark' || (!('fl-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
 
-        // Share Function
-        function shareVote() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'FL 投票決策',
-                    text: '快來參與 FL 網站的下一個功能投票！',
-                    url: window.location.href
-                });
-            } else {
-                alert('連結已複製到剪貼簿！');
-                navigator.clipboard.writeText(window.location.href);
-            }
-        }
-
-        // Share specific idea
-        function shareIdea(text, votes) {
-            const shareText = `我在 FL 網站支持「${text}」，目前已有 ${votes} 票！快來幫我投票讓它成真：`;
-            if (navigator.share) {
-                navigator.share({
-                    title: 'FL 投票決策',
-                    text: shareText,
-                    url: window.location.href
-                });
-            } else {
-                alert('文案已複製！快去分享給朋友：\n' + shareText + ' ' + window.location.href);
-                navigator.clipboard.writeText(shareText + ' ' + window.location.href);
-            }
-        }
-
-        // --- Core Voting Logic (Enhanced) ---
-
-        // 1. Data Structure:
-        // ideas: Array of objects { id, text, votes }
-        // votedIdeas: Array of IDs that user has voted for [1, 3, ...]
-
-        // Default initial ideas
-        const defaultIdeas = [
+        // --- Core Voting Logic ---
+        
+        // Initial Data (The 3 Core Ideas)
+        const initialIdeas = [
             { id: 1, text: "個人會員中心", votes: 0 },
             { id: 2, text: "完整的故事留言板功能", votes: 0 },
             { id: 3, text: "網站深色模式 (Dark Mode)", votes: 0 }
         ];
 
-        // Load data
-        let ideas = JSON.parse(localStorage.getItem('fl_ideas')) || defaultIdeas;
-        // Migration check: if old data format (no IDs), reset or migrate. 
-        // For simplicity in this session, we assume new structure or reset if needed.
+        // State Management
+        let ideas = JSON.parse(localStorage.getItem('fl_ideas')) || initialIdeas;
+        let votedIds = JSON.parse(localStorage.getItem('fl_voted_ids')) || [];
+
+        // Data Migration Check (if old data format exists)
         if (!ideas[0].id) {
-            ideas = defaultIdeas;
+            ideas = initialIdeas;
             localStorage.setItem('fl_ideas', JSON.stringify(ideas));
         }
-
-        let votedIdeas = JSON.parse(localStorage.getItem('fl_voted')) || [];
 
         function saveData() {
             localStorage.setItem('fl_ideas', JSON.stringify(ideas));
-            localStorage.setItem('fl_voted', JSON.stringify(votedIdeas));
+            localStorage.setItem('fl_voted_ids', JSON.stringify(votedIds));
         }
 
-        // Add new idea
-        function addIdea(ideaText) {
-            if (!ideaText.trim()) return;
+        // Add Idea
+        document.getElementById('idea-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('idea-input');
+            const text = input.value.trim();
             
-            // Generate new ID: max existing ID + 1
-            const newId = ideas.length > 0 ? Math.max(...ideas.map(i => i.id)) + 1 : 1;
-            
-            ideas.push({ 
-                id: newId,
-                text: ideaText, 
-                votes: 0 
-            });
-            saveData();
-            renderIdeas();
-            alert('想法已提交！等待社群投票～');
-        }
-
-        // Vote for an idea
-        function vote(id) {
-            // Check if already voted
-            if (votedIdeas.includes(id)) {
-                alert('你已經投過這個想法囉！每人每項只能投一票。');
-                return;
+            if (text) {
+                const newId = ideas.length > 0 ? Math.max(...ideas.map(i => i.id)) + 1 : 1;
+                ideas.push({ id: newId, text: text, votes: 0 });
+                saveData();
+                renderIdeas();
+                input.value = '';
+                
+                // Visual feedback
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-20 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl animate-bounce z-50';
+                notification.innerHTML = '<i class="fas fa-check-circle mr-2"></i> 想法已提交！';
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
             }
+        });
+
+        // Vote Action
+        window.handleVote = function(id) {
+            if (votedIds.includes(id)) return;
 
             const idea = ideas.find(i => i.id === id);
             if (idea) {
                 idea.votes++;
-                votedIdeas.push(id);
+                votedIds.push(id);
                 saveData();
                 renderIdeas();
-                
-                // Visual feedback
-                const btn = document.getElementById(`vote-btn-${id}`);
-                if (btn) {
-                    btn.innerHTML = '<i class="fas fa-check"></i> 已投';
-                    btn.classList.remove('bg-green-100', 'text-green-700', 'hover:bg-green-600', 'hover:text-white', 'dark:bg-green-900', 'dark:text-green-300');
-                    btn.classList.add('bg-gray-400', 'text-white', 'cursor-not-allowed');
-                }
-                
-                alert('感謝投票！你的選擇將推動 FL 生長～');
             }
-        }
+        };
 
-        // Render the list
+        // Render List
         function renderIdeas() {
             const list = document.getElementById('idea-list');
             list.innerHTML = '';
-            
-            // Sort by votes (descending)
+
             const sortedIdeas = [...ideas].sort((a, b) => b.votes - a.votes);
 
-            if (sortedIdeas.length === 0) {
-                list.innerHTML = '<p class="text-center text-gray-500 py-4 dark:text-gray-400">目前還沒有想法，快來提交第一個！</p>';
-                return;
-            }
-
             sortedIdeas.forEach((idea, index) => {
-                const hasVoted = votedIdeas.includes(idea.id);
+                const isVoted = votedIds.includes(idea.id);
+                const isTop3 = index < 3;
+                const isTrending = idea.votes >= 10;
                 
-                const item = document.createElement('div');
-                item.className = 'flex items-center justify-between p-4 border rounded-lg hover:bg-green-50 transition group dark:border-gray-700 dark:hover:bg-gray-700 relative overflow-hidden';
+                // Dynamic Styles
+                let cardClass = "bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between transition hover:shadow-md dark:bg-gray-800 dark:border-gray-700";
+                let rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 font-bold text-sm dark:bg-gray-700 dark:text-gray-400">#${index + 1}</span>`;
                 
-                // Rank styling
-                let rankClass = "bg-gray-200 text-gray-600 dark:bg-gray-600 dark:text-gray-300";
-                let statusBadge = "";
-
                 if (index === 0) {
-                    rankClass = "bg-yellow-100 text-yellow-700 border border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200 dark:border-yellow-700";
-                    item.classList.add('border-green-200', 'shadow-sm');
-                    statusBadge = '<span class="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-0.5 rounded-bl-lg font-bold"><i class="fas fa-fire"></i> Trending</span>';
-                }
-                else if (index === 1) rankClass = "bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-200";
-                else if (index === 2) rankClass = "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-200";
-
-                // Auto-promote logic visualization (Simulation)
-                if (idea.votes >= 10 && index < 3) {
-                     statusBadge = '<span class="absolute top-0 right-0 bg-blue-500 text-white text-xs px-2 py-0.5 rounded-bl-lg font-bold"><i class="fas fa-rocket"></i> Planned</span>';
+                    cardClass += " border-l-4 border-l-yellow-400 ring-1 ring-yellow-100 dark:ring-yellow-900";
+                    rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-700 font-bold text-sm ring-2 ring-yellow-200 dark:bg-yellow-900 dark:text-yellow-200">🥇</span>`;
+                } else if (index === 1) {
+                    rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 font-bold text-sm dark:bg-gray-600 dark:text-gray-200">🥈</span>`;
+                } else if (index === 2) {
+                    rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-100 text-orange-800 font-bold text-sm dark:bg-orange-900 dark:text-orange-200">🥉</span>`;
                 }
 
-                // Button styling based on voted state
-                let btnClass = hasVoted 
-                    ? "bg-gray-400 text-white cursor-not-allowed px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm font-bold"
-                    : "bg-green-100 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-lg transition duration-200 flex items-center gap-2 text-sm font-bold dark:bg-green-900 dark:text-green-300 dark:hover:bg-green-600 dark:hover:text-white";
+                const item = document.createElement('div');
+                item.className = cardClass;
                 
-                let btnContent = hasVoted 
-                    ? '<i class="fas fa-check"></i> 已投'
-                    : '<i class="fas fa-thumbs-up"></i> 投票';
+                // Status Badges
+                let badges = '';
+                if (isTrending) badges += `<span class="ml-2 text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold"><i class="fas fa-fire"></i> 熱門</span>`;
+                if (isVoted) badges += `<span class="ml-2 text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-bold"><i class="fas fa-check"></i> 已投</span>`;
+
+                // Button State
+                const btnClass = isVoted 
+                    ? "bg-gray-100 text-gray-400 cursor-not-allowed px-4 py-2 rounded-lg font-bold text-sm border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-500"
+                    : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 px-4 py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white";
+
+                const btnText = isVoted ? '已投' : '投票';
 
                 item.innerHTML = `
-                    ${statusBadge}
                     <div class="flex items-center gap-4 flex-1">
-                        <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm ${rankClass}">
-                            #${index + 1}
-                        </span>
-                        <div class="flex-1">
-                            <h3 class="font-medium text-lg text-gray-800 dark:text-gray-200">
-                                ${idea.text}
+                        ${rankBadge}
+                        <div class="flex flex-col">
+                            <h3 class="font-bold text-gray-800 text-lg dark:text-gray-100 flex items-center flex-wrap">
+                                ${idea.text} ${badges}
                             </h3>
-                            <button onclick="shareIdea('${idea.text}', ${idea.votes})" class="text-xs text-blue-500 hover:text-blue-700 mt-1 dark:text-blue-400 dark:hover:text-blue-300">
-                                <i class="fas fa-share"></i> 拉票
-                            </button>
+                            <div class="text-xs text-gray-500 mt-1 dark:text-gray-400">
+                                目前票數: <span class="font-bold text-green-600 dark:text-green-400">${idea.votes}</span>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="flex items-center gap-4 ml-4">
-                        <span class="font-bold text-green-700 text-lg w-8 text-center dark:text-green-400">${idea.votes}</span>
-                        <button id="vote-btn-${idea.id}" onclick="vote(${idea.id})" ${hasVoted ? 'disabled' : ''} class="${btnClass}">
-                            ${btnContent}
-                        </button>
-                    </div>
+                    <button onclick="handleVote(${idea.id})" ${isVoted ? 'disabled' : ''} class="${btnClass}">
+                        ${isVoted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-thumbs-up"></i>'} ${btnText}
+                    </button>
                 `;
                 list.appendChild(item);
             });
         }
 
-        // Form submission handler
-        document.getElementById('idea-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const input = document.getElementById('idea-input');
-            addIdea(input.value);
-            input.value = ''; // Clear input
-        });
+        // --- Social Share Logic (Share to X) ---
+        window.shareToX = function() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("我正在 FL 網站參與網站未來的投票決策！這是一個由人機共創的自由實驗。 #FreeLifeExperiment #FL #AI");
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        };
 
-        // Initial render
+        // Init
         renderIdeas();
+
     </script>
 </body>
 </html>

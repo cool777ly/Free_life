@@ -168,19 +168,73 @@
     </footer>
 
     <script>
-        // Check for trending ideas and show banner
+        // Check for trending ideas and show banner & section
         document.addEventListener('DOMContentLoaded', () => {
-            const ideas = JSON.parse(localStorage.getItem('fl-ideas')) || [];
+            const ideas = JSON.parse(localStorage.getItem('fl_ideas')) || []; // Note: changed key to fl_ideas to match vote.html
+            
             if (ideas.length > 0) {
-                // Find top voted idea
+                // 1. Banner Logic (Top Idea)
                 const topIdea = ideas.reduce((prev, current) => (prev.votes > current.votes) ? prev : current);
-                
                 if (topIdea.votes > 0) {
                     const banner = document.getElementById('community-choice-banner');
-                    const text = document.getElementById('top-idea-text');
-                    
-                    text.textContent = `大家最想要：「${topIdea.text}」(${topIdea.votes}票)`;
-                    banner.classList.remove('hidden');
+                    if(banner) {
+                        const text = document.getElementById('top-idea-text');
+                        text.textContent = `大家最想要：「${topIdea.text}」(${topIdea.votes}票)`;
+                        banner.classList.remove('hidden');
+                    }
+                }
+
+                // 2. Hot Ideas Section Logic (> 5 votes)
+                const hotIdeas = ideas.filter(i => i.votes > 5).sort((a, b) => b.votes - a.votes);
+                if (hotIdeas.length > 0) {
+                    const section = document.getElementById('hot-ideas-section');
+                    const list = document.getElementById('hot-ideas-list');
+
+                    // Security: Check if elements exist and use DocumentFragment for performance
+                    if (section && list) {
+                        const fragment = document.createDocumentFragment();
+
+                        hotIdeas.forEach((idea, index) => {
+                            const li = document.createElement('li');
+                            li.className = 'p-4 flex justify-between items-center hover:bg-gray-50 transition';
+
+                            // Rank icon
+                            let icon = '<i class="fas fa-star text-yellow-400"></i>';
+                            if(index === 0) icon = '<i class="fas fa-crown text-yellow-500"></i>';
+
+                            // Security: Use createElement and textContent to prevent XSS
+                            const leftDiv = document.createElement('div');
+                            leftDiv.className = 'flex items-center gap-3';
+
+                            const rankSpan = document.createElement('span');
+                            rankSpan.className = 'text-gray-400 font-mono w-6 text-right';
+                            rankSpan.textContent = `#${index + 1}`;
+
+                            const textSpan = document.createElement('span');
+                            textSpan.className = 'font-medium text-gray-800';
+                            textSpan.textContent = idea.text;
+
+                            leftDiv.appendChild(rankSpan);
+                            leftDiv.appendChild(textSpan);
+
+                            const rightDiv = document.createElement('div');
+                            rightDiv.className = 'flex items-center gap-2';
+                            rightDiv.innerHTML = `${icon}`;
+
+                            const votesSpan = document.createElement('span');
+                            votesSpan.className = 'font-bold text-green-600';
+                            votesSpan.textContent = `${idea.votes} 票`;
+
+                            rightDiv.appendChild(votesSpan);
+
+                            li.appendChild(leftDiv);
+                            li.appendChild(rightDiv);
+                            fragment.appendChild(li);
+                        });
+
+                        list.appendChild(fragment);
+                        section.classList.remove('hidden');
+                    }
                 }
             }
         });
