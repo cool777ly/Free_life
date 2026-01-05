@@ -14,109 +14,92 @@
     <meta property="og:description" content="不追求完美，只記錄真實。這裡是 FL 成長的足跡，見證每一個功能的誕生。">
     <meta property="og:type" content="article">
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* 簡單生長動畫 */
+        @keyframes grow { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .animate-grow { animation: grow 0.8s ease-out; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-800">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">FL</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="origin.html">起點</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="build_log.html">建造日誌</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="stories.html">故事</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="submit.html">投稿</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="message_board.html">留言板</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">FL</h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
+                <li><a href="build_log.html" class="hover:text-green-200 transition border-b-2 border-white">建造紀錄</a></li>
+                <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
+                <!-- Future Link -->
+                <li><span class="text-green-400 cursor-not-allowed" title="即將開放">社群</span></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Header -->
-    <header class="bg-light py-5 mt-5">
-        <div class="container text-center">
-            <h1 class="display-5 fw-bold text-primary">建造日誌</h1>
-            <p class="lead text-muted">不追求完美，只記錄真實。這裡是 FL 成長的足跡。</p>
+    <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4">
+        <div class="max-w-4xl mx-auto animate-grow">
+            <h1 class="text-4xl font-bold text-green-800 mb-4">建造日誌</h1>
+            <p class="text-lg text-gray-600">不追求完美，只記錄真實。這裡是 FL 成長的足跡。</p>
         </div>
     </header>
 
     <!-- Build Logs Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    
-                    <!-- Log Entry Template -->
-                    <!-- 
-                    <div class="card mb-4 border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-secondary">YYYY-MM-DD</span>
-                                <small class="text-muted">Day X</small>
-                            </div>
-                            <h3 class="card-title h4 mb-3">日誌標題</h3>
-                            <div class="card-text text-muted">
-                                <p>內容段落...</p>
-                            </div>
-                        </div>
+    <section class="max-w-4xl mx-auto py-8 px-4 animate-grow">
+        
+        <!-- Timeline Container -->
+        <div class="relative border-l-4 border-green-300 ml-4 md:ml-0 pl-8 md:pl-12 space-y-16">
+            
+            <!-- Log Entry: Day 1 -->
+            <div class="relative group">
+                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-600 text-white text-sm font-bold px-2 py-1 rounded shadow">2026-01-05</span>
+                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-600 rounded-full border-4 border-white shadow"></div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
+                    <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
+                        <i class="fas fa-flag"></i> Day 1 - 起點
                     </div>
-                    -->
-
-                    <!-- First Log Entry -->
-                    <div class="card mb-4 border-0 shadow-sm fade-in">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-primary">2026-01-05</span> <!-- 使用當前日期 -->
-                                <small class="text-muted">Day 1</small>
-                            </div>
-                            <h3 class="card-title h4 mb-3">開始：這是一個誠實的起點</h3>
-                            <div class="card-text text-secondary">
-                                <p>今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼。它現在還很簡陋，很多功能只是「看起來能用」，但我決定先讓它存在。不完美沒關係，因為這才剛開始。</p>
-                            </div>
-                        </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">開始：這是一個誠實的起點</h3>
+                    <div class="prose max-w-none text-gray-600 leading-relaxed">
+                        <p class="mb-4">今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼。</p>
+                        <p>它現在還很簡陋，很多功能只是「看起來能用」，但我決定先讓它存在。我們使用了 <strong>Tailwind CSS</strong> 來快速構建現代化的界面，並引入了 <strong>LocalStorage</strong> 來實現無後端的投票功能。不完美沒關係，因為這才剛開始。</p>
                     </div>
-
                 </div>
             </div>
+
+            <!-- Future Log Placeholder (Static Example) -->
+            <!-- 
+            <div class="relative group opacity-50">
+                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-gray-400 text-white text-sm font-bold px-2 py-1 rounded shadow">Coming Soon</span>
+                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-gray-400 rounded-full border-4 border-white shadow"></div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-2 text-gray-600">下一站...</h3>
+                    <p class="text-gray-500">更多功能正在生長中。</p>
+                </div>
+            </div>
+            -->
+
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-4 border-top mt-5">
-        <div class="container">
-            <div class="mb-3">
-                <span class="text-muted small">🚧 網站持續進化中 | This site is evolving | 這裡正在施工</span>
+    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="mb-4">
+                <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-sm">🚧 網站持續進化中 | This site is evolving</span>
             </div>
-            <p class="mb-0 text-muted small">&copy; 2026 FL. Last updated: 2026-01-05</p>
+            <p class="mb-2 text-sm">
+                <a href="origin.html" class="hover:text-white transition underline">為什麼會有這個網站？</a>
+            </p>
+            <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-05</p>
         </div>
     </footer>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="script.js"></script>
 </body>
 </html>
