@@ -136,9 +136,9 @@
                             <div>
                                 <h3 class="font-bold text-gray-800 group-hover:text-indigo-600 transition">揭秘：我如何用 Prompt 讓 AI 寫出完美 CSS？</h3>
                                 <div class="w-full bg-gray-100 h-2 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 70%"></div>
+                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 0%"></div>
                                 </div>
-                                <div class="text-xs text-gray-400 mt-1">目前 14 票</div>
+                                <div class="text-xs text-gray-400 mt-1">目前 0 票</div>
                             </div>
                             <button class="bg-indigo-100 text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-600 hover:text-white transition">
                                 <i class="fas fa-plus"></i>
@@ -150,9 +150,9 @@
                             <div>
                                 <h3 class="font-bold text-gray-800 group-hover:text-indigo-600 transition">實戰：從零串接 Vercel Analytics 的坑與淚</h3>
                                 <div class="w-full bg-gray-100 h-2 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 30%"></div>
+                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 0%"></div>
                                 </div>
-                                <div class="text-xs text-gray-400 mt-1">目前 6 票</div>
+                                <div class="text-xs text-gray-400 mt-1">目前 0 票</div>
                             </div>
                             <button class="bg-indigo-100 text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-600 hover:text-white transition">
                                 <i class="fas fa-plus"></i>
@@ -208,20 +208,20 @@
 
         // --- Core Voting Logic ---
         
-        // Initial Data (The 3 Core Ideas)
-        const initialIdeas = [
+        // Default initial ideas to populate if empty
+        const defaultIdeas = [
             { id: 1, text: "個人會員中心", votes: 0 },
             { id: 2, text: "完整的故事留言板功能", votes: 0 },
             { id: 3, text: "網站深色模式 (Dark Mode)", votes: 0 }
         ];
 
         // State Management
-        let ideas = JSON.parse(localStorage.getItem('fl_ideas')) || initialIdeas;
+        let ideas = JSON.parse(localStorage.getItem('fl_ideas')) || defaultIdeas;
         let votedIds = JSON.parse(localStorage.getItem('fl_voted_ids')) || [];
 
         // Data Migration Check (if old data format exists)
         if (!ideas[0].id) {
-            ideas = initialIdeas;
+            ideas = defaultIdeas;
             localStorage.setItem('fl_ideas', JSON.stringify(ideas));
         }
 
@@ -347,6 +347,40 @@
                 `;
                 list.appendChild(item);
             });
+        }
+
+        // --- Topic Voting Logic ---
+        const topics = JSON.parse(localStorage.getItem('fl-topics')) || {
+            topic1: 0,
+            topic2: 0
+        };
+
+        function renderTopics() {
+            const total = (topics.topic1 + topics.topic2) || 1; // avoid division by zero
+            
+            // Update Topic 1
+            const t1 = document.getElementById('count-topic1');
+            const b1 = document.getElementById('bar-topic1');
+            if(t1) t1.innerText = topics.topic1;
+            if(b1) b1.style.width = `${(topics.topic1 / total) * 100}%`;
+            
+            // Update Topic 2
+            const t2 = document.getElementById('count-topic2');
+            const b2 = document.getElementById('bar-topic2');
+            if(t2) t2.innerText = topics.topic2;
+            if(b2) b2.style.width = `${(topics.topic2 / total) * 100}%`;
+        }
+
+        window.voteTopic = function(topicId) {
+            topics[topicId]++;
+            localStorage.setItem('fl-topics', JSON.stringify(topics));
+            renderTopics();
+            alert('感謝投票！');
+        };
+
+        // Only call if elements exist
+        if(document.getElementById('count-topic1')) {
+            renderTopics();
         }
 
         // --- Social Share Logic (Share to X) ---
