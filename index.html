@@ -77,12 +77,19 @@
             </p>
             
             <!-- CTAs -->
-            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
                 <a href="build_log.html" class="bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition shadow-lg font-bold flex items-center justify-center group">
                     查看建造紀錄 <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                 </a>
                 <a href="vote.html" class="bg-white text-gray-900 border-2 border-gray-200 px-8 py-4 rounded-xl hover:border-green-500 hover:text-green-600 transition font-bold flex items-center justify-center">
                     參與決策投票
+                </a>
+            </div>
+
+            <!-- Origin Link (Sub-CTA) -->
+            <div class="mb-16">
+                <a href="origin.html" class="inline-flex items-center text-gray-500 hover:text-green-700 transition border-b border-transparent hover:border-green-700 pb-0.5">
+                    <i class="fas fa-book-reader mr-2"></i> 為什麼會有這個網站？閱讀起源故事
                 </a>
             </div>
 
@@ -148,6 +155,34 @@
                     <div class="text-gray-400 mb-2"><i class="fas fa-lock"></i></div>
                     <p class="text-xs text-gray-400">即將解鎖</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origin Story Section (Prominent) -->
+    <section class="max-w-5xl mx-auto py-8 px-4">
+        <div class="bg-gradient-to-r from-green-800 to-green-900 rounded-2xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition duration-500">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 right-0 p-8 opacity-10 text-9xl transform rotate-12 group-hover:rotate-0 transition duration-700">
+                <i class="fas fa-book-open"></i>
+            </div>
+            
+            <div class="relative z-10 max-w-2xl">
+                <div class="inline-block bg-green-700 text-green-100 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-green-600">
+                    The Origin / 緣起
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">為什麼會有這個網站？</h2>
+                <div class="text-green-100 text-lg mb-8 leading-relaxed space-y-4">
+                    <p class="italic border-l-4 border-green-500 pl-4 bg-green-800/30 py-2 pr-2 rounded-r">
+                        「我是一個原來是數據處理工程師... 雖然這份工作很穩定，但我總覺得缺少了什麼。」
+                    </p>
+                    <p>
+                        這是一個關於離職、迷惘，最後在 AI 中找到新火花的故事。這不是一個精心策劃的創業項目，而是一個普通人試圖突破自我的真實紀錄。
+                    </p>
+                </div>
+                <a href="origin.html" class="inline-flex items-center bg-white text-green-900 px-8 py-4 rounded-xl font-bold hover:bg-green-50 transition shadow-lg transform group-hover:translate-x-2">
+                    閱讀完整故事 <i class="fas fa-arrow-right ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
