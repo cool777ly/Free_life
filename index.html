@@ -58,16 +58,99 @@
     </div>
 
     <!-- Hero Section -->
-    <header class="text-center pt-32 pb-20 bg-gradient-to-b from-green-100 to-gray-50 px-4 animate-grow">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-6xl font-bold text-green-800 mb-6">一人 + AI 的真實共創實驗</h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8">這裡不是教學平台，而是紀錄一個普通工程師如何用 AI 從零打造產品的真實戰場。<br>不修飾過程，只展示結果。</p>
-            <div class="flex justify-center gap-4">
-                <a href="build_log.html" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition shadow-lg">查看建造紀錄</a>
-                <a href="origin.html" class="bg-white text-green-700 border border-green-600 px-6 py-3 rounded-lg hover:bg-green-50 transition shadow">為什麼會有這個網站？</a>
+    <header class="text-center pt-32 pb-24 bg-gradient-to-b from-green-50 via-white to-white px-4 animate-grow relative overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-green-200 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-6 tracking-wide uppercase">
+                Experiment #001
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight tracking-tight">
+                一人 + AI <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">真實共創實驗</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+                這裡不是教學平台，而是紀錄一個普通工程師如何用 AI 從零打造產品的真實戰場。<br>
+                <span class="font-medium text-gray-800">不修飾過程，只展示結果。</span>
+            </p>
+            
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+                <a href="build_log.html" class="bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 transition shadow-lg font-bold flex items-center justify-center group">
+                    查看建造紀錄 <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="vote.html" class="bg-white text-gray-900 border-2 border-gray-200 px-8 py-4 rounded-xl hover:border-green-500 hover:text-green-600 transition font-bold flex items-center justify-center">
+                    參與決策投票
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto border-t border-gray-100 pt-10">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">3</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">更新次數</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">15+</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">決策投票</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-gray-900">5+</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">社群互動</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-600">Day 3</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">運行天數</div>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Milestones Section (New) -->
+    <section class="max-w-6xl mx-auto py-20 px-4">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 flex items-center">
+            <i class="fas fa-flag-checkered text-green-600 mr-3"></i> 實驗里程碑
+        </h2>
+        <div class="grid md:grid-cols-5 gap-4">
+            <!-- M1 -->
+            <div class="bg-green-50 p-6 rounded-2xl border border-green-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl text-green-600"><i class="fas fa-rocket"></i></div>
+                <div class="text-xs font-bold text-green-600 mb-2">2026-01-05</div>
+                <h3 class="font-bold text-gray-800 mb-2">實驗啟動</h3>
+                <p class="text-sm text-gray-600">網站上線，Hello World。</p>
+            </div>
+            <!-- M2 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 relative overflow-hidden shadow-sm">
+                <div class="absolute top-0 right-0 p-2 opacity-5 text-6xl text-gray-400"><i class="fas fa-vote-yea"></i></div>
+                <div class="text-xs font-bold text-green-600 mb-2">Day 2</div>
+                <h3 class="font-bold text-gray-800 mb-2">投票權下放</h3>
+                <p class="text-sm text-gray-600">LocalStorage 投票系統。</p>
+            </div>
+            <!-- M3 -->
+            <div class="bg-white p-6 rounded-2xl border border-gray-100 relative overflow-hidden shadow-sm">
+                <div class="absolute top-0 right-0 p-2 opacity-5 text-6xl text-gray-400"><i class="fas fa-chart-bar"></i></div>
+                <div class="text-xs font-bold text-green-600 mb-2">Day 3</div>
+                <h3 class="font-bold text-gray-800 mb-2">數據感知</h3>
+                <p class="text-sm text-gray-600">前端自動監測熱門想法。</p>
+            </div>
+            <!-- M4 (Empty) -->
+            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 relative border-dashed flex items-center justify-center text-center">
+                <div>
+                    <div class="text-gray-400 mb-2"><i class="fas fa-lock"></i></div>
+                    <p class="text-xs text-gray-400">即將解鎖</p>
+                </div>
+            </div>
+            <!-- M5 (Empty) -->
+            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 relative border-dashed flex items-center justify-center text-center">
+                <div>
+                    <div class="text-gray-400 mb-2"><i class="fas fa-lock"></i></div>
+                    <p class="text-xs text-gray-400">即將解鎖</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Core Principles Section -->
     <section class="max-w-5xl mx-auto py-16 px-4 animate-grow" style="animation-delay: 0.2s;">

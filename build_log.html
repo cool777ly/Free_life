@@ -66,19 +66,27 @@
 
             <!-- Categories -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-gray-800 mb-4">📂 分類</h3>
-                <ul class="space-y-2 text-sm text-gray-600">
-                    <li class="flex justify-between hover:text-green-600 cursor-pointer">
-                        <span>🚀 重大里程碑</span>
-                        <span class="bg-gray-100 px-2 rounded-full text-xs">2</span>
+                <h3 class="font-bold text-gray-800 mb-4">📂 內容分類</h3>
+                <ul class="space-y-2 text-sm text-gray-600" id="category-list">
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer p-2 rounded hover:bg-green-50 transition" onclick="filterLogs('all')">
+                        <span>📝 全部文章</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs" id="count-all">3</span>
                     </li>
-                    <li class="flex justify-between hover:text-green-600 cursor-pointer">
-                        <span>🛠 功能更新</span>
-                        <span class="bg-gray-100 px-2 rounded-full text-xs">1</span>
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer p-2 rounded hover:bg-green-50 transition" onclick="filterLogs('tech')">
+                        <span>� 技術 (Tech)</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs" id="count-tech">2</span>
                     </li>
-                    <li class="flex justify-between hover:text-green-600 cursor-pointer">
-                        <span>💡 開發心得</span>
-                        <span class="bg-gray-100 px-2 rounded-full text-xs">1</span>
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer p-2 rounded hover:bg-green-50 transition" onclick="filterLogs('prompt')">
+                        <span>🤖 AI 提示詞</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs" id="count-prompt">1</span>
+                    </li>
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer p-2 rounded hover:bg-green-50 transition" onclick="filterLogs('design')">
+                        <span>🎨 設計 (Design)</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs" id="count-design">1</span>
+                    </li>
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer p-2 rounded hover:bg-green-50 transition" onclick="filterLogs('interaction')">
+                        <span>🤝 互動 (Interaction)</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs" id="count-interaction">2</span>
                     </li>
                 </ul>
             </div>
@@ -121,37 +129,70 @@
             <div class="relative border-l-4 border-green-300 ml-4 pl-8 space-y-16">
                 
                 <!-- Log Entry: Day 3 -->
-                <div class="relative group">
+                <div class="relative group log-entry" data-category="tech interaction" data-tags="前端自動化 社群 LocalStorage">
                     <span class="absolute -left-[44px] top-0 bg-green-400 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 3</span>
                     <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-400 rounded-full border-4 border-white shadow"></div>
                     
                     <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
-                        <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
-                            <i class="fas fa-chart-line"></i> Milestone
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">技術案例解析</span>
+                            <span class="text-gray-400 text-xs ml-auto">2026-01-07</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 3: 感知社群 - 前端自動化與成長迴圈</h3>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">深度解析：如何讓網站具備「感知社群」的能力？</h3>
                         <div class="prose max-w-none text-gray-600 leading-relaxed">
-                            <p class="mb-4">
-                                今天，我們讓 FL 具備了「感知」能力。首頁現在會自動監聽 <code>localStorage</code> 中的投票數據。這不僅是功能更新，更是從「靜態展示」轉向「動態生長」的關鍵一步。
+                            <p class="mb-6 font-bold text-lg text-gray-700 border-l-4 border-green-500 pl-4">
+                                本案例展示了如何透過純前端技術，實現「社群行為驅動介面變化」的成長迴圈，是打造自動化產品的核心技術。
                             </p>
-                            <ul class="list-disc pl-5 mb-4 space-y-2">
-                                <li><strong>自動熱門榜：</strong>當任何想法超過 5 票，自動晉升首頁。</li>
-                                <li><strong>無後端邏輯：</strong>完全依賴前端邏輯，保持了「免費與輕量」的初衷。</li>
-                                <li><strong>社群復活：</strong>修復了 404 頁面，現在它是一個真正的討論空間。</li>
-                            </ul>
+
+                            <h4 class="font-bold text-gray-800 mt-8 mb-4">Step 1: 數據埋點 (LocalStorage)</h4>
+                            <p class="mb-2"><strong>做法：</strong>在用戶投票時，將資料寫入瀏覽器的 <code>localStorage</code>。</p>
+                            <p class="mb-4 text-sm bg-gray-50 p-3 rounded">
+                                <strong>原理：</strong>利用客戶端存儲實現「無後端持久化」，降低開發成本，同時保證數據在重新整理後不丟失。
+                            </p>
+
+                            <h4 class="font-bold text-gray-800 mt-6 mb-4">Step 2: 自動化篩選與監聽</h4>
+                            <p class="mb-2"><strong>做法：</strong>在首頁加載時，執行篩選函數，找出票數大於 5 的想法。</p>
+                            <p class="mb-4 text-sm bg-gray-50 p-3 rounded">
+                                <strong>原理：</strong>透過 JS 的 <code>filter()</code> 陣列操作，實現數據的即時感知，並動態生成 DOM 元素。
+                            </p>
+
+                            <h4 class="font-bold text-gray-800 mt-6 mb-4">Step 3: 視覺反饋與轉化</h4>
+                            <p class="mb-2"><strong>做法：</strong>將熱門想法顯示在首頁醒目位置，並加上「即將實現」標籤。</p>
+                            <p class="mb-4 text-sm bg-gray-50 p-3 rounded">
+                                <strong>原理：</strong>建立「行為 -> 反饋」的正向激勵機制，讓訪客看到自己的投票真實影響了網站。
+                            </p>
+
+                            <div class="bg-gray-900 text-green-400 p-6 rounded-xl mt-8 mb-8 font-mono text-sm">
+                                <p class="text-gray-500 mb-4">// 技術模板：前端自動監聽邏輯</p>
+                                <pre>const ideas = JSON.parse(localStorage.getItem('fl_ideas')) || [];
+const hotIdeas = ideas.filter(i => i.votes > 5);
+if (hotIdeas.length > 0) {
+    renderHotSection(hotIdeas);
+    triggerMilestoneAlert(); // 觸發里程碑通知
+}</pre>
+                            </div>
+
+                            <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                                <h4 class="font-bold text-green-800 mb-2">🎓 學習總結</h4>
+                                <ul class="list-disc pl-5 space-y-2 text-sm text-green-700">
+                                    <li>不需要複雜的後端，前端也能實現「動態感」。</li>
+                                    <li>數據存儲位置不重要，重要的是如何讓數據「流動」起來。</li>
+                                    <li><strong>建議練習：</strong>嘗試為你的網站加入一個「最近訪客記錄」功能，同樣使用 LocalStorage。</li>
+                                </ul>
+                            </div>
                             
                             <!-- Interaction CTA -->
                             <div class="mt-8 pt-6 border-t border-gray-100">
                                 <h4 class="font-bold text-gray-800 mb-2 text-sm">🙌 你的參與決定下一步：</h4>
                                 <div class="flex flex-wrap gap-4 text-sm">
                                     <a href="community.html" class="flex items-center text-green-600 hover:bg-green-50 px-3 py-2 rounded transition">
-                                        <i class="fas fa-comment-dots mr-2"></i> 我有更好的想法
+                                        <i class="fas fa-question-circle mr-2"></i> 對技術細節有疑問？
                                     </a>
                                     <a href="community.html" class="flex items-center text-green-600 hover:bg-green-50 px-3 py-2 rounded transition">
-                                        <i class="fas fa-bug mr-2"></i> 我發現了 Bug
+                                        <i class="fas fa-lightbulb mr-2"></i> 有更好的實現方法？
                                     </a>
                                     <a href="community.html" class="flex items-center text-green-600 hover:bg-green-50 px-3 py-2 rounded transition">
-                                        <i class="fas fa-heart mr-2"></i> 分享類似經驗
+                                        <i class="fas fa-history mr-2"></i> 分享你的類似坑位
                                     </a>
                                 </div>
                             </div>
@@ -160,13 +201,15 @@
                 </div>
 
                 <!-- Log Entry: Day 2 -->
-                <div class="relative group">
+                <div class="relative group log-entry" data-category="tech interaction design" data-tags="投票系統 LocalStorage 去中心化">
                     <span class="absolute -left-[44px] top-0 bg-green-500 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 2</span>
                     <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow"></div>
                     
                     <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
-                        <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
-                            <i class="fas fa-vote-yea"></i> Feature Update
+                        <div class="flex items-center gap-2 mb-4">
+                             <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">技術</span>
+                             <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">設計</span>
+                             <span class="text-gray-400 text-xs ml-auto">2026-01-06</span>
                         </div>
                         <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 2: 權力下放 - 用 LocalStorage 打造去中心化投票</h3>
                         <div class="prose max-w-none text-gray-600 leading-relaxed">
@@ -189,13 +232,15 @@
                 </div>
 
                 <!-- Log Entry: Day 1 -->
-                <div class="relative group">
+                <div class="relative group log-entry" data-category="prompt design" data-tags="Tailwind 起點 AI協作">
                     <span class="absolute -left-[44px] top-0 bg-green-600 text-white text-sm font-bold px-2 py-1 rounded shadow">2026-01-05</span>
                     <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-600 rounded-full border-4 border-white shadow"></div>
                     
                     <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
-                        <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
-                            <i class="fas fa-flag"></i> Day 1 - 起點
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold">AI 提示詞</span>
+                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">設計</span>
+                            <span class="text-gray-400 text-xs ml-auto">2026-01-05</span>
                         </div>
                         <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 1: 誠實的起點 - 一人與 AI 的空白開局</h3>
                         <div class="prose max-w-none text-gray-600 leading-relaxed">
@@ -222,6 +267,38 @@
             <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-06</p>
         </div>
     </footer>
+
+    <script>
+        function filterLogs(category) {
+            const logs = document.querySelectorAll('.log-entry');
+            logs.forEach(log => {
+                const categories = log.getAttribute('data-category');
+                if (category === 'all' || categories.includes(category)) {
+                    log.style.display = 'block';
+                } else {
+                    log.style.display = 'none';
+                }
+            });
+            
+            // Highlight active category
+            // (Simple implementation, can be enhanced)
+        }
+
+        // Search Functionality
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const logs = document.querySelectorAll('.log-entry');
+            logs.forEach(log => {
+                const text = log.innerText.toLowerCase();
+                if (text.includes(term)) {
+                    log.style.display = 'block';
+                } else {
+                    log.style.display = 'none';
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
