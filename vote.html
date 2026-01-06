@@ -208,6 +208,13 @@
             }
         });
 
+        // Share Helper
+        function shareIdea(text, votes) {
+            const url = encodeURIComponent(window.location.href);
+            const msg = encodeURIComponent(`我在 FL 投給了「${text}」！目前已有 ${votes} 票。來參與決策吧！ #FreeLifeExperiment`);
+            window.open(`https://twitter.com/intent/tweet?text=${msg}&url=${url}`, '_blank');
+        }
+
         // Vote Action
         window.handleVote = function(id) {
             if (votedIds.includes(id)) return;
@@ -217,7 +224,24 @@
                 idea.votes++;
                 votedIds.push(id);
                 saveData();
+                
+                // Visual feedback
+                const btn = document.getElementById(`vote-btn-${id}`);
+                if (btn) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> 已投';
+                    btn.classList.add('voted-animation');
+                }
+                
                 renderIdeas();
+
+                // Milestone Trigger (>5 votes)
+                if (idea.votes === 6) { 
+                     alert(`🔥 太棒了！「${idea.text}」票數剛剛突破 5 票！\n\n這是一個重要的里程碑，它將自動出現在首頁的「熱門想法」區，並通知開發者優先處理！`);
+                } else {
+                    if(confirm('感謝投票！分享給朋友，讓 FL 更快生長？')) {
+                        shareIdea(idea.text, idea.votes);
+                    }
+                }
             }
         };
 
@@ -273,7 +297,7 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="handleVote(${idea.id})" ${isVoted ? 'disabled' : ''} class="${btnClass}">
+                    <button id="vote-btn-${idea.id}" onclick="handleVote(${idea.id})" ${isVoted ? 'disabled' : ''} class="${btnClass}">
                         ${isVoted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-thumbs-up"></i>'} ${btnText}
                     </button>
                 `;
