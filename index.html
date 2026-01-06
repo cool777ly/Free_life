@@ -39,8 +39,7 @@
                 <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
                 <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
                 <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
-                <!-- Future Link -->
-                <li><span class="text-green-400 cursor-not-allowed" title="即將開放">社群</span></li>
+                <li><a href="community.html" class="hover:text-green-200 transition">社群</a></li>
             </ul>
         </div>
     </nav>
@@ -102,46 +101,37 @@
         </div>
     </section>
 
-    <!-- Latest Logs Timeline Section -->
+    <!-- Recent Updates Section (Simplified) -->
     <section class="max-w-4xl mx-auto py-16 px-4 animate-grow" style="animation-delay: 0.4s;">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">最新紀錄</h2>
-        <div class="relative border-l-4 border-green-300 ml-4 md:ml-0 pl-8 md:pl-12 space-y-12">
-            
-            <!-- Log Item 1 -->
-            <div class="relative group">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-500 text-white text-sm font-bold px-2 py-1 rounded shadow">2026-01-05</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow"></div>
-                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-                    <h3 class="text-lg font-bold mb-2 text-green-800">開始：這是一個誠實的起點</h3>
-                    <p class="text-gray-600">今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼...</p>
-                </div>
-            </div>
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">近期更新 / Recent Updates</h2>
+        
+        <div class="grid gap-6 md:grid-cols-3">
+            <!-- Update 1 -->
+            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-green-500 group">
+                <div class="text-xs text-gray-400 mb-2">2026-01-05</div>
+                <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Day 1: 誠實的起點</h3>
+                <p class="text-sm text-gray-500 mt-2">一人與 AI 的空白開局。</p>
+            </a>
 
-            <!-- Log Item 2 -->
-            <div class="relative group">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-400 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 1</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-400 rounded-full border-4 border-white shadow"></div>
-                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-                    <h3 class="text-lg font-bold mb-2 text-green-800">功能更新 - 投票系統上線</h3>
-                    <p class="text-gray-600">即使是一個簡單的按鈕，背後也有數據流動的邏輯。使用 LocalStorage 暫存數據。</p>
-                </div>
-            </div>
+            <!-- Update 2 -->
+            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-green-400 group">
+                <div class="text-xs text-gray-400 mb-2">Day 2</div>
+                <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Day 2: 投票系統上線</h3>
+                <p class="text-sm text-gray-500 mt-2">權力下放，社群共創的開始。</p>
+            </a>
 
-            <!-- Log Item 3 -->
-            <div class="relative group">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-300 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 2</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-300 rounded-full border-4 border-white shadow"></div>
-                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-                    <h3 class="text-lg font-bold mb-2 text-green-800">思考 - 為什麼是「自由」？</h3>
-                    <p class="text-gray-600">FL (Free Life) 不只是一個名字，它是開發者追求技術自由與生活自由的隱喻。</p>
-                </div>
-            </div>
-
+            <!-- Update 3 -->
+            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-green-300 group">
+                <div class="text-xs text-gray-400 mb-2">Day 3</div>
+                <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Day 3: 票數監測上線</h3>
+                <p class="text-sm text-gray-500 mt-2">網站有了感知能力，熱門想法自動上榜。</p>
+            </a>
         </div>
         
-        <div class="text-center mt-12">
-            <a href="build_log.html" class="inline-block text-green-600 font-semibold hover:text-green-800 hover:underline transition">
-                查看全部日誌 <i class="fas fa-arrow-right ml-1"></i>
+        <div class="text-center mt-10">
+            <p class="text-gray-600 mb-4">這只是開始，每天都有新變化。</p>
+            <a href="build_log.html" class="inline-flex items-center text-green-600 font-semibold hover:text-green-800 hover:bg-green-50 px-4 py-2 rounded transition">
+                查看完整建造日誌 <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
     </section>

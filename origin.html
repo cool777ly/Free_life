@@ -3,100 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>為什麼會有這個網站 - FL</title>
+    <title>為什麼會有這個網站 | Why This Website Exists</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="FL網站的起點與初衷。一個數據工程師離職後的真實心路歷程與AI共創實驗的開端。真實紀錄，未經修飾。">
-    <meta name="keywords" content="網站起源, 離職故事, 個人成長, FL, Free Life, AI實驗">
+    <meta name="description" content="一個真實的離職、創業嘗試與 AI 共創的故事。A true story about resignation, entrepreneurial attempts, and AI co-creation.">
+    <meta name="keywords" content="FL, Origin Story, AI Co-creation, Data Engineer, Free Life, 網站起源">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="為什麼會有這個網站 - FL">
-    <meta property="og:description" content="一個人的離職、迷惘與重新出發。這是一個關於真實建造的公開實驗的起點。">
+    <meta property="og:title" content="為什麼會有這個網站 | Why This Website Exists">
+    <meta property="og:description" content="從數據工程師到 AI 實驗者，一個真實的轉變過程。From data engineer to AI experimenter, a real transformation process.">
     <meta property="og:type" content="article">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+                        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        .reading-content p {
-            margin-bottom: 2rem;
-            text-align: justify;
-            line-height: 2;
-            letter-spacing: 0.02em;
-        }
-        /* 簡單生長動畫 */
         @keyframes grow { from { transform: scale(0.98); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .animate-grow { animation: grow 1s ease-out; }
+        .animate-grow { animation: grow 0.8s ease-out; }
+        
+        .bilingual-block {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .zh-text {
+            color: #1f2937; /* gray-800 */
+            font-size: 1.125rem; /* text-lg */
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+        
+        .en-text {
+            color: #4b5563; /* gray-600 */
+            font-size: 1rem; /* text-base */
+            line-height: 1.6;
+            font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+            font-style: italic;
+            border-left: 3px solid #86efac; /* green-300 */
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Dark mode overrides */
+        .dark .zh-text { color: #e5e7eb; /* gray-200 */ }
+        .dark .en-text { color: #9ca3af; /* gray-400 */ border-left-color: #166534; /* green-800 */ }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-gray-50 font-sans text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
 
     <!-- Navigation -->
-    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
+    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50 dark:bg-green-900">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-wider">FL</h1>
-            <ul class="flex space-x-6">
+            <ul class="flex space-x-6 items-center">
                 <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
                 <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
                 <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
-                <!-- Future Link -->
-                <li><span class="text-green-400 cursor-not-allowed" title="即將開放">社群</span></li>
+                <li><a href="community.html" class="hover:text-green-200 transition">社群</a></li>
+                <li>
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Content Section -->
-    <section class="py-32 px-4 animate-grow">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-8 text-center">為什麼會有這個網站</h1>
-            
-            <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-10 text-gray-600 text-sm italic rounded-r">
-                <i class="fas fa-info-circle mr-2"></i>
-                以下內容為真實紀錄，未經任何修飾或行銷包裝。
-            </div>
-
-            <div class="reading-content text-lg text-gray-700 bg-white p-8 md:p-12 rounded-xl shadow-sm border border-gray-100">
-                <p>我是一個原來是數據處理工程師，本身對我來說是一份穩定的工作，有被優化風險工作，但因爲還算資深，暫時可能與不上，但是對我來說我遇到了無法提升的外部瓶頸，再內部又無法做到能力的絕對提升，一方面也不想要一個看得到的未來，想要骑驴找马但是工作占用时间是在不少，没有精力再去尝试其他的（后来听说大多数成功人士的特质就是精力无限）。所以就在2024年的11月份離職了。</p>
-                
-                <p>作爲普通人，不同於Elon mask這種天才，bill gates這種背景（當然人家也是聰明絕頂），不是能够想得到多大的梦想，也不是想到了就能够实现的，但是不甘心的我還是抱着想要有所成就的想法離開了暫時穩定的工作，但是一時之間還真不知道可以怎么做，或是說如何開始。</p>
-                
-                <p>离职之后很兴奋，开始自己健身，到处走走，但是钱袋子还是会慢慢消失的，毕竟是普通人，幸运的是父母层面暂时不需要我担忧，但是錢袋子慢慢變扁了，內心還是很慌的。</p>
-                
-                <p>離職之前，就知道有個朋友要規劃開开洗车店，想说以后可以扩展成全国连锁，開始一步步從租房、裝修、最後招募人員，籌備開店，網路營銷，除了花錢以外其他都是深度蔘與但是店面開成之後，自己又沒有相關技術（洗車還是需要一點技術的），一步步的經歷我也成長不少，生意上的人心也看了不少（這個是我的自我感覺），當然最後就是白忙一場賠了一些社交費用以及學費（但过程中包了吃，奖金200，哈哈哈哈），歷時6個月。</p>
-                
-                <p>之後嘗試短線炒股（之前有放長線的盈利的），學習了各種交易方法，以及交易理論，但是也是賺賺賠賠，最後差不多是平手，還虧損了一點（相信陌生網路信息還被騙了700）。</p>
-                
-                <p>其間也想嘗試倒賣商品，看了一圈，現在網絡商品售價已經很透明了，少量商品想要獲利，需要拿到很好的價格，貨品也很豐富，信息差也很小了。</p>
-                
-                <p>另方面，也有想到可以自己設計產品，再找工廠代工，可以拿少量產品測試市場（需要設計得想法及能力，想要嘗試，還沒想好可以做什麼產品。），需要控制好止損，還在摸索要怎麼找，畢竟一投入，沒有收穫就是損失。</p>
-                
-                <p>就這樣，到了2026了，這段時間AI產品的爆發我不是沒注意到，但是一時之間不知道如何去運用，前段時間嘗試製作了簡單的庫存管理app（自己是ETL工程師，所以這方面有點概念），感覺AI發展確實非常的快，比自己寫快很多，對於有概念的人或是有基礎的人來說，用AI學習可以大大提升效率。</p>
-                
-                <p>就這樣打算用AI做個嘗試，也爲我生活進步做個嘗試，就親自試試看，不道聽途說，看看有什麼結果吧。</p>
-
-                <div class="flex items-center my-12">
-                    <div class="flex-grow border-t border-gray-200"></div>
-                    <span class="flex-shrink-0 mx-4 text-gray-300 text-sm"><i class="fas fa-feather-alt"></i></span>
-                    <div class="flex-grow border-t border-gray-200"></div>
-                </div>
-
-                <p>我的想法是這樣，先建立一個網站，這個網站不論任何營利與否，只是我剛開始只是依照我的隨意的想法先建立主題跟內容，這是一個不完美的網站，我會把他盡量改上線，然後不斷的用AI建議優化，無論任何方面（包括UI設計、後台等...），我會開個留言板，讓大家留言，大家可以給我建議如何跟它溝通，當然我會適當進行取捨，我會盡量按照AI的意見，以及運用AI進行優化，時機合適的話我也會公開這個過程，這些由有我一個人操作。</p>
-            </div>
-            
+    <!-- Header -->
+    <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4 animate-grow dark:from-green-900 dark:to-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold text-green-800 mb-4 dark:text-green-400">為什麼會有這個網站</h1>
+            <h2 class="text-xl md:text-2xl font-serif italic text-green-700 opacity-80 dark:text-green-500">Why Does This Website Exist?</h2>
         </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="max-w-3xl mx-auto py-8 px-6 animate-grow" style="animation-delay: 0.2s;">
+        
+        <!-- Intro Decoration -->
+        <div class="flex justify-center mb-12 text-green-600 opacity-60">
+            <i class="fas fa-quote-left text-3xl"></i>
+        </div>
+
+        <article class="space-y-12">
+            
+            <!-- Paragraph 1 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    我是一個原來是數據處理工程師，本身對我來說是一份穩定的工作，有被優化風險工作，但因爲還算資深，暫時可能與不上，但是對我來說我遇到了無法提升的外部瓶頸，再內部又無法做到能力的絕對提升，一方面也不想要一個看得到的未來，想要骑驴找马但是工作占用时间是在不少，没有精力再去尝试其他的（后来听说大多数成功人士的特质就是精力无限）。所以就在2024年的11月份離職了。
+                </p>
+                <p class="en-text">
+                    I was originally a data processing engineer. It was a stable job for me. Although there was a risk of being "optimized" (laid off), being relatively senior meant I was safe for the time being. However, I encountered external bottlenecks where I couldn't advance further, and internally, I couldn't achieve absolute improvement in my capabilities. On one hand, I didn't want a future I could see the end of; I wanted to look for new opportunities while still employed ("riding a donkey to find a horse"). But work took up so much time that I had no energy left to try other things (I later heard that boundless energy is a trait of most successful people). So, in November 2024, I resigned.
+                </p>
+            </div>
+
+            <!-- Paragraph 2 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    作爲普通人，不同於Elon mask這種天才，Bill gates這種背景（當然人家也是聰明絕頂），不是能够想得到多大的梦想，也不是想到了就能够实现的，但是不甘心的我還是抱着想要有所成就的想法離開了暫時穩定的工作，但是一時之間還真不知道可以怎么做，或是說如何開始。
+                </p>
+                <p class="en-text">
+                    As an ordinary person, unlike geniuses like Elon Musk or people with backgrounds like Bill Gates (though they are brilliantly smart too), I can't conceive of grand dreams, nor can I simply realize them just by thinking about them. However, unwilling to settle, I left my temporarily stable job holding onto the desire to achieve something. But in that moment, I really didn't know what to do or how to start.
+                </p>
+            </div>
+
+            <!-- Paragraph 3 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    离职之后很兴奋，开始自己健身，到处走走，但是钱袋子还是会慢慢消失的，毕竟是普通人，幸运的是父母层面暂时不需要我担忧，但是錢袋子慢慢變扁了，內心還是很慌的。
+                </p>
+                <p class="en-text">
+                    After leaving, I was excited. I started working out and walking around. But my savings were slowly disappearing. Being an ordinary person, I was lucky that my parents didn't need my financial support for now, but as my wallet grew thinner, I still felt panic inside.
+                </p>
+            </div>
+
+            <!-- Paragraph 4 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    離職之前，就知道有個朋友要規劃開开洗车店，想说以后可以扩展成全国连锁，開始一步步從租房、裝修、最後招募人員，籌備開店，網路營銷，除了花錢以外其他都是深度蔘與但是店面開成之後，自己又沒有相關技術（洗車還是需要一點技術的），一步步的經歷我也成長不少，生意上的人心也看了不少（這個是我的自我感覺），當然最後就是白忙一場賠了一些社交費用以及學費（但过程中包了吃，奖金200，哈哈哈哈），歷時6個月。
+                </p>
+                <p class="en-text">
+                    Before resigning, I knew a friend planning to open a car wash shop, aiming to expand it into a national chain. We went step by step: renting, renovating, recruiting, preparing for opening, and online marketing. Except for spending money, I was deeply involved in everything. However, after the shop opened, I lacked the relevant skills (car washing does require some technique). Through this step-by-step experience, I grew a lot and saw the human side of business (or so I feel). Of course, in the end, it was all for nothing—I lost some money on socializing and "tuition fees" (but meals were covered, and I got a 200 bonus, hahaha). This lasted for 6 months.
+                </p>
+            </div>
+
+            <!-- Paragraph 5 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    之後嘗試短線炒股（之前有放長線的盈利的），學習了各種交易方法，以及交易理論，但是也是賺賺賠賠，最後差不多是平手，還虧損了一點（相信陌生網路信息還被騙了700）。
+                </p>
+                <p class="en-text">
+                    After that, I tried short-term stock trading (I had profits from long-term holding before). I learned various trading methods and theories, but it was a mix of gains and losses. In the end, I broke even, or rather lost a little (I trusted a stranger online and got scammed out of 700).
+                </p>
+            </div>
+
+            <!-- Paragraph 6 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    其間也想嘗試倒賣商品，看了一圈，現在網絡商品售價已經很透明了，少量商品想要獲利，需要拿到很好的價格，貨品也很豐富，信息差也很小了。
+                </p>
+                <p class="en-text">
+                    During this time, I also thought about reselling goods. After looking around, I realized online prices are very transparent now. To make a profit on small quantities, you need a very good cost price. Goods are abundant, and the information gap is very small.
+                </p>
+            </div>
+
+            <!-- Paragraph 7 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    另方面，也有想到可以自己設計產品，再找工廠代工，可以拿少量產品測試市場（需要設計得想法及能力，想要嘗試，還沒想好可以做什麼產品。），需要控制好止損，還在摸索要怎麼找，畢竟一投入，沒有收穫就是損失。
+                </p>
+                <p class="en-text">
+                    On the other hand, I thought about designing my own products and finding a factory for OEM, testing the market with a small batch (this requires design ideas and ability; I want to try, but haven't decided what to make yet). I need to control the stop-loss and am still figuring out how to find resources. After all, once you invest, no return means a loss.
+                </p>
+            </div>
+
+            <!-- Paragraph 8 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    就這樣，到了2026了，這段時間AI產品的爆發我不是沒注意到，但是一時之間不知道如何去運用，前段時間嘗試製作了簡單的庫存管理app（自己是ETL工程師，所以這方面有點概念），感覺AI發展確實非常的快，比自己寫快很多，對於有概念的人或是有基礎的人來說，用AI學習可以大大提升效率。
+                </p>
+                <p class="en-text">
+                    Just like that, it's 2026. I hadn't ignored the explosion of AI products during this time, but I didn't know how to apply them at first. Recently, I tried making a simple inventory management app (as an ETL engineer, I have some concepts in this area). I felt that AI development is indeed very fast, much faster than writing it myself. For those with concepts or a foundation, learning with AI can greatly improve efficiency.
+                </p>
+            </div>
+
+            <!-- Paragraph 9 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    就這樣打算用AI做個嘗試，也爲我生活進步做個嘗試，就親自試試看，不道聽途說，看看有什麼結果吧。
+                </p>
+                <p class="en-text">
+                    So, I decided to make an attempt with AI, and an attempt for my life's progress. I'll try it myself, not just listen to hearsay, and see what the results will be.
+                </p>
+            </div>
+
+            <!-- Paragraph 10 -->
+            <div class="bilingual-block">
+                <p class="zh-text">
+                    我的想法是這樣，先建立一個網站，這個網站不論任何營利與否，只是我剛開始只是依照我的隨意的想法先建立主題跟內容，這是一個不完美的網站，我會把他盡量改上線，然後不斷的用AI建議優化，無論任何方面，我會開個留言板，讓大家留言，大家可以給我建議如何跟它溝通，當然我會適當進行取捨，我會盡量按照AI的意見，以及運用AI進行優化，時機合適的話我也會公開這個過程，這些由有我一個人操作。
+                </p>
+                <p class="en-text">
+                    Here is my idea: first, build a website. Regardless of profitability, I'll start by building the theme and content based on my random thoughts. This is an imperfect website. I will try my best to get it online, and then continuously use AI suggestions to optimize it in all aspects. I will open a message board for everyone to leave comments. You can give me suggestions on how to communicate with it. Of course, I will make appropriate trade-offs. I will try my best to follow AI's opinions and use AI for optimization. When the time is right, I will also make this process public. All of this is operated by me alone.
+                </p>
+            </div>
+
+        </article>
+
+        <!-- Footer Decoration -->
+        <div class="text-center mt-16 mb-8 text-green-600 opacity-50 text-2xl animate-pulse">
+            <i class="fas fa-seedling"></i>
+        </div>
+
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12">
+    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12 dark:bg-gray-950">
         <div class="container mx-auto px-4">
             <div class="mb-4">
                 <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-sm">🚧 網站持續進化中 | This site is evolving</span>
             </div>
-            <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-05</p>
+            <p class="text-xs">&copy; 2026 FL. Last updated: 2026-01-06</p>
         </div>
     </footer>
 
+    <!-- Dark Mode Logic -->
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('fl-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('fl-theme') === 'dark' || (!('fl-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </body>
 </html>
