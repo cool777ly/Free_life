@@ -202,33 +202,17 @@
                             let icon = '<i class="fas fa-star text-yellow-400"></i>';
                             if(index === 0) icon = '<i class="fas fa-crown text-yellow-500"></i>';
 
-                            // Security: Use createElement and textContent to prevent XSS
-                            const leftDiv = document.createElement('div');
-                            leftDiv.className = 'flex items-center gap-3';
-
-                            const rankSpan = document.createElement('span');
-                            rankSpan.className = 'text-gray-400 font-mono w-6 text-right';
-                            rankSpan.textContent = `#${index + 1}`;
-
-                            const textSpan = document.createElement('span');
-                            textSpan.className = 'font-medium text-gray-800';
-                            textSpan.textContent = idea.text;
-
-                            leftDiv.appendChild(rankSpan);
-                            leftDiv.appendChild(textSpan);
-
-                            const rightDiv = document.createElement('div');
-                            rightDiv.className = 'flex items-center gap-2';
-                            rightDiv.innerHTML = `${icon}`;
-
-                            const votesSpan = document.createElement('span');
-                            votesSpan.className = 'font-bold text-green-600';
-                            votesSpan.textContent = `${idea.votes} 票`;
-
-                            rightDiv.appendChild(votesSpan);
-
-                            li.appendChild(leftDiv);
-                            li.appendChild(rightDiv);
+                            li.innerHTML = `
+                                <div class="flex items-center gap-3">
+                                    <span class="text-gray-400 font-mono w-6 text-right">#${index + 1}</span>
+                                    <span class="font-medium text-gray-800">${idea.text}</span>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold animate-pulse">即將進入建造日誌！</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    ${icon}
+                                    <span class="font-bold text-green-600">${idea.votes} 票</span>
+                                </div>
+                            `;
                             fragment.appendChild(li);
                         });
 
