@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資源與方法論 | FL Resources</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fadeIn 0.5s ease-out; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Navigation -->
+    <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50 dark:bg-green-900">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">FL</h1>
+            <ul class="flex space-x-6 items-center">
+                <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
+                <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
+                <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
+                <li><a href="community.html" class="hover:text-green-200 transition">社群</a></li>
+                <li><a href="resources.html" class="hover:text-green-200 transition border-b-2 border-white">資源</a></li>
+                <li>
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4 dark:from-green-900 dark:to-gray-900">
+        <div class="max-w-4xl mx-auto animate-fade">
+            <h1 class="text-4xl font-bold text-green-800 mb-4 dark:text-green-400">AI 協作實驗室</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">這裡公開 FL 網站背後的「大腦」：我們使用的方法論與 Prompt 範本。</p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl animate-fade" style="animation-delay: 0.1s;">
+        
+        <!-- Methodology Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-l-8 border-green-500 pl-4 dark:text-gray-100">FL 協作方法論 (The FL Method)</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="text-green-600 font-bold text-xl mb-2">01. 意圖定義 (Human)</div>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">AI 不會讀心術。第一步是將模糊的「想要」轉化為具體的「需求」。</p>
+                    <div class="bg-gray-50 p-3 rounded text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                        <strong>檢查點：</strong> 我能用一句話清楚描述我要做的功能嗎？<br>
+                        <em>例：「我想做個投票功能」 vs 「我想做個基於 LocalStorage 的匿名投票，每人限投一票。」</em>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="text-green-600 font-bold text-xl mb-2">02. 結構化 Prompt (Human -> AI)</div>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">給 AI 一個角色，給任務一個框架。不要讓 AI 猜測你的上下文。</p>
+                    <div class="bg-gray-50 p-3 rounded text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                        <strong>檢查點：</strong> 包含了「角色」、「背景」、「任務」、「限制條件」嗎？
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="text-green-600 font-bold text-xl mb-2">03. 生成與迭代 (AI + Human)</div>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">AI 的第一次輸出通常是 80 分。關鍵在於如何引導它修復剩下的 20 分。</p>
+                    <div class="bg-gray-50 p-3 rounded text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                        <strong>檢查點：</strong> 不要直接複製貼上。閱讀代碼，理解邏輯，然後指出具體錯誤讓 AI 修正。
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="text-green-600 font-bold text-xl mb-2">04. 真實部署 (Human)</div>
+                    <p class="text-gray-600 mb-4 dark:text-gray-300">在本地運行完美不代表上線沒問題。部署是檢驗真理的唯一標準。</p>
+                    <div class="bg-gray-50 p-3 rounded text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                        <strong>檢查點：</strong> 手機版跑版了嗎？深色模式正常嗎？
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prompt Library Section -->
+        <section>
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-l-8 border-green-500 pl-4 dark:text-gray-100">Prompt 範本庫</h2>
+            
+            <div class="space-y-6">
+                <!-- Prompt 1: UI Design -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden dark:bg-gray-800">
+                    <div class="bg-green-600 text-white p-4 font-bold flex justify-between">
+                        <span>🎨 UI 設計與切版</span>
+                        <span class="text-xs bg-green-700 px-2 py-1 rounded">Frontend</span>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4 text-sm dark:text-gray-300">用於讓 AI 生成符合特定風格（如 Tailwind）的網頁結構。</p>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm whitespace-pre-wrap overflow-x-auto">你是一個資深前端工程師，專精 HTML/CSS/JS 與 Tailwind CSS。
+
+任務：請重新設計 [頁面名稱]
+風格要求：[形容詞，如：極簡、綠色生長風格、高科技感]
+功能需求：
+1. [功能點 1]
+2. [功能點 2]
+
+限制條件：
+- 僅使用 Tailwind CDN，不需 Build Step
+- 確保移動端響應式 (Responsive)
+- 輸出完整單一 HTML 文件</div>
+                    </div>
+                </div>
+
+                <!-- Prompt 2: Content Optimization -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden dark:bg-gray-800">
+                    <div class="bg-blue-600 text-white p-4 font-bold flex justify-between">
+                        <span>📝 內容優化與 SEO</span>
+                        <span class="text-xs bg-blue-700 px-2 py-1 rounded">Content</span>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4 text-sm dark:text-gray-300">用於將生硬的技術文檔轉化為有人味的日誌。</p>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded font-mono text-sm whitespace-pre-wrap overflow-x-auto">請幫我優化這段 [文章類型] 的內容。
+
+目標讀者：[描述讀者，如：獨立開發者、對 AI 好奇的普通人]
+語氣要求：[形容詞，如：真誠、幽默、不說教]
+優化重點：
+1. SEO 關鍵詞植入：[關鍵詞 1, 關鍵詞 2]
+2. 增加可讀性（使用小標題、列表）
+3. 保持「一人開發」的真實感，不要像企業新聞稿
+
+原文：
+[貼上原文]</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12 dark:bg-gray-950">
+        <div class="container mx-auto px-4">
+            <p class="text-xs">&copy; 2026 FL. Last updated: 2026-01-06</p>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Logic -->
+    <script>
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('fl-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('fl-theme') === 'dark' || (!('fl-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

@@ -36,6 +36,7 @@
                 <li><a href="build_log.html" class="hover:text-green-200 transition border-b-2 border-white">建造紀錄</a></li>
                 <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
                 <li><a href="community.html" class="hover:text-green-200 transition">社群</a></li>
+                <li><a href="resources.html" class="hover:text-green-200 transition">資源</a></li>
             </ul>
         </div>
     </nav>
@@ -48,107 +49,166 @@
         </div>
     </header>
 
-    <!-- Build Logs Section -->
-    <section class="max-w-4xl mx-auto py-8 px-4 animate-grow">
+    <!-- Main Content Grid -->
+    <div class="container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8 max-w-6xl animate-grow">
         
-        <!-- Timeline Container -->
-        <div class="relative border-l-4 border-green-300 ml-4 md:ml-0 pl-8 md:pl-12 space-y-16">
+        <!-- Sidebar (Navigation Panel) -->
+        <aside class="lg:col-span-1 space-y-8 order-2 lg:order-1">
             
-            <!-- Log Entry: Day 1 -->
-            <div class="relative group">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-600 text-white text-sm font-bold px-2 py-1 rounded shadow">2026-01-05</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-600 rounded-full border-4 border-white shadow"></div>
-                
-                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
-                    <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
-                        <i class="fas fa-flag"></i> Day 1 - 起點
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">開始：這是一個誠實的起點</h3>
-                    <div class="prose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼。</p>
-                        <p>它現在還很簡陋，很多功能只是「看起來能用」，但我決定先讓它存在。我們使用了 <strong>Tailwind CSS</strong> 來快速構建現代化的界面，並引入了 <strong>LocalStorage</strong> 來實現無後端的投票功能。不完美沒關係，因為這才剛開始。</p>
-                    </div>
+            <!-- Search -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4">🔍 搜尋日誌</h3>
+                <div class="relative">
+                    <input type="text" placeholder="輸入關鍵字..." class="w-full p-2 pl-8 border rounded-lg text-sm focus:outline-none focus:border-green-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400 text-xs"></i>
                 </div>
             </div>
 
-            <!-- Log Entry: Day 2 -->
-            <div class="relative group">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-500 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 2</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow"></div>
+            <!-- Categories -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4">📂 分類</h3>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer">
+                        <span>🚀 重大里程碑</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs">2</span>
+                    </li>
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer">
+                        <span>🛠 功能更新</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs">1</span>
+                    </li>
+                    <li class="flex justify-between hover:text-green-600 cursor-pointer">
+                        <span>💡 開發心得</span>
+                        <span class="bg-gray-100 px-2 rounded-full text-xs">1</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tags -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4">🏷 熱門標籤</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs cursor-pointer hover:bg-green-200">#AI協作</span>
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs cursor-pointer hover:bg-green-200">#Tailwind</span>
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs cursor-pointer hover:bg-green-200">#LocalStorage</span>
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs cursor-pointer hover:bg-green-200">#一人開發</span>
+                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs cursor-pointer hover:bg-green-200">#投票系統</span>
+                </div>
+            </div>
+
+            <!-- Recommended -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4">🔥 推薦閱讀</h3>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#" class="block hover:text-green-600">
+                            <span class="text-xs text-gray-400 block mb-1">2026-01-05</span>
+                            <span class="text-sm font-medium">為什麼我決定開始這個實驗？</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="block hover:text-green-600">
+                            <span class="text-xs text-gray-400 block mb-1">Day 2</span>
+                            <span class="text-sm font-medium">如何用 LocalStorage 做一個去中心化投票？</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <!-- Logs Timeline -->
+        <main class="lg:col-span-3 order-1 lg:order-2">
+            <div class="relative border-l-4 border-green-300 ml-4 pl-8 space-y-16">
                 
-                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
-                    <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
-                        <i class="fas fa-vote-yea"></i> Feature Update
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">投票系統上線：權力下放</h3>
-                    <div class="prose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">
-                            今天，我們邁出了重要的一步。FL 不再是我一個人的獨角戲，而是變成了一個<strong>社群共創</strong>的實驗。
-                        </p>
-                        <ul class="list-disc pl-5 mb-4 space-y-2">
-                            <li>實作了基於 <code>localStorage</code> 的去中心化投票系統。</li>
-                            <li>加入了「防刷票機制」，確保每個瀏覽器只能投一票。</li>
-                            <li>新增了「病毒式分享」按鈕，讓實驗能自我擴散。</li>
-                        </ul>
-                        <p>
-                            當你點下「投票」的那一刻，你就成為了 FL 的建造者之一。
-                        </p>
-                        
-                        <!-- CTA -->
-                        <div class="mt-6 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
-                            <p class="text-sm text-green-800 font-medium mb-1">💡 邀請你參與實驗：</p>
-                            <p class="text-sm text-green-700">這個投票系統是我們共創的第一步。如果你覺得哪裡卡卡的，或是想到了更有趣的玩法（比如「負面票」？），請務必在 <a href="community.html" class="underline font-bold hover:text-green-900">社群討論區</a> 告訴我。你的每一個建議，都會成為下一次更新的養分。</p>
+                <!-- Log Entry: Day 3 -->
+                <div class="relative group">
+                    <span class="absolute -left-[44px] top-0 bg-green-400 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 3</span>
+                    <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-400 rounded-full border-4 border-white shadow"></div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
+                            <i class="fas fa-chart-line"></i> Milestone
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 3: 感知社群 - 前端自動化與成長迴圈</h3>
+                        <div class="prose max-w-none text-gray-600 leading-relaxed">
+                            <p class="mb-4">
+                                今天，我們讓 FL 具備了「感知」能力。首頁現在會自動監聽 <code>localStorage</code> 中的投票數據。這不僅是功能更新，更是從「靜態展示」轉向「動態生長」的關鍵一步。
+                            </p>
+                            <ul class="list-disc pl-5 mb-4 space-y-2">
+                                <li><strong>自動熱門榜：</strong>當任何想法超過 5 票，自動晉升首頁。</li>
+                                <li><strong>無後端邏輯：</strong>完全依賴前端邏輯，保持了「免費與輕量」的初衷。</li>
+                                <li><strong>社群復活：</strong>修復了 404 頁面，現在它是一個真正的討論空間。</li>
+                            </ul>
+                            
+                            <!-- Interaction CTA -->
+                            <div class="mt-8 pt-6 border-t border-gray-100">
+                                <h4 class="font-bold text-gray-800 mb-2 text-sm">🙌 你的參與決定下一步：</h4>
+                                <div class="flex flex-wrap gap-4 text-sm">
+                                    <a href="community.html" class="flex items-center text-green-600 hover:bg-green-50 px-3 py-2 rounded transition">
+                                        <i class="fas fa-comment-dots mr-2"></i> 我有更好的想法
+                                    </a>
+                                    <a href="community.html" class="flex items-center text-green-600 hover:bg-green-50 px-3 py-2 rounded transition">
+                                        <i class="fas fa-bug mr-2"></i> 我發現了 Bug
+                                    </a>
+                                    <a href="community.html" class="flex items-center text-green-600 hover:bg-green-50 px-3 py-2 rounded transition">
+                                        <i class="fas fa-heart mr-2"></i> 分享類似經驗
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Log Entry: Day 3 -->
-            <div class="relative group">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-green-400 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 3</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-green-400 rounded-full border-4 border-white shadow"></div>
-                
-                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
-                    <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
-                        <i class="fas fa-chart-line"></i> Milestone
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">票數監測系統上線</h3>
-                    <div class="prose max-w-none text-gray-600 leading-relaxed">
-                        <p class="mb-4">
-                            今天，我們讓 FL 具備了「感知」能力。首頁現在會自動監聽 <code>localStorage</code> 中的投票數據。
-                        </p>
-                        <ul class="list-disc pl-5 mb-4 space-y-2">
-                            <li>當任何想法的票數超過 <strong>5 票</strong>，它將自動出現在首頁的「熱門想法」區塊。</li>
-                            <li>這是一個完全由前端驅動的自動化流程，無需後端介入。</li>
-                            <li>修復了社群頁面的 404 問題，現在它是一個充滿活力的討論空間。</li>
-                        </ul>
-                        <p>
-                            網站正在像生物一樣，對社群的刺激做出反應。
-                        </p>
-                        
-                        <!-- CTA -->
-                        <p class="text-sm text-gray-500 italic mt-6 border-t pt-4 border-gray-100">
-                            💡 覺得這個功能如何？有更好的點子嗎？歡迎到 <a href="community.html" class="text-green-600 hover:underline">社群討論區</a> 告訴我。
-                        </p>
+                <!-- Log Entry: Day 2 -->
+                <div class="relative group">
+                    <span class="absolute -left-[44px] top-0 bg-green-500 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 2</span>
+                    <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow"></div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
+                            <i class="fas fa-vote-yea"></i> Feature Update
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 2: 權力下放 - 用 LocalStorage 打造去中心化投票</h3>
+                        <div class="prose max-w-none text-gray-600 leading-relaxed">
+                            <p class="mb-4">
+                                FL 不再是我一個人的獨角戲。我們實作了基於 <code>localStorage</code> 的投票系統，這意味著網站的發展方向現在掌握在每一位訪客手中。
+                            </p>
+                            <ul class="list-disc pl-5 mb-4 space-y-2">
+                                <li>實作了去中心化投票邏輯。</li>
+                                <li>加入了「防刷票機制」。</li>
+                                <li>新增了「病毒式分享」按鈕。</li>
+                            </ul>
+                            
+                            <!-- CTA -->
+                            <div class="mt-6 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
+                                <p class="text-sm text-green-800 font-medium mb-1">💡 邀請你參與實驗：</p>
+                                <p class="text-sm text-green-700">這個投票系統是我們共創的第一步。如果你覺得哪裡卡卡的，或是想到了更有趣的玩法，請務必在 <a href="community.html" class="underline font-bold hover:text-green-900">社群討論區</a> 告訴我。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Future Log Placeholder (Static Example) -->
-            <!-- 
-            <div class="relative group opacity-50">
-                <span class="absolute -left-[42px] md:-left-[60px] top-0 bg-gray-400 text-white text-sm font-bold px-2 py-1 rounded shadow">Coming Soon</span>
-                <div class="absolute -left-[46px] top-8 w-4 h-4 bg-gray-400 rounded-full border-4 border-white shadow"></div>
-                
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold mb-2 text-gray-600">下一站...</h3>
-                    <p class="text-gray-500">更多功能正在生長中。</p>
+                <!-- Log Entry: Day 1 -->
+                <div class="relative group">
+                    <span class="absolute -left-[44px] top-0 bg-green-600 text-white text-sm font-bold px-2 py-1 rounded shadow">2026-01-05</span>
+                    <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-600 rounded-full border-4 border-white shadow"></div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-2 mb-4 text-green-700 font-semibold text-sm uppercase tracking-wide">
+                            <i class="fas fa-flag"></i> Day 1 - 起點
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 1: 誠實的起點 - 一人與 AI 的空白開局</h3>
+                        <div class="prose max-w-none text-gray-600 leading-relaxed">
+                            <p class="mb-4">今天是網站上線的第一天。沒有宏大的發布會，只有我和一個 AI 助手，在空白的編輯器裡敲下了第一行代碼。</p>
+                            <p>我們使用了 <strong>Tailwind CSS</strong> 來快速構建現代化的界面。不完美沒關係，因為這才剛開始。</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            -->
 
-        </div>
-    </section>
+            </div>
+        </main>
+
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-400 text-center py-8 mt-12">
@@ -159,7 +219,7 @@
             <p class="mb-2 text-sm">
                 <a href="origin.html" class="hover:text-white transition underline">為什麼會有這個網站？</a>
             </p>
-            <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-05</p>
+            <p class="text-xs">&copy; 2024 FL. Last updated: 2026-01-06</p>
         </div>
     </footer>
 
