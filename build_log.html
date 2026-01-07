@@ -228,25 +228,84 @@ if (hotIdeas.length > 0) {
                     
                     <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
                         <div class="flex items-center gap-2 mb-4">
-                             <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">技術</span>
-                             <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-bold">設計</span>
+                             <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">技術案例解析</span>
                              <span class="text-gray-400 text-xs ml-auto">2026-01-06</span>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Day 2: 權力下放 - 用 LocalStorage 打造去中心化投票</h3>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">深度解析：權力下放 - 用 LocalStorage 打造去中心化投票</h3>
                         <div class="prose max-w-none text-gray-600 leading-relaxed">
-                            <p class="mb-4">
+                            <p class="mb-6 font-bold text-lg text-gray-700 border-l-4 border-green-500 pl-4">
                                 FL 不再是我一個人的獨角戲。我們實作了基於 <code>localStorage</code> 的投票系統，這意味著網站的發展方向現在掌握在每一位訪客手中。
                             </p>
-                            <ul class="list-disc pl-5 mb-4 space-y-2">
-                                <li>實作了去中心化投票邏輯。</li>
-                                <li>加入了「防刷票機制」。</li>
-                                <li>新增了「病毒式分享」按鈕。</li>
-                            </ul>
+
+                            <h4 class="font-bold text-gray-800 mt-8 mb-4">Step 1: UI 設計 (Tailwind)</h4>
+                            <p class="mb-2"><strong>做法：</strong>使用 Tailwind CSS 快速構建投票卡片，包含排名、標題和按鈕。</p>
+                            <div class="bg-gray-100 p-4 rounded-lg my-4 text-xs font-mono overflow-x-auto">
+                                &lt;div class="flex items-center justify-between p-4 border rounded-lg hover:bg-green-50 transition"&gt;...&lt;/div&gt;
+                            </div>
+
+                            <h4 class="font-bold text-gray-800 mt-6 mb-4">Step 2: 邏輯實現 (JS + LocalStorage)</h4>
+                            <p class="mb-2"><strong>做法：</strong>編寫 JavaScript 函數來處理投票點擊，更新數據陣列，並保存到 <code>localStorage</code>。</p>
+                            <div class="bg-gray-900 text-green-400 p-6 rounded-xl mt-4 mb-8 font-mono text-sm">
+                                <p class="text-gray-500 mb-4">// 技術模板：LocalStorage 投票邏輯</p>
+                                <pre>function vote(id) {
+    const idea = ideas.find(i => i.id === id);
+    if (idea) {
+        idea.votes++;
+        saveData(); // localStorage.setItem(...)
+        renderIdeas();
+    }
+}</pre>
+                            </div>
+
+                            <h4 class="font-bold text-gray-800 mt-6 mb-4">Step 3: 防刷票機制</h4>
+                            <p class="mb-2"><strong>做法：</strong>在 <code>localStorage</code> 中記錄已投票的 ID 列表，防止重複投票。</p>
+                            <p class="mb-4 text-sm bg-gray-50 p-3 rounded">
+                                <strong>原理：</strong>雖然這不是絕對安全的（用戶可以清除緩存），但對於一個實驗性專案來說，這是一個足夠輕量且有效的解決方案。
+                            </p>
+
+                            <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                                <h4 class="font-bold text-green-800 mb-2">🎓 學習總結與應用建議</h4>
+                                <ul class="list-disc pl-5 space-y-2 text-sm text-green-700">
+                                    <li><strong>去中心化思維：</strong>不一定需要後端才能做應用。</li>
+                                    <li><strong>用戶賦權：</strong>讓用戶參與決策能顯著提升參與感。</li>
+                                    <li><strong>應用建議：</strong>試著在你的個人網站加上「喜歡」按鈕，記錄在本地。</li>
+                                </ul>
+                            </div>
                             
-                            <!-- CTA -->
-                            <div class="mt-6 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
-                                <p class="text-sm text-green-800 font-medium mb-1">💡 邀請你參與實驗：</p>
-                                <p class="text-sm text-green-700">這個投票系統是我們共創的第一步。如果你覺得哪裡卡卡的，或是想到了更有趣的玩法，請務必在 <a href="community.html" class="underline font-bold hover:text-green-900">社群討論區</a> 告訴我。</p>
+                            <!-- Interaction CTA -->
+                            <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 p-6 rounded-xl">
+                                <h4 class="font-bold text-gray-800 mb-4 text-lg">💬 參與 FL 的共創實驗</h4>
+                                
+                                <div class="space-y-4">
+                                    <!-- Q1 -->
+                                    <div class="flex items-start">
+                                        <div class="bg-green-100 text-green-700 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">Q</div>
+                                        <div>
+                                            <p class="font-bold text-gray-700">你覺得 LocalStorage 這種「君子協定」的防刷票機制夠用嗎？</p>
+                                            <a href="community.html" class="text-sm text-green-600 hover:underline">去社群回答 -></a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Q2 -->
+                                    <div class="flex items-start">
+                                        <div class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">💡</div>
+                                        <div>
+                                            <p class="font-bold text-gray-700">分享你的 Prompt</p>
+                                            <p class="text-sm text-gray-600">如果你有讓 AI 生成更漂亮 UI 的 Prompt，歡迎分享！</p>
+                                            <a href="community.html" class="text-sm text-blue-600 hover:underline">貢獻你的 Prompt -></a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Q3 -->
+                                    <div class="flex items-start">
+                                        <div class="bg-purple-100 text-purple-700 w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">🤝</div>
+                                        <div>
+                                            <p class="font-bold text-gray-700">留下你的案例</p>
+                                            <p class="text-sm text-gray-600">你有做過類似的無後端實驗嗎？</p>
+                                            <a href="community.html" class="text-sm text-purple-600 hover:underline">分享你的作品 -></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
