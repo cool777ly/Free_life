@@ -300,6 +300,15 @@
     </footer>
 
     <script>
+        // Dark Mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('fl-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('fl-theme') === 'dark' || (!('fl-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
         // Check for trending ideas and show banner & section
         document.addEventListener('DOMContentLoaded', () => {
             const ideas = JSON.parse(localStorage.getItem('fl_ideas')) || []; // Note: changed key to fl_ideas to match vote.html
