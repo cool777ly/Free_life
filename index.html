@@ -64,16 +64,16 @@
         <div class="absolute bottom-10 right-10 w-32 h-32 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
 
         <div class="max-w-4xl mx-auto relative z-10">
-            <div class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-6 tracking-wide uppercase">
-                Experiment #001
+            <div class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-6 tracking-wide uppercase flex items-center justify-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                現在更新中 • 每日 / 每週有最新 Build Log
             </div>
-            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight tracking-tight">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
                 一人 + AI <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">真實共創實驗</span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-                這裡不是教學平台，而是紀錄一個普通工程師如何用 AI 從零打造產品的真實戰場。<br>
-                <span class="font-medium text-gray-800">不修飾過程，只展示結果。</span>
+                追蹤我們，一起看 AI 協作如何從 0 到 1
             </p>
             
             <!-- CTAs -->
@@ -220,37 +220,60 @@
         </div>
     </section>
 
-    <!-- Recent Updates Section (Simplified) -->
+    <!-- Recent Updates Section (Redesigned) -->
     <section class="max-w-4xl mx-auto py-16 px-4 animate-grow" style="animation-delay: 0.4s;">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">近期更新 / Recent Updates</h2>
         
-        <div class="grid gap-6 md:grid-cols-3">
-            <!-- Update 1 -->
-            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-green-500 group">
-                <div class="text-xs text-gray-400 mb-2">2026-01-05</div>
-                <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Day 1: 誠實的起點</h3>
-                <p class="text-sm text-gray-500 mt-2">一人與 AI 的空白開局。</p>
+        <div class="space-y-4">
+            <!-- Update 3 (Latest) -->
+            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-green-500 group flex justify-between items-center">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded">技術</span>
+                        <span class="text-xs text-gray-400">Day 3</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">感知社群：前端自動化與成長迴圈</h3>
+                    <p class="text-sm text-gray-500 mt-1 line-clamp-1">如何讓網站自己「看見」熱門投票並自動更新首頁？</p>
+                </div>
+                <div class="text-gray-300 group-hover:text-green-500 transition">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </a>
 
             <!-- Update 2 -->
-            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-green-400 group">
-                <div class="text-xs text-gray-400 mb-2">Day 2</div>
-                <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Day 2: 投票系統上線</h3>
-                <p class="text-sm text-gray-500 mt-2">權力下放，社群共創的開始。</p>
+            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-blue-500 group flex justify-between items-center">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">互動</span>
+                        <span class="text-xs text-gray-400">Day 2</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-700 transition">權力下放：LocalStorage 去中心化投票</h3>
+                    <p class="text-sm text-gray-500 mt-1 line-clamp-1">沒有後端也能做投票？防刷票機制的實作細節。</p>
+                </div>
+                <div class="text-gray-300 group-hover:text-blue-500 transition">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </a>
 
-            <!-- Update 3 -->
-            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-t-4 border-green-300 group">
-                <div class="text-xs text-gray-400 mb-2">Day 3</div>
-                <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Day 3: 票數監測上線</h3>
-                <p class="text-sm text-gray-500 mt-2">網站有了感知能力，熱門想法自動上榜。</p>
+            <!-- Update 1 -->
+            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-purple-500 group flex justify-between items-center">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xs font-bold bg-purple-100 text-purple-700 px-2 py-0.5 rounded">起點</span>
+                        <span class="text-xs text-gray-400">2026-01-05</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-purple-700 transition">誠實的起點：一人與 AI 的空白開局</h3>
+                    <p class="text-sm text-gray-500 mt-1 line-clamp-1">為什麼我決定開始這個實驗？Hello World 的第一天。</p>
+                </div>
+                <div class="text-gray-300 group-hover:text-purple-500 transition">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </a>
         </div>
         
         <div class="text-center mt-10">
-            <p class="text-gray-600 mb-4">這只是開始，每天都有新變化。</p>
-            <a href="build_log.html" class="inline-flex items-center text-green-600 font-semibold hover:text-green-800 hover:bg-green-50 px-4 py-2 rounded transition">
-                查看完整建造日誌 <i class="fas fa-arrow-right ml-2"></i>
+            <a href="build_log.html" class="inline-flex items-center bg-gray-100 text-gray-600 font-semibold hover:bg-green-600 hover:text-white px-6 py-3 rounded-full transition">
+                瀏覽所有日誌 <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
     </section>
