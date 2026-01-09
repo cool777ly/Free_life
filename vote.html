@@ -222,24 +222,21 @@
         // ==========================================
         // Firebase Configuration
         // ==========================================
-        // ⚠️ 重要：由於這是純靜態 HTML 網站，瀏覽器無法直接讀取 Vercel 的環境變數 (process.env)。
-        // 您必須將 Firebase Console 中的真實 Config 直接填入下方。
-        // 別擔心，Firebase 的 API Key 是設計為可公開的 (Public)，安全性由 Firebase Rules 控制。
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+            authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+            storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
         };
 
         // Initialize Firebase
         let app, auth, db;
         try {
-            // Check if config is filled
-            if (firebaseConfig.apiKey === "YOUR_API_KEY" || !firebaseConfig.apiKey) {
-                throw new Error("請在原始碼中填入正確的 Firebase Config");
+            // Basic validation to prevent crash if env vars are missing
+            if (!firebaseConfig.apiKey) {
+                console.warn("Firebase Config is missing. Check Environment Variables.");
             }
 
             app = initializeApp(firebaseConfig);
