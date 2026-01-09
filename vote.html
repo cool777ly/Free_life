@@ -222,23 +222,20 @@
         // ==========================================
         // Firebase Configuration
         // ==========================================
+        // 修正：因為這是靜態網站 (Static HTML)，瀏覽器無法讀取 process.env。
+        // 必須直接填入數值才能運作。
         const firebaseConfig = {
-            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-            authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-            storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-            messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-            appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+            apiKey: "AIzaSyDRX-YdqSwI_fKieE08JzzcbYBoVKNGIiM",
+            authDomain: "fl-free.firebaseapp.com",
+            projectId: "fl-free",
+            storageBucket: "fl-free.appspot.com",
+            messagingSenderId: "107620840392",
+            appId: "1:107620840392:web:2d155b26f96418493ec6fd"
         };
 
         // Initialize Firebase
         let app, auth, db;
         try {
-            // Basic validation to prevent crash if env vars are missing
-            if (!firebaseConfig.apiKey) {
-                console.warn("Firebase Config is missing. Check Environment Variables.");
-            }
-
             app = initializeApp(firebaseConfig);
             auth = getAuth(app);
             db = getFirestore(app);
