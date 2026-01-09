@@ -161,6 +161,8 @@
         }
 
         // Sample Comments (Fake Data for Demo)
+        let comments = JSON.parse(localStorage.getItem('fl_comments_v2')) || [];
+        
         if (comments.length === 0) {
             comments = [
                 { id: 1, name: "WebDev_Mike", tag: "討論", content: "這個 LocalStorage 的應用太有趣了！不需要後端也能做互動，對於 MVP 驗證很有幫助。", timestamp: Date.now() - 100000 },
