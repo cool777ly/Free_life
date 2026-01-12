@@ -124,6 +124,24 @@
                 </ul>
             </div>
 
+            <!-- Event Banner: Proposal Marathon -->
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 mb-8 text-white shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-20 text-8xl transform rotate-12">
+                    <i class="fas fa-running"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-white/20 px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide">Event</span>
+                        <span class="text-purple-200 text-xs">本週限定</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-2">🏃 提案馬拉松：AI 助手如何優化日程？</h2>
+                    <p class="text-purple-100 mb-4 max-w-lg">提交你的需求，獲讚最高者可獲得一對一諮詢。我們正在尋找最痛的痛點。</p>
+                    <a href="#idea-form" class="inline-block bg-white text-purple-700 px-6 py-2 rounded-full font-bold hover:bg-purple-50 transition shadow-md">
+                        立即提案
+                    </a>
+                </div>
+            </div>
+
             <!-- Submission Form -->
             <div class="bg-white p-6 rounded-2xl shadow-lg mb-10 border border-green-100 dark:bg-gray-800 dark:border-gray-700">
                 <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
@@ -448,6 +466,26 @@
         // UI Rendering (Similar to previous)
         // ==========================================
 
+        // Mock Save Function
+        window.toggleSave = function(btn) {
+            // Prevent event bubbling if inside a clickable card (though here buttons are separate)
+            const isSaved = btn.dataset.saved === 'true';
+            
+            if (isSaved) {
+                btn.dataset.saved = 'false';
+                btn.classList.remove('text-yellow-600', 'bg-yellow-50');
+                btn.classList.add('text-gray-400', 'hover:text-yellow-500');
+                btn.innerHTML = '<i class="far fa-bookmark"></i> 收藏靈感';
+            } else {
+                btn.dataset.saved = 'true';
+                btn.classList.remove('text-gray-400', 'hover:text-yellow-500');
+                btn.classList.add('text-yellow-600', 'bg-yellow-50');
+                btn.innerHTML = '<i class="fas fa-bookmark"></i> 已存入靈感庫';
+                // Toast notification could be better, but alert is requested/simple
+                alert('已存入你的靈感庫！');
+            }
+        }
+
         function renderIdeas() {
             const list = document.getElementById('idea-list');
             list.innerHTML = '';
@@ -462,17 +500,24 @@
 
             sortedIdeas.forEach((idea, index) => {
                 const isVoted = !!userVotes[idea.id];
-                const isTop3 = index < 3;
                 const isTrending = idea.votes >= 10;
                 
+                // Mock "Read/New" Status
+                // Logic: Randomly assign "New" to some items for visual demo, or based on index
+                const isNew = index < 2; // Top 2 are "New"
+                const statusBadge = isNew 
+                    ? `<span class="ml-2 text-xs text-blue-600 font-bold flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-full"><span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> 新動態</span>`
+                    : `<span class="ml-2 text-xs text-gray-400 font-bold bg-gray-100 px-2 py-0.5 rounded-full">已閱</span>`;
+
+                
                 // Styles (Same as before)
-                let cardClass = "bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between transition hover:shadow-md dark:bg-gray-800 dark:border-gray-700";
+                let cardClass = "bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center justify-between transition hover:shadow-md dark:bg-gray-800 dark:border-gray-700 gap-4";
                 let rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 font-bold text-sm dark:bg-gray-700 dark:text-gray-400">#${index + 1}</span>`;
                 
                 if (index === 0) {
                     cardClass += " border-l-4 border-l-yellow-400 ring-1 ring-yellow-100 dark:ring-yellow-900";
                     rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-700 font-bold text-sm ring-2 ring-yellow-200 dark:bg-yellow-900 dark:text-yellow-200">🥇</span>`;
-                } else if (index === 1) rankBadge = `🥈`; // Simplified for brevity
+                } else if (index === 1) rankBadge = `🥈`; 
                 else if (index === 2) rankBadge = `🥉`;
 
                 // Status Badges
@@ -482,8 +527,8 @@
 
                 // Button State
                 const btnClass = isVoted 
-                    ? "bg-red-50 text-red-500 border border-red-200 px-4 py-2 rounded-lg font-bold text-sm hover:bg-red-100 transition dark:bg-red-900/20 dark:border-red-800"
-                    : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 px-4 py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white";
+                    ? "bg-red-50 text-red-500 border border-red-200 px-4 py-2 rounded-lg font-bold text-sm hover:bg-red-100 transition dark:bg-red-900/20 dark:border-red-800 flex-1 md:flex-none text-center"
+                    : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 px-4 py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white flex-1 md:flex-none text-center";
 
                 const btnText = isVoted ? '撤銷' : '投票';
                 const btnIcon = isVoted ? '<i class="fas fa-undo"></i>' : '<i class="fas fa-thumbs-up"></i>';
@@ -492,20 +537,29 @@
                 item.className = cardClass;
                 item.innerHTML = `
                     <div class="flex items-center gap-4 flex-1">
-                        <div class="w-8 h-8 flex items-center justify-center font-bold text-lg">${rankBadge}</div>
+                        <div class="w-8 h-8 flex items-center justify-center font-bold text-lg flex-shrink-0">${rankBadge}</div>
                         <div class="flex flex-col">
-                            <h3 class="font-bold text-gray-800 text-lg dark:text-gray-100 flex items-center flex-wrap">
-                                ${idea.text} ${badges}
+                            <h3 class="font-bold text-gray-800 text-lg dark:text-gray-100 flex items-center flex-wrap gap-1">
+                                ${idea.text} ${badges} ${statusBadge}
                             </h3>
-                            <div class="text-xs text-gray-500 mt-1 dark:text-gray-400">
-                                票數: <span class="font-bold text-green-600 dark:text-green-400">${idea.votes}</span>
-                                ${idea.createdBy ? `<span class="ml-2 text-gray-400">• by ${idea.createdBy}</span>` : ''}
+                            <div class="text-xs text-gray-500 mt-1 dark:text-gray-400 flex items-center gap-2">
+                                <span>票數: <span class="font-bold text-green-600 dark:text-green-400">${idea.votes}</span></span>
+                                ${idea.createdBy ? `<span class="text-gray-300">|</span> <span>by ${idea.createdBy}</span>` : ''}
                             </div>
                         </div>
                     </div>
-                    <button id="vote-btn-${idea.id}" onclick="handleVote('${idea.id}')" class="${btnClass}">
-                        ${btnIcon} ${btnText}
-                    </button>
+                    
+                    <div class="flex items-center gap-3 w-full md:w-auto">
+                        <!-- Save Button -->
+                        <button onclick="toggleSave(this)" class="text-gray-400 hover:text-yellow-500 text-sm font-bold px-3 py-2 rounded-lg hover:bg-yellow-50 transition flex items-center gap-1 whitespace-nowrap" title="加入靈感庫">
+                            <i class="far fa-bookmark"></i> <span class="hidden sm:inline">收藏靈感</span>
+                        </button>
+                        
+                        <!-- Vote Button -->
+                        <button id="vote-btn-${idea.id}" onclick="handleVote('${idea.id}')" class="${btnClass}">
+                            ${btnIcon} ${btnText}
+                        </button>
+                    </div>
                 `;
                 list.appendChild(item);
             });

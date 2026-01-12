@@ -76,11 +76,11 @@
         </div>
     </nav>
 
-    <!-- Header -->
+    <!-- Hero -->
     <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4">
         <div class="max-w-4xl mx-auto animate-grow">
-            <h1 class="text-4xl font-bold text-green-800 mb-4">建造日誌</h1>
-            <p class="text-lg text-gray-600">不追求完美，只記錄真實。這裡是 FL 成長的足跡。</p>
+            <h1 class="text-4xl font-bold text-green-800 mb-4">從 0 到 1 構建即時投票系統：Firestore 實戰拆解</h1>
+            <p class="text-lg text-gray-600">解決靜態網頁與動態資料庫的通訊難題，實現低延遲的社群決策工具。</p>
         </div>
     </header>
 
@@ -157,11 +157,57 @@
                 </ul>
             </div>
 
+            <!-- Email Subscription -->
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-xl shadow-lg text-white">
+                <h3 class="font-bold text-white mb-2">別再追著資訊跑</h3>
+                <p class="text-xs text-gray-300 mb-4">每週五發送「自動化實戰報告」，包含本週最強 Prompt 與 Build Log 深度解析。</p>
+                <form class="space-y-2">
+                    <input type="email" placeholder="輸入 Email" class="w-full p-2 rounded text-gray-900 text-sm focus:ring-2 focus:ring-green-500 border-none">
+                    <button type="button" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2 rounded text-sm transition">
+                        獲取實戰報告
+                    </button>
+                </form>
+                <p class="text-[10px] text-gray-500 mt-2 text-center">已有 1,000+ 開發者加入</p>
+            </div>
+
         </aside>
 
         <!-- Logs Timeline -->
         <main class="lg:col-span-3 order-1 lg:order-2">
             <div class="relative border-l-4 border-green-300 ml-4 pl-8 space-y-16">
+
+                <!-- Log Entry: Day 4 (New) -->
+                <div class="relative group log-entry" data-category="tech" data-tags="Firestore Firebase Transaction">
+                    <span class="absolute -left-[44px] top-0 bg-green-600 text-white text-sm font-bold px-2 py-1 rounded shadow">Day 4</span>
+                    <div class="absolute -left-[48px] top-8 w-4 h-4 bg-green-600 rounded-full border-4 border-white shadow"></div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-bold">架構升級</span>
+                            <span class="text-gray-400 text-xs ml-auto">2026-01-12</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Firestore 實戰：解決靜態網頁與動態資料庫的通訊難題</h3>
+                        <div class="prose max-w-none text-gray-600 leading-relaxed">
+                            <p class="mb-6 font-bold text-lg text-gray-700 border-l-4 border-green-500 pl-4">
+                                從 LocalStorage 到 Firestore，我們終於實現了真正的社群同步。
+                            </p>
+                            <h4 class="font-bold text-gray-800 mt-8 mb-4">挑戰：靜態 HTML 如何安全連接資料庫？</h4>
+                            <p class="mb-2">我們遇到的最大問題是：在沒有後端伺服器（只有靜態 HTML）的情況下，如何安全地與資料庫通訊？</p>
+                            <p class="mb-4">最初嘗試使用 `process.env` 在前端注入變數，但發現純靜態頁面無法讀取環境變數。最終解決方案是回歸本質：使用 Firebase 的客戶端 SDK，並配合嚴格的 Firestore 安全規則 (Security Rules)。</p>
+                            
+                            <h4 class="font-bold text-gray-800 mt-6 mb-4">關鍵代碼：即時監聽 (onSnapshot)</h4>
+                            <div class="bg-gray-900 text-green-400 p-6 rounded-xl mt-4 mb-8 font-mono text-sm">
+<pre>onSnapshot(collection(db, 'ideas'), (snapshot) => {
+    ideas = [];
+    snapshot.forEach((doc) => {
+        ideas.push({ id: doc.id, ...doc.data() });
+    });
+    renderIdeas(); // 數據一變，畫面秒更
+});</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Log Entry: Day 3 -->
                 <div class="relative group log-entry" data-category="tech interaction" data-tags="前端自動化 社群 LocalStorage">
