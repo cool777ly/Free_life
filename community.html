@@ -93,52 +93,136 @@
     <header class="text-center pt-32 pb-10 bg-gradient-to-b from-green-100 to-gray-50 px-4 dark:from-green-900 dark:to-gray-900">
         <div class="max-w-4xl mx-auto animate-fade">
             <h1 class="text-4xl font-bold text-green-800 mb-4 dark:text-green-400">這裡沒有標準答案，只有我們的共同實驗</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300">這裡不是單向的許願池，而是我們一起思考 FL 未來的實驗室。歡迎分享你對網站功能的想像，或是你正在嘗試的「自由生活」小實驗。</p>
+            <p class="text-lg text-gray-600 dark:text-gray-300">這裡不是單向的許願池，而是我們一起思考 FL 未來的實驗室。</p>
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-8 max-w-4xl animate-fade" style="animation-delay: 0.1s;">
+    <div class="container mx-auto px-4 py-8 max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade" style="animation-delay: 0.1s;">
         
-        <!-- Comment Form -->
-        <div class="bg-white p-6 rounded-xl shadow-md mb-8 border-t-4 border-green-500 dark:bg-gray-800 dark:border-green-400">
-            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
-                <i class="fas fa-users text-green-600 mr-2"></i> 與 FL 一起生長：社群共創板
-            </h2>
-            <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-r text-sm text-green-800 dark:bg-green-900/30 dark:text-green-200 dark:border-green-600">
-                <p class="font-bold mb-2 text-base">這不是傳統的客服信箱，而是我們一起打磨產品的工作桌。</p>
-                <p class="mb-3 opacity-90">你的每一條留言，無論是吐槽 Bug 還是天馬行空的想像，都可能在下一次更新中變成現實。不知道說什麼？試試這些方向：</p>
-                <ul class="list-disc pl-5 space-y-1 opacity-90">
-                    <li>覺得投票規則太簡單？告訴我你心目中的「完美民主」機制。</li>
-                    <li>發現了顯示 Bug？（很有可能！）請詳細描述，幫我抓出來。</li>
-                    <li>你希望 FL 下一步長出什麼功能？會員？聊天室？還是...？</li>
-                    <li>分享你在「自由生活」實驗中的小發現，不一定要關於網站。</li>
-                    <li>單純想給一人開發者加油打氣？（我會非常感謝！）</li>
+        <!-- Sidebar (Newcomer Tasks & Badges) -->
+        <aside class="lg:col-span-1 space-y-8">
+            
+            <!-- Newcomer Tasks -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
+                    <i class="fas fa-map-signs text-green-600 mr-2"></i> 新手任務
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <div class="bg-gray-100 text-gray-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-700 text-sm dark:text-gray-200">初次見面</h4>
+                            <p class="text-xs text-gray-500">在首頁點擊任意一個「投票」按鈕。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="bg-gray-100 text-gray-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-700 text-sm dark:text-gray-200">留下足跡</h4>
+                            <p class="text-xs text-gray-500">在右側留言板發布一條「Hello World」。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="bg-gray-100 text-gray-400 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-700 text-sm dark:text-gray-200">尋找彩蛋</h4>
+                            <p class="text-xs text-gray-500">切換一次深色/淺色模式。</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
-            <form id="comment-form" class="space-y-4">
-                <div class="flex gap-4">
-                    <input id="comment-name" type="text" class="w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="你的暱稱" required>
-                    <select id="comment-tag" class="w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                        <option value="討論">💬 討論</option>
-                        <option value="建議">💡 建議</option>
-                        <option value="Bug">🐛 Bug</option>
-                        <option value="閒聊">☕ 閒聊</option>
-                    </select>
-                </div>
-                <textarea id="comment-content" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="分享你的想法..." required></textarea>
-                <button type="submit" class="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-sm dark:bg-green-500 dark:hover:bg-green-600">
-                    發布留言
-                </button>
-            </form>
-        </div>
 
-        <!-- Comments List -->
-        <div id="comment-list" class="space-y-4">
-            <!-- Comments injected via JS -->
-            <div class="text-center py-12 text-gray-500 dark:text-gray-400">
-                <i class="fas fa-spinner fa-spin mr-2"></i> 載入討論中...
+            <!-- Badges Gallery -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
+                    <i class="fas fa-medal text-yellow-500 mr-2"></i> 社群貢獻徽章
+                </h3>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="text-center p-2 rounded hover:bg-gray-50 transition cursor-help group relative" title="新手園丁：首次提交投票或留言">
+                        <div class="text-2xl mb-1">🌱</div>
+                        <div class="text-[10px] text-gray-500">新手園丁</div>
+                    </div>
+                    <div class="text-center p-2 rounded hover:bg-gray-50 transition cursor-help group relative" title="熱情自造者：累積投票超過 10 次">
+                        <div class="text-2xl mb-1">🔥</div>
+                        <div class="text-[10px] text-gray-500">熱情自造者</div>
+                    </div>
+                    <div class="text-center p-2 rounded hover:bg-gray-50 transition cursor-help group relative" title="皇家捕蟲手：成功回報並被修復 1 個 Bug">
+                        <div class="text-2xl mb-1">🐛</div>
+                        <div class="text-[10px] text-gray-500">皇家捕蟲手</div>
+                    </div>
+                    <div class="text-center p-2 rounded hover:bg-gray-50 transition cursor-help group relative" title="靈感建築師：提交的提案進入「開發中」狀態">
+                        <div class="text-2xl mb-1">💡</div>
+                        <div class="text-[10px] text-gray-500">靈感建築師</div>
+                    </div>
+                    <div class="text-center p-2 rounded hover:bg-gray-50 transition cursor-help group relative" title="友善鄰居：回覆其他人的留言超過 3 次">
+                        <div class="text-2xl mb-1">🤝</div>
+                        <div class="text-[10px] text-gray-500">友善鄰居</div>
+                    </div>
+                    <div class="text-center p-2 rounded hover:bg-gray-50 transition cursor-help group relative" title="提示詞大師：分享的 Prompt 被收錄">
+                        <div class="text-2xl mb-1">🧙‍♂️</div>
+                        <div class="text-[10px] text-gray-500">提示詞大師</div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <!-- Discussion Starters -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100 dark:from-blue-900/20 dark:to-indigo-900/20 dark:border-blue-800">
+                <h3 class="font-bold text-blue-800 mb-4 text-sm dark:text-blue-300">
+                    不知道說什麼？試試這些話題：
+                </h3>
+                <ul class="space-y-3 text-sm text-blue-900 dark:text-blue-100">
+                    <li class="cursor-pointer hover:underline" onclick="fillTemplate('如果這個網站是你做的，你第一個想加什麼功能？')">👉 「如果這個網站是你做的，你第一個想加什麼功能？」</li>
+                    <li class="cursor-pointer hover:underline" onclick="fillTemplate('一人開發最孤獨的時刻是什麼？來聊聊。')">👉 「一人開發最孤獨的時刻是什麼？來聊聊。」</li>
+                    <li class="cursor-pointer hover:underline" onclick="fillTemplate('上次讓你感到『哇，這就是未來』的瞬間是什麼？')">👉 「上次讓你感到『哇，這就是未來』的瞬間是什麼？」</li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <!-- Main Content (Comments) -->
+        <main class="lg:col-span-2">
+            
+            <!-- Comment Form -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8 border-t-4 border-green-500 dark:bg-gray-800 dark:border-green-400">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
+                    <i class="fas fa-users text-green-600 mr-2"></i> 與 FL 一起生長：社群共創板
+                </h2>
+                
+                <!-- Quick Templates -->
+                <div class="mb-4 flex flex-wrap gap-2">
+                    <span class="text-xs text-gray-500 flex items-center mr-1">一鍵帶入模板：</span>
+                    <button onclick="fillTemplate('我在做 ______ 時遇到 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">遇到困難</button>
+                    <button onclick="fillTemplate('如果有人用 ______ 提示詞想得到 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">Prompt分享</button>
+                    <button onclick="fillTemplate('我建議 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">給建議</button>
+                    <button onclick="fillTemplate('發現一個 Bug：在 ______ 點擊 ______ 會 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">回報Bug</button>
+                </div>
+
+                <form id="comment-form" class="space-y-4">
+                    <div class="flex gap-4">
+                        <input id="comment-name" type="text" class="w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="你的暱稱" required>
+                        <select id="comment-tag" class="w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            <option value="討論">💬 討論</option>
+                            <option value="建議">💡 建議</option>
+                            <option value="Bug">🐛 Bug</option>
+                            <option value="閒聊">☕ 閒聊</option>
+                        </select>
+                    </div>
+                    <textarea id="comment-content" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="分享你的想法..." required></textarea>
+                    <button type="submit" class="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-sm dark:bg-green-500 dark:hover:bg-green-600">
+                        發布留言
+                    </button>
+                </form>
+            </div>
+
+            <!-- Comments List -->
+            <div id="comment-list" class="space-y-4">
+                <!-- Comments injected via JS -->
+                <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> 載入討論中...
+                </div>
+            </div>
+
+        </main>
 
     </div>
 
@@ -158,6 +242,13 @@
         }
         if (localStorage.getItem('fl-theme') === 'dark' || (!('fl-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
+        }
+
+        // Helper: Fill Template
+        window.fillTemplate = function(text) {
+            const textarea = document.getElementById('comment-content');
+            textarea.value = text;
+            textarea.focus();
         }
 
         // Sample Comments (Fake Data for Demo)
