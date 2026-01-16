@@ -95,120 +95,83 @@
 
     <!-- Main Content -->
     <main class="flex-grow pt-24 px-4 pb-12">
-        <div class="max-w-3xl mx-auto animate-grow">
+        <div class="max-w-6xl mx-auto animate-grow">
             
-            <!-- Header -->
-            <header class="text-center pt-32 pb-12 bg-gradient-to-b from-green-100 to-gray-50 px-4 animate-grow dark:from-green-900 dark:to-gray-900">
-                <div class="max-w-4xl mx-auto">
-                    <h1 class="text-4xl font-bold text-green-800 mb-4 dark:text-green-400">功能投票</h1>
-                    <p class="text-lg text-gray-600 mb-6 dark:text-gray-300">這裡沒有黑箱，只有你的選擇。</p>
-                    
-                    <!-- Login Simulation (Mock) -->
-                    <button onclick="alert('後端認證系統開發中！\n目前我們使用 LocalStorage 來保存您的投票。\n敬請期待 Firebase 整合更新！')" class="bg-white text-green-700 border border-green-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-green-50 transition shadow-sm dark:bg-gray-800 dark:text-green-400 dark:border-green-800">
-                        <i class="fas fa-user-circle mr-2"></i> 登入以保存投票 (Login)
-                    </button>
+            <!-- Top Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-poll text-green-600 mr-3"></i> 網頁投票
+                    </h1>
+                    <p class="text-gray-500 text-sm mt-1 dark:text-gray-400">選出你心目中最有價值的網站</p>
                 </div>
-            </header>
-
-            <!-- Rules Section (v0.1) -->
-            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-10 rounded-r-xl shadow-sm dark:bg-yellow-900/20 dark:border-yellow-500">
-                <h2 class="text-lg font-bold mb-3 flex items-center text-yellow-800 dark:text-yellow-200">
-                    <i class="fas fa-clipboard-list mr-2"></i> 投票規則 v0.1
-                </h2>
-                <ul class="list-none space-y-2 text-sm text-yellow-900 dark:text-yellow-100/90">
-                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> 每位用戶（同一瀏覽器）對每個想法限投 1 票。</li>
-                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> <strong>無法撤銷</strong>：請慎重使用你的權利。</li>
-                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> <strong>數據真實</strong>：直接存於 LocalStorage，這是一個去中心化的信任實驗。</li>
-                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> <strong>行動承諾</strong>：累計超過 10 票的想法，將被標記為「計劃中」並優先開發。</li>
-                    <li class="flex items-start"><i class="fas fa-check mt-1 mr-2 text-yellow-600"></i> 作弊行為（如清除緩存刷票）將被視為對人類本性的測試 😂</li>
-                </ul>
+                <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="bg-green-600 text-white px-6 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg flex items-center gap-2">
+                    <i class="fas fa-plus"></i> 添加網頁
+                </button>
             </div>
 
-            <!-- Event Banner: Proposal Marathon -->
-            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 mb-8 text-white shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-20 text-8xl transform rotate-12">
-                    <i class="fas fa-running"></i>
+            <!-- Hot Section (Top Voted) -->
+            <section id="hot-section" class="mb-16 hidden">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
+                        <i class="fas fa-fire"></i> Hot
+                    </span>
+                    <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">目前最高票</h2>
                 </div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="bg-white/20 px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wide">Event</span>
-                        <span class="text-purple-200 text-xs">本週限定</span>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2">🏃 提案馬拉松：AI 助手如何優化日程？</h2>
-                    <p class="text-purple-100 mb-4 max-w-lg">提交你的需求，獲讚最高者可獲得一對一諮詢。我們正在尋找最痛的痛點。</p>
-                    <a href="#idea-form" class="inline-block bg-white text-purple-700 px-6 py-2 rounded-full font-bold hover:bg-purple-50 transition shadow-md">
-                        立即提案
-                    </a>
+                <div id="hot-website-container">
+                    <!-- Injected by JS -->
                 </div>
-            </div>
+            </section>
 
-            <!-- Submission Form -->
-            <div class="bg-white p-6 rounded-2xl shadow-lg mb-10 border border-green-100 dark:bg-gray-800 dark:border-gray-700">
-                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center dark:text-gray-100">
-                    <i class="fas fa-plus-circle text-green-600 mr-2"></i> 發起新提案
-                </h2>
-                <form id="idea-form" class="flex flex-col md:flex-row gap-3">
-                    <input id="idea-input" type="text" class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="例如：增加「番茄鐘」功能..." required>
-                    <button type="submit" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-md active:transform active:scale-95 dark:bg-green-500 dark:hover:bg-green-600 whitespace-nowrap">
-                        提交想法
-                    </button>
-                </form>
-            </div>
-
-            <!-- Next Topic Voting (New Feature) -->
-            <div class="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-100 p-8 rounded-2xl shadow-sm mb-12 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl text-indigo-600 transform rotate-12">
-                    <i class="fas fa-book-open"></i>
+            <!-- Voting Groups (Grid Layout) -->
+            <section>
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
+                        <i class="fas fa-layer-group"></i> All
+                    </span>
+                    <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">所有候選網頁</h2>
                 </div>
-                <div class="relative z-10">
-                    <h2 class="text-2xl font-bold text-indigo-900 mb-2 flex items-center">
-                        <i class="fas fa-pen-fancy mr-3"></i> 決定下一篇日誌的主題
-                    </h2>
-                    <p class="text-indigo-700 mb-6">我想寫什麼不重要，重要的是你想看什麼。最高票的主題將成為本週五的更新內容。</p>
-                    
-                    <div class="space-y-4">
-                        <!-- Topic 1 -->
-                        <div class="bg-white p-4 rounded-xl flex items-center justify-between shadow-sm cursor-pointer hover:shadow-md transition group" onclick="voteTopic('topic1')">
-                            <div>
-                                <h3 class="font-bold text-gray-800 group-hover:text-indigo-600 transition">揭秘：我如何用 Prompt 讓 AI 寫出完美 CSS？</h3>
-                                <div class="w-full bg-gray-100 h-2 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 0%"></div>
-                                </div>
-                                <div class="text-xs text-gray-400 mt-1">目前 0 票</div>
-                            </div>
-                            <button class="bg-indigo-100 text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-600 hover:text-white transition">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                        
-                        <!-- Topic 2 -->
-                        <div class="bg-white p-4 rounded-xl flex items-center justify-between shadow-sm cursor-pointer hover:shadow-md transition group" onclick="voteTopic('topic2')">
-                            <div>
-                                <h3 class="font-bold text-gray-800 group-hover:text-indigo-600 transition">實戰：從零串接 Vercel Analytics 的坑與淚</h3>
-                                <div class="w-full bg-gray-100 h-2 rounded-full mt-2 overflow-hidden">
-                                    <div class="bg-indigo-500 h-2 rounded-full" style="width: 0%"></div>
-                                </div>
-                                <div class="text-xs text-gray-400 mt-1">目前 0 票</div>
-                            </div>
-                            <button class="bg-indigo-100 text-indigo-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-indigo-600 hover:text-white transition">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+                
+                <!-- The "Middle Frame" (Grid Container) -->
+                <div id="website-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Website Cards (Small Frames) Injected by JS -->
+                    <div class="col-span-full text-center py-12 text-gray-400">
+                        <i class="fas fa-spinner fa-spin mr-2"></i> 載入數據中...
                     </div>
                 </div>
-            </div>
-
-            <!-- Feature Voting List (Existing) -->
-            <div class="space-y-6" id="idea-list">
-                <!-- Ideas injected by JS -->
-                <div class="text-center py-12">
-                    <i class="fas fa-circle-notch fa-spin text-3xl text-green-500"></i>
-                    <p class="mt-4 text-gray-500">正在讀取社群智慧...</p>
-                </div>
-            </div>
+            </section>
 
         </div>
     </main>
+
+    <!-- Add Website Modal -->
+    <div id="add-modal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-grow dark:bg-gray-800">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">添加網頁</h3>
+                <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="add-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1 dark:text-gray-300">網頁標題</label>
+                    <input id="web-title" type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="例如：GitHub" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1 dark:text-gray-300">網址 (URL)</label>
+                    <input id="web-url" type="url" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="https://example.com" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1 dark:text-gray-300">說明 (為什麼推薦？)</label>
+                    <textarea id="web-desc" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="簡短介紹這個網頁..." required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition shadow-md">
+                    提交網頁
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer with Social Share -->
     <footer class="bg-gray-800 text-gray-400 py-10 mt-auto dark:bg-gray-950">
@@ -286,35 +249,20 @@
         // State & Auth Logic
         // ==========================================
         let currentUser = null;
-        let ideas = [];
-        let userVotes = {}; // { ideaId: true }
+        let websites = [];
+        let userVotes = {}; // { websiteId: true }
 
         // Auth State Listener
         if (auth) {
             onAuthStateChanged(auth, (user) => {
-                const loading = document.getElementById('auth-loading');
-                const loginBtn = document.getElementById('login-btn');
-                const userProfile = document.getElementById('user-profile');
-
-                if(loading) loading.classList.add('hidden');
-
                 if (user) {
                     currentUser = user;
-                    // UI Update
-                    if(loginBtn) loginBtn.classList.add('hidden');
-                    if(userProfile) userProfile.classList.remove('hidden');
-                    document.getElementById('user-name').innerText = user.displayName;
-                    document.getElementById('user-avatar').src = user.photoURL;
-                    
                     // Load User Votes
                     loadUserVotes(user.uid);
                 } else {
                     currentUser = null;
-                    // UI Update
-                    if(loginBtn) loginBtn.classList.remove('hidden');
-                    if(userProfile) userProfile.classList.add('hidden');
                     userVotes = {};
-                    renderIdeas(); // Re-render to update button states
+                    renderWebsites();
                 }
             });
         }
@@ -336,17 +284,18 @@
         // Database Logic (Cloud Firestore)
         // ==========================================
         
-        // Listen to Ideas Collection
+        // Listen to Websites Collection
         if (db) {
-            const ideasRef = collection(db, 'ideas');
-            onSnapshot(ideasRef, (snapshot) => {
-                ideas = [];
+            const websitesRef = collection(db, 'websites');
+            onSnapshot(websitesRef, (snapshot) => {
+                websites = [];
                 snapshot.forEach((doc) => {
-                    ideas.push({ id: doc.id, ...doc.data() });
+                    websites.push({ id: doc.id, ...doc.data() });
                 });
-                renderIdeas();
+                renderWebsites();
             }, (error) => {
                 console.error("Firestore Listen Error:", error);
+                document.getElementById('website-grid').innerHTML = `<div class="col-span-full text-center py-12 text-red-400">無法連接數據庫：${error.message}</div>`;
             });
         }
 
@@ -354,75 +303,70 @@
             const userRef = doc(db, 'users', uid);
             onSnapshot(userRef, (docSnapshot) => {
                 if (docSnapshot.exists()) {
-                    userVotes = docSnapshot.data().votes || {};
+                    userVotes = docSnapshot.data().website_votes || {}; // Note: changed key to website_votes
                 } else {
                     userVotes = {};
                 }
-                renderIdeas();
+                renderWebsites();
             });
         }
 
         // Vote Action
-        window.handleVote = async function(ideaId) {
+        window.handleVote = async function(websiteId) {
             if (!currentUser) {
                 alert("請先登入才能投票！這能確保數據真實性。");
                 googleLogin();
                 return;
             }
 
-            if (userVotes[ideaId]) {
-                // Revoke Vote (Optional feature)
+            if (userVotes[websiteId]) {
                 if(confirm("您已經投過票了。確定要撤銷嗎？")) {
-                    revokeVote(ideaId);
+                    revokeVote(websiteId);
                 }
                 return;
             }
 
             try {
                 await runTransaction(db, async (transaction) => {
-                    const ideaRef = doc(db, "ideas", ideaId);
+                    const webRef = doc(db, "websites", websiteId);
                     const userRef = doc(db, "users", currentUser.uid);
 
-                    const ideaDoc = await transaction.get(ideaRef);
-                    if (!ideaDoc.exists()) throw "Document does not exist!";
+                    const webDoc = await transaction.get(webRef);
+                    if (!webDoc.exists()) throw "Document does not exist!";
 
-                    const newVotes = (ideaDoc.data().votes || 0) + 1;
-                    transaction.update(ideaRef, { votes: newVotes });
+                    const newVotes = (webDoc.data().votes || 0) + 1;
+                    transaction.update(webRef, { votes: newVotes });
 
                     // Record user vote
                     transaction.set(userRef, { 
-                        votes: { [ideaId]: true } 
+                        website_votes: { [websiteId]: true } 
                     }, { merge: true });
                 });
                 
-                // Visual Feedback
-                const btn = document.getElementById(`vote-btn-${ideaId}`);
-                if (btn) btn.classList.add('voted-animation');
-
             } catch (e) {
                 console.error("Transaction failed: ", e);
                 alert("投票失敗，請稍後再試。");
             }
         };
 
-        async function revokeVote(ideaId) {
+        async function revokeVote(websiteId) {
             try {
                 await runTransaction(db, async (transaction) => {
-                    const ideaRef = doc(db, "ideas", ideaId);
+                    const webRef = doc(db, "websites", websiteId);
                     const userRef = doc(db, "users", currentUser.uid);
 
-                    const ideaDoc = await transaction.get(ideaRef);
-                    if (!ideaDoc.exists()) throw "Document does not exist!";
+                    const webDoc = await transaction.get(webRef);
+                    if (!webDoc.exists()) throw "Document does not exist!";
 
-                    const newVotes = (ideaDoc.data().votes || 0) - 1;
-                    transaction.update(ideaRef, { votes: newVotes });
+                    const newVotes = (webDoc.data().votes || 0) - 1;
+                    transaction.update(webRef, { votes: newVotes });
 
                     // Remove user vote
                     const userDoc = await transaction.get(userRef);
                     if (userDoc.exists()) {
                         const userData = userDoc.data();
-                        if (userData.votes && userData.votes[ideaId]) {
-                            delete userData.votes[ideaId];
+                        if (userData.website_votes && userData.website_votes[websiteId]) {
+                            delete userData.website_votes[websiteId];
                             transaction.set(userRef, userData);
                         }
                     }
@@ -432,137 +376,149 @@
             }
         }
 
-        // Add New Idea
-        document.getElementById('idea-form').addEventListener('submit', async (e) => {
+        // Add New Website
+        document.getElementById('add-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!currentUser) {
-                alert("請先登入才能提交想法！");
+                alert("請先登入才能提交網頁！");
                 googleLogin();
                 return;
             }
 
-            const input = document.getElementById('idea-input');
-            const text = input.value.trim();
+            const title = document.getElementById('web-title').value.trim();
+            const url = document.getElementById('web-url').value.trim();
+            const desc = document.getElementById('web-desc').value.trim();
             
-            if (text) {
+            if (title && url) {
                 try {
-                    await addDoc(collection(db, 'ideas'), {
-                        text: text,
+                    await addDoc(collection(db, 'websites'), {
+                        title: title,
+                        url: url,
+                        desc: desc,
                         votes: 0,
                         createdBy: currentUser.displayName,
                         createdAt: Date.now()
                     });
                     
-                    input.value = '';
-                    alert("想法已提交！感謝您的貢獻。");
+                    document.getElementById('add-form').reset();
+                    document.getElementById('add-modal').classList.add('hidden');
+                    alert("網頁已提交！感謝您的推薦。");
                 } catch (e) {
-                    console.error("Add idea failed: ", e);
+                    console.error("Add website failed: ", e);
                     alert("提交失敗：" + e.message);
                 }
             }
         });
 
         // ==========================================
-        // UI Rendering (Similar to previous)
+        // UI Rendering
         // ==========================================
 
-        // Mock Save Function
-        window.toggleSave = function(btn) {
-            // Prevent event bubbling if inside a clickable card (though here buttons are separate)
-            const isSaved = btn.dataset.saved === 'true';
+        function renderWebsites() {
+            const grid = document.getElementById('website-grid');
+            const hotContainer = document.getElementById('hot-website-container');
+            const hotSection = document.getElementById('hot-section');
             
-            if (isSaved) {
-                btn.dataset.saved = 'false';
-                btn.classList.remove('text-yellow-600', 'bg-yellow-50');
-                btn.classList.add('text-gray-400', 'hover:text-yellow-500');
-                btn.innerHTML = '<i class="far fa-bookmark"></i> 收藏靈感';
-            } else {
-                btn.dataset.saved = 'true';
-                btn.classList.remove('text-gray-400', 'hover:text-yellow-500');
-                btn.classList.add('text-yellow-600', 'bg-yellow-50');
-                btn.innerHTML = '<i class="fas fa-bookmark"></i> 已存入靈感庫';
-                // Toast notification could be better, but alert is requested/simple
-                alert('已存入你的靈感庫！');
-            }
-        }
-
-        function renderIdeas() {
-            const list = document.getElementById('idea-list');
-            list.innerHTML = '';
+            grid.innerHTML = '';
+            hotContainer.innerHTML = '';
 
             // Sort by votes
-            const sortedIdeas = [...ideas].sort((a, b) => b.votes - a.votes);
+            const sortedWebsites = [...websites].sort((a, b) => b.votes - a.votes);
 
-            if (sortedIdeas.length === 0) {
-                list.innerHTML = '<div class="text-center py-10 text-gray-500">暫無數據，連接 Firebase 中...</div>';
+            if (sortedWebsites.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">暫無數據，快來添加第一個網頁吧！</div>';
+                hotSection.classList.add('hidden');
                 return;
             }
 
-            sortedIdeas.forEach((idea, index) => {
-                const isVoted = !!userVotes[idea.id];
-                const isTrending = idea.votes >= 10;
-                
-                // Mock "Read/New" Status
-                // Logic: Randomly assign "New" to some items for visual demo, or based on index
-                const isNew = index < 2; // Top 2 are "New"
-                const statusBadge = isNew 
-                    ? `<span class="ml-2 text-xs text-blue-600 font-bold flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded-full"><span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span> 新動態</span>`
-                    : `<span class="ml-2 text-xs text-gray-400 font-bold bg-gray-100 px-2 py-0.5 rounded-full">已閱</span>`;
+            // Render Hot Website (Top 1)
+            const topWebsite = sortedWebsites[0];
+            if (topWebsite.votes > 0) {
+                hotSection.classList.remove('hidden');
+                const hotCard = createWebsiteCard(topWebsite, true);
+                hotContainer.appendChild(hotCard);
+            } else {
+                hotSection.classList.add('hidden');
+            }
 
-                
-                // Styles (Same as before)
-                let cardClass = "bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row md:items-center justify-between transition hover:shadow-md dark:bg-gray-800 dark:border-gray-700 gap-4";
-                let rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 font-bold text-sm dark:bg-gray-700 dark:text-gray-400">#${index + 1}</span>`;
-                
-                if (index === 0) {
-                    cardClass += " border-l-4 border-l-yellow-400 ring-1 ring-yellow-100 dark:ring-yellow-900";
-                    rankBadge = `<span class="w-8 h-8 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-700 font-bold text-sm ring-2 ring-yellow-200 dark:bg-yellow-900 dark:text-yellow-200">🥇</span>`;
-                } else if (index === 1) rankBadge = `🥈`; 
-                else if (index === 2) rankBadge = `🥉`;
+            // Render Grid
+            sortedWebsites.forEach((web, index) => {
+                const card = createWebsiteCard(web, false, index);
+                grid.appendChild(card);
+            });
+        }
 
-                // Status Badges
-                let badges = '';
-                if (isTrending) badges += `<span class="ml-2 text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold"><i class="fas fa-fire"></i> 熱門</span>`;
-                if (isVoted) badges += `<span class="ml-2 text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-bold"><i class="fas fa-check"></i> 已投</span>`;
+        function createWebsiteCard(web, isHot, index) {
+            const isVoted = !!userVotes[web.id];
+            
+            const card = document.createElement('div');
+            // 小框樣式：模擬網頁預覽
+            card.className = isHot 
+                ? "bg-white p-6 rounded-2xl shadow-lg border-2 border-red-100 flex flex-col md:flex-row gap-6 items-center dark:bg-gray-800 dark:border-red-900"
+                : "bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition overflow-hidden flex flex-col dark:bg-gray-800 dark:border-gray-700 h-full"; // h-full for grid height matching
 
-                // Button State
-                const btnClass = isVoted 
-                    ? "bg-red-50 text-red-500 border border-red-200 px-4 py-2 rounded-lg font-bold text-sm hover:bg-red-100 transition dark:bg-red-900/20 dark:border-red-800 flex-1 md:flex-none text-center"
-                    : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 px-4 py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white flex-1 md:flex-none text-center";
+            // Website Preview Placeholder (Visual "Small Frame")
+            // Since we can't iframe easily, we use a styled div with domain initial or icon
+            const domain = new URL(web.url).hostname;
+            const previewColorClass = isHot ? "bg-red-50 text-red-500" : "bg-gray-100 text-gray-500";
+            
+            const previewHTML = `
+                <div class="${isHot ? 'w-full md:w-48 h-32' : 'w-full h-40'} ${previewColorClass} flex items-center justify-center flex-shrink-0 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                    <div class="text-center p-4">
+                        <i class="fas fa-globe text-4xl mb-2 opacity-50"></i>
+                        <div class="text-xs font-mono opacity-70 truncate max-w-[150px]">${domain}</div>
+                    </div>
+                    <!-- Overlay Link -->
+                    <a href="${web.url}" target="_blank" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition text-white font-bold no-underline">
+                        訪問網站 <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            `;
 
-                const btnText = isVoted ? '撤銷' : '投票';
-                const btnIcon = isVoted ? '<i class="fas fa-undo"></i>' : '<i class="fas fa-thumbs-up"></i>';
+            const btnClass = isVoted 
+                ? "bg-red-50 text-red-500 border border-red-200 w-full py-2 rounded-lg font-bold text-sm hover:bg-red-100 transition dark:bg-red-900/20 dark:border-red-800"
+                : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 w-full py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white";
 
-                const item = document.createElement('div');
-                item.className = cardClass;
-                item.innerHTML = `
-                    <div class="flex items-center gap-4 flex-1">
-                        <div class="w-8 h-8 flex items-center justify-center font-bold text-lg flex-shrink-0">${rankBadge}</div>
-                        <div class="flex flex-col">
-                            <h3 class="font-bold text-gray-800 text-lg dark:text-gray-100 flex items-center flex-wrap gap-1">
-                                ${idea.text} ${badges} ${statusBadge}
-                            </h3>
-                            <div class="text-xs text-gray-500 mt-1 dark:text-gray-400 flex items-center gap-2">
-                                <span>票數: <span class="font-bold text-green-600 dark:text-green-400">${idea.votes}</span></span>
-                                ${idea.createdBy ? `<span class="text-gray-300">|</span> <span>by ${idea.createdBy}</span>` : ''}
+            const btnText = isVoted ? `已投票 (${web.votes})` : `投票 (${web.votes})`;
+            const btnIcon = isVoted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-thumbs-up"></i>';
+
+            if (isHot) {
+                card.innerHTML = `
+                    ${previewHTML}
+                    <div class="flex-1 w-full text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2 dark:text-gray-100">
+                            <i class="fas fa-crown text-yellow-500 mr-2"></i>${web.title}
+                        </h3>
+                        <p class="text-gray-600 mb-4 dark:text-gray-300">${web.desc}</p>
+                        <div class="flex items-center gap-4 justify-center md:justify-start">
+                            <button onclick="handleVote('${web.id}')" class="${btnClass} max-w-[150px]">
+                                ${btnIcon} ${btnText}
+                            </button>
+                            <span class="text-xs text-gray-400">推薦人：${web.createdBy}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                card.innerHTML = `
+                    ${previewHTML}
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2 line-clamp-1 dark:text-gray-100" title="${web.title}">${web.title}</h3>
+                        <p class="text-sm text-gray-500 mb-4 line-clamp-2 flex-grow dark:text-gray-400" title="${web.desc}">${web.desc}</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                            <button onclick="handleVote('${web.id}')" class="${btnClass} mb-2">
+                                ${btnIcon} ${btnText}
+                            </button>
+                            <div class="flex justify-between items-center text-xs text-gray-400">
+                                <span>By ${web.createdBy}</span>
+                                <span>#${index + 1}</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="flex items-center gap-3 w-full md:w-auto">
-                        <!-- Save Button -->
-                        <button onclick="toggleSave(this)" class="text-gray-400 hover:text-yellow-500 text-sm font-bold px-3 py-2 rounded-lg hover:bg-yellow-50 transition flex items-center gap-1 whitespace-nowrap" title="加入靈感庫">
-                            <i class="far fa-bookmark"></i> <span class="hidden sm:inline">收藏靈感</span>
-                        </button>
-                        
-                        <!-- Vote Button -->
-                        <button id="vote-btn-${idea.id}" onclick="handleVote('${idea.id}')" class="${btnClass}">
-                            ${btnIcon} ${btnText}
-                        </button>
-                    </div>
                 `;
-                list.appendChild(item);
-            });
+            }
+
+            return card;
         }
 
         // --- Dark Mode (Preserved) ---
