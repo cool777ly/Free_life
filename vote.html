@@ -540,7 +540,8 @@
 
             // Render Hot Website (Top 1)
             const topWebsite = sortedWebsites[0];
-            if (topWebsite.votes > 0) {
+            // Rule: Only show hot section if votes > 5
+            if (topWebsite.votes > 5) {
                 hotSection.classList.remove('hidden');
                 const hotCard = createWebsiteCard(topWebsite, true);
                 hotContainer.appendChild(hotCard);
