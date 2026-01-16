@@ -163,16 +163,18 @@
         </div>
     </main>
 
-    <!-- Add Website Modal -->
+    <!-- Add/Edit Website Modal -->
     <div id="add-modal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-grow dark:bg-gray-800">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">添加網頁</h3>
-                <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                <h3 id="modal-title" class="text-xl font-bold text-gray-800 dark:text-gray-100">添加網頁</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <form id="add-form" class="space-y-4">
+                <input type="hidden" id="web-id"> <!-- Hidden ID for Edit Mode -->
+                
                 <div>
                     <label class="block text-sm font-bold text-gray-700 mb-1 dark:text-gray-300">網頁標題</label>
                     <input id="web-title" type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="例如：GitHub" required>
@@ -185,9 +187,15 @@
                     <label class="block text-sm font-bold text-gray-700 mb-1 dark:text-gray-300">說明 (為什麼推薦？)</label>
                     <textarea id="web-desc" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="簡短介紹這個網頁..." required></textarea>
                 </div>
-                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition shadow-md">
-                    提交網頁
-                </button>
+                
+                <div class="flex gap-3">
+                    <button type="submit" id="submit-btn" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition shadow-md">
+                        提交網頁
+                    </button>
+                    <button type="button" id="delete-btn" onclick="deleteWebsite()" class="hidden flex-none bg-red-100 text-red-600 px-4 py-3 rounded-lg font-bold hover:bg-red-200 transition" title="刪除此網頁">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -253,9 +261,9 @@
             
             // Show error in the list section
             setTimeout(() => {
-                const list = document.getElementById('idea-list');
+                const list = document.getElementById('website-grid');
                 if (list) {
-                    list.innerHTML = `<div class="text-center py-12 text-gray-400">
+                    list.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400">
                         <i class="fas fa-exclamation-triangle text-4xl mb-4 text-yellow-400"></i>
                         <p>無法連接到社群數據庫</p>
                         <p class="text-xs mt-2">(${e.message})</p>
@@ -395,7 +403,7 @@
             }
         }
 
-        // Add New Website
+        // Add New Website / Edit Website
         document.getElementById('add-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!currentUser) {
@@ -404,30 +412,83 @@
                 return;
             }
 
+            const id = document.getElementById('web-id').value;
             const title = document.getElementById('web-title').value.trim();
             const url = document.getElementById('web-url').value.trim();
             const desc = document.getElementById('web-desc').value.trim();
             
             if (title && url) {
                 try {
-                    await addDoc(collection(db, 'websites'), {
-                        title: title,
-                        url: url,
-                        desc: desc,
-                        votes: 0,
-                        createdBy: currentUser.displayName,
-                        createdAt: Date.now()
-                    });
+                    if (id) {
+                        // Edit Mode
+                        await updateDoc(doc(db, 'websites', id), {
+                            title: title,
+                            url: url,
+                            desc: desc,
+                            updatedAt: Date.now()
+                        });
+                        alert("網頁已更新！");
+                    } else {
+                        // Add Mode
+                        await addDoc(collection(db, 'websites'), {
+                            title: title,
+                            url: url,
+                            desc: desc,
+                            votes: 0,
+                            createdBy: currentUser.displayName,
+                            creatorId: currentUser.uid, // Important for permission check
+                            createdAt: Date.now()
+                        });
+                        alert("網頁已提交！感謝您的推薦。");
+                    }
                     
-                    document.getElementById('add-form').reset();
-                    document.getElementById('add-modal').classList.add('hidden');
-                    alert("網頁已提交！感謝您的推薦。");
+                    closeModal();
                 } catch (e) {
-                    console.error("Add website failed: ", e);
-                    alert("提交失敗：" + e.message);
+                    console.error("Operation failed: ", e);
+                    alert("操作失敗：" + e.message);
                 }
             }
         });
+
+        window.deleteWebsite = async function() {
+            const id = document.getElementById('web-id').value;
+            if (!id) return;
+
+            if (confirm("確定要刪除這個網頁嗎？此操作無法復原。")) {
+                try {
+                    await deleteDoc(doc(db, 'websites', id));
+                    alert("網頁已刪除。");
+                    closeModal();
+                } catch (e) {
+                    console.error("Delete failed: ", e);
+                    alert("刪除失敗：" + e.message);
+                }
+            }
+        }
+
+        // Modal Helpers
+        window.openEditModal = function(id, title, url, desc) {
+            document.getElementById('add-modal').classList.remove('hidden');
+            document.getElementById('modal-title').innerText = "編輯網頁";
+            document.getElementById('submit-btn').innerText = "更新網頁";
+            
+            document.getElementById('web-id').value = id;
+            document.getElementById('web-title').value = title;
+            document.getElementById('web-url').value = url;
+            document.getElementById('web-desc').value = desc;
+            
+            document.getElementById('delete-btn').classList.remove('hidden');
+        }
+
+        window.closeModal = function() {
+            document.getElementById('add-modal').classList.add('hidden');
+            document.getElementById('add-form').reset();
+            // Reset to "Add" state
+            document.getElementById('modal-title').innerText = "添加網頁";
+            document.getElementById('submit-btn').innerText = "提交網頁";
+            document.getElementById('web-id').value = "";
+            document.getElementById('delete-btn').classList.add('hidden');
+        }
 
         // ==========================================
         // UI Rendering
@@ -469,12 +530,22 @@
 
         function createWebsiteCard(web, isHot, index) {
             const isVoted = !!userVotes[web.id];
+            // Check ownership
+            const isOwner = currentUser && (web.creatorId === currentUser.uid || web.createdBy === currentUser.displayName); // Fallback to name for legacy data
             
             const card = document.createElement('div');
             // 小框樣式：模擬網頁預覽
             card.className = isHot 
-                ? "bg-white p-6 rounded-2xl shadow-lg border-2 border-red-100 flex flex-col md:flex-row gap-6 items-center dark:bg-gray-800 dark:border-red-900"
-                : "bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition overflow-hidden flex flex-col dark:bg-gray-800 dark:border-gray-700 h-full"; // h-full for grid height matching
+                ? "bg-white p-6 rounded-2xl shadow-lg border-2 border-red-100 flex flex-col md:flex-row gap-6 items-center dark:bg-gray-800 dark:border-red-900 relative group"
+                : "bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition overflow-hidden flex flex-col dark:bg-gray-800 dark:border-gray-700 h-full relative group";
+
+            // Edit Button (Only visible to owner)
+            const editBtn = isOwner ? `
+                <button onclick="openEditModal('${web.id}', '${web.title}', '${web.url}', '${web.desc}')" 
+                        class="absolute top-2 right-2 z-20 bg-white/90 text-gray-500 p-2 rounded-full shadow hover:text-blue-600 hover:bg-white transition opacity-0 group-hover:opacity-100" title="編輯網頁">
+                    <i class="fas fa-edit"></i>
+                </button>
+            ` : '';
 
             // Website Preview Placeholder (Visual "Small Frame")
             // Since we can't iframe easily, we use a styled div with domain initial or icon
@@ -488,7 +559,7 @@
                         <div class="text-xs font-mono opacity-70 truncate max-w-[150px]">${domain}</div>
                     </div>
                     <!-- Overlay Link -->
-                    <a href="${web.url}" target="_blank" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition text-white font-bold no-underline">
+                    <a href="${web.url}" target="_blank" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition text-white font-bold no-underline z-10">
                         訪問網站 <i class="fas fa-external-link-alt ml-2"></i>
                     </a>
                 </div>
@@ -503,6 +574,7 @@
 
             if (isHot) {
                 card.innerHTML = `
+                    ${editBtn}
                     ${previewHTML}
                     <div class="flex-1 w-full text-center md:text-left">
                         <h3 class="text-2xl font-bold text-gray-800 mb-2 dark:text-gray-100">
@@ -519,6 +591,7 @@
                 `;
             } else {
                 card.innerHTML = `
+                    ${editBtn}
                     ${previewHTML}
                     <div class="p-5 flex flex-col flex-grow">
                         <h3 class="font-bold text-lg text-gray-800 mb-2 line-clamp-1 dark:text-gray-100" title="${web.title}">${web.title}</h3>

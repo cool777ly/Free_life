@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. 網站資料 (websites)
+    match /websites/{websiteId} {
+      // 允許所有人查看網站列表
+      allow read: if true;
+      
+      // 允許已登入用戶新增網站
+      // 驗證：必須包含標題、URL、創建者名稱
+      allow create: if request.auth != null 
+                    && request.resource.data.title is string
+                    && request.resource.data.url is string;
+
+      // 更新邏輯 (Update)
+      allow update: if request.auth != null && (
+        // 情況 A：作者編輯自己的文章 (修改 title, url, desc, updatedAt)
+        (resource.data.creatorId == request.auth.uid && 
+         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['title', 'url', 'desc', 'updatedAt']))
+        ||
+        // 情況 B：大眾投票 (只修改 votes)
+        (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['votes']) && 
+         (request.resource.data.votes == resource.data.votes + 1 || request.resource.data.votes == resource.data.votes - 1))
+      );
+
+      // 刪除邏輯 (Delete)
+      // 只有作者本人可以刪除
+      allow delete: if request.auth != null && resource.data.creatorId == request.auth.uid;
+    }
+
+    // 2. 用戶資料 (users) - 用於記錄誰投過票
+    match /users/{userId} {
+      // 用戶只能讀寫自己的資料
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // 3. 其他所有資料預設禁止
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
