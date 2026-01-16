@@ -122,8 +122,22 @@
 
                     <!-- Add Button -->
                     <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="bg-green-600 text-white px-5 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-lg flex items-center gap-2">
-                        <i class="fas fa-plus"></i> <span class="hidden sm:inline">添加網頁</span>
+                        <i class="fas fa-plus"></i> <span class="hidden sm:inline">添加候選網站</span>
                     </button>
+                </div>
+            </div>
+
+            <!-- Construction Notice -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8 rounded-r-lg shadow-sm animate-fade">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-hard-hat text-blue-500 mt-1"></i>
+                    <div>
+                        <p class="text-sm text-blue-800 font-bold mb-1">建設中，每週都會逐步改進 🚧</p>
+                        <p class="text-sm text-blue-700 leading-relaxed">
+                            希望添加及投票時，可以用 <span class="font-bold underline">好用</span> 或是 <span class="font-bold underline">買過</span> 的網站。<br>
+                            如果有任何建議，歡迎在 <a href="community.html" class="text-blue-900 font-bold hover:underline">社群</a> 留言，謝謝！
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -165,7 +179,7 @@
     <div id="add-modal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-grow dark:bg-gray-800">
             <div class="flex justify-between items-center mb-6">
-                <h3 id="modal-title" class="text-xl font-bold text-gray-800 dark:text-gray-100">添加網頁</h3>
+                <h3 id="modal-title" class="text-xl font-bold text-gray-800 dark:text-gray-100">添加候選網站</h3>
                 <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -202,12 +216,27 @@
     <footer class="bg-gray-800 text-gray-400 py-10 mt-auto dark:bg-gray-950">
         <div class="container mx-auto px-4 text-center">
             
+            <!-- Social Share -->
             <div class="mb-8">
-                <h3 class="text-white font-bold mb-4 text-lg">讓更多人參與實驗</h3>
-                <button onclick="shareToX()" class="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-full font-bold transition shadow-lg inline-flex items-center gap-2 border border-gray-700">
-                    <i class="fab fa-x-twitter text-xl"></i> 分享到 X
-                </button>
-                <p class="text-xs mt-2 text-gray-500">自動帶入 Hashtag #FreeLifeExperiment</p>
+                <p class="text-sm mb-3 text-gray-300">邀請朋友見證生長 🌱</p>
+                <!-- Custom Social Buttons -->
+                <div class="flex justify-center gap-4">
+                    <a href="https://twitter.com/intent/tweet?text=我發現了一個有趣的網站「FL 實驗室」，這裡由社群投票決定未來功能！快來選出你喜歡的網站，或是推薦你的愛用工具 👉&url=https://fl-free.vercel.app/&hashtags=FreeLife,IndieHacker,WebDev" target="_blank" class="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white hover:scale-110 transition shadow-lg" title="Share on X">
+                        <i class="fab fa-x-twitter text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 flex items-center justify-center text-white hover:scale-110 transition shadow-lg" title="Instagram">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://social-plugins.line.me/lineit/share?url=https://fl-free.vercel.app/" target="_blank" class="w-10 h-10 rounded-full bg-[#00C300] flex items-center justify-center text-white hover:scale-110 transition shadow-lg" title="Line">
+                        <i class="fab fa-line text-xl"></i>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://fl-free.vercel.app/" target="_blank" class="w-10 h-10 rounded-full bg-[#1877F2] flex items-center justify-center text-white hover:scale-110 transition shadow-lg" title="Facebook">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="https://www.snapchat.com/" target="_blank" class="w-10 h-10 rounded-full bg-[#FFFC00] flex items-center justify-center text-gray-900 hover:scale-110 transition shadow-lg" title="Snapchat">
+                        <i class="fab fa-snapchat-ghost text-xl"></i>
+                    </a>
+                </div>
             </div>
 
             <div class="border-t border-gray-700 pt-6">
@@ -482,7 +511,7 @@
             document.getElementById('add-modal').classList.add('hidden');
             document.getElementById('add-form').reset();
             // Reset to "Add" state
-            document.getElementById('modal-title').innerText = "添加網頁";
+            document.getElementById('modal-title').innerText = "添加候選網站";
             document.getElementById('submit-btn').innerText = "提交網頁";
             document.getElementById('web-id').value = "";
             document.getElementById('delete-btn').classList.add('hidden');
@@ -559,10 +588,11 @@
                     const remaining = groupSize - group.length;
                     for(let j=0; j<remaining; j++) {
                         const placeholder = document.createElement('div');
-                        placeholder.className = "border-2 border-dashed border-gray-200 rounded-xl h-64 flex flex-col items-center justify-center text-gray-400 dark:border-gray-700";
+                        placeholder.className = "border-2 border-dashed border-gray-200 rounded-xl h-64 flex flex-col items-center justify-center text-gray-400 dark:border-gray-700 hover:border-green-500 hover:text-green-500 cursor-pointer transition group";
+                        placeholder.onclick = () => document.getElementById('add-modal').classList.remove('hidden');
                         placeholder.innerHTML = `
-                            <i class="fas fa-plus text-3xl mb-2 opacity-50"></i>
-                            <span class="text-sm">等待加入...</span>
+                            <i class="fas fa-plus text-3xl mb-2 opacity-50 group-hover:scale-110 transition-transform"></i>
+                            <span class="text-sm font-bold">添加候選網站</span>
                         `;
                         groupDiv.appendChild(placeholder);
                     }
