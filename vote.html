@@ -79,10 +79,8 @@
             </h1>
             <ul class="flex space-x-6 items-center text-sm md:text-base">
                 <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
-                <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
                 <li><a href="vote.html" class="hover:text-green-200 transition border-b-2 border-white font-semibold">投票</a></li>
                 <li><a href="community.html" class="hover:text-green-200 transition">社群</a></li>
-                <li><a href="resources.html" class="hover:text-green-200 transition">資源</a></li>
                 <li>
                     <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition" title="切換深色模式">
                         <i class="fas fa-moon dark:hidden"></i>
@@ -103,7 +101,7 @@
                     <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
                         <i class="fas fa-poll text-green-600 mr-3"></i> 網頁投票
                     </h1>
-                    <p class="text-gray-500 text-sm mt-1 dark:text-gray-400">選出你心目中最有價值的網站</p>
+                    <p class="text-gray-500 text-sm mt-1 dark:text-gray-400">選出你個人喜歡的</p>
                 </div>
                 
                 <div class="flex items-center gap-3">
@@ -521,31 +519,82 @@
                 hotSection.classList.add('hidden');
             }
 
-            // Render Grid
-            sortedWebsites.forEach((web, index) => {
-                const card = createWebsiteCard(web, false, index);
-                grid.appendChild(card);
-            });
+            // Render Groups
+            // Logic: Group by 3. Only show voting buttons if group is full (3 items).
+            const groupSize = 3;
+            // Filter out hot website if we want to separate it, or keep it. 
+            // Usually "All Candidates" includes everyone or excludes top. Let's include everyone for fairness in grid, or exclude top?
+            // Requirement says: "候選網頁類計放三個網站，纔會開啓一輪投票" -> implies grouping.
+            // Let's group all websites (including top one) into chunks of 3 for the grid.
+            
+            // Re-sort by creation time for "candidates" list? Or keep by votes?
+            // "候選網頁" implies a list. Let's use creation time to be fair for new groups.
+            // Or just use the sorted list. Let's stick to sorted for now but group them.
+            
+            // Actually, "Candidate websites accumulate to 3, then open a round of voting" implies a batching mechanism.
+            // Implementation: Chunk the array into groups of 3.
+            // If a chunk has < 3 items, buttons are disabled or hidden.
+            
+            for (let i = 0; i < sortedWebsites.length; i += groupSize) {
+                const group = sortedWebsites.slice(i, i + groupSize);
+                const isGroupFull = group.length === groupSize;
+                
+                // Create a group container (visual separator)
+                const groupDiv = document.createElement('div');
+                groupDiv.className = "col-span-full grid grid-cols-1 md:grid-cols-3 gap-8 p-6 bg-gray-50 rounded-2xl border border-gray-100 dark:bg-gray-800/50 dark:border-gray-700 relative";
+                
+                // Group Label
+                const groupLabel = document.createElement('div');
+                groupLabel.className = "col-span-full text-xs font-bold text-gray-400 uppercase tracking-wider mb-2";
+                groupLabel.innerText = `Group ${Math.floor(i/groupSize) + 1} ${isGroupFull ? '(Open for Voting)' : '(Waiting for candidates...)'}`;
+                groupDiv.appendChild(groupLabel);
+
+                group.forEach((web, idx) => {
+                    const card = createWebsiteCard(web, false, i + idx, isGroupFull);
+                    groupDiv.appendChild(card);
+                });
+                
+                // If group is not full, show placeholder slots
+                if (!isGroupFull) {
+                    const remaining = groupSize - group.length;
+                    for(let j=0; j<remaining; j++) {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = "border-2 border-dashed border-gray-200 rounded-xl h-64 flex flex-col items-center justify-center text-gray-400 dark:border-gray-700";
+                        placeholder.innerHTML = `
+                            <i class="fas fa-plus text-3xl mb-2 opacity-50"></i>
+                            <span class="text-sm">等待加入...</span>
+                        `;
+                        groupDiv.appendChild(placeholder);
+                    }
+                }
+
+                grid.appendChild(groupDiv);
+            }
         }
 
-        function createWebsiteCard(web, isHot, index) {
+        function createWebsiteCard(web, isHot, index, isVotingEnabled = true) {
             const isVoted = !!userVotes[web.id];
             
             // Check ownership
-            // Logic: Must match UID. For legacy data without creatorId, we fallback to display name matching (less secure but helpful for transition)
             const isOwner = currentUser && (
                 web.creatorId === currentUser.uid || 
                 (!web.creatorId && web.createdBy === currentUser.displayName)
             );
             
+            // Check if user has voted for ANY website (One vote per person per site is default, 
+            // but requirement says "One vote per person ONLY".
+            // "一個網站一個人只能頭一票" -> This usually means 1 vote per site (standard). 
+            // If it means "One vote per user across ALL sites", that's different.
+            // Interpretation: "For a single website, a person can only vote once." (Standard)
+            // AND "候選網頁類計放三個網站，纔會開啓一輪投票" -> Voting enabled only when 3.
+            
             const card = document.createElement('div');
-            // 小框樣式：模擬網頁預覽
+            // Card Styles
             card.className = isHot 
                 ? "bg-white p-6 rounded-2xl shadow-lg border-2 border-red-100 flex flex-col md:flex-row gap-6 items-center dark:bg-gray-800 dark:border-red-900 relative group"
                 : "bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition overflow-hidden flex flex-col dark:bg-gray-800 dark:border-gray-700 h-full relative group";
 
             // Edit Button (Only visible to owner)
-            // Style: Visible on hover (group-hover)
             const editBtn = isOwner ? `
                 <button onclick="event.stopPropagation(); openEditModal('${web.id}', '${web.title}', '${web.url}', '${web.desc}')" 
                         class="absolute top-3 right-3 z-30 bg-gray-100 text-gray-600 w-8 h-8 rounded-full flex items-center justify-center shadow-sm hover:bg-green-600 hover:text-white transition opacity-0 group-hover:opacity-100" title="編輯網頁">
@@ -553,29 +602,52 @@
                 </button>
             ` : '';
 
-            // Website Preview Placeholder (Visual "Small Frame")
+            // Website Preview
             const domain = new URL(web.url).hostname;
-            const previewColorClass = isHot ? "bg-red-50 text-red-500" : "bg-gray-100 text-gray-500";
+            // Use Microlink API for screenshot
+            const screenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(web.url)}&screenshot=true&meta=false&embed=screenshot.url`;
             
             const previewHTML = `
-                <div class="${isHot ? 'w-full md:w-48 h-32' : 'w-full h-40'} ${previewColorClass} flex items-center justify-center flex-shrink-0 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                    <div class="text-center p-4">
+                <div class="${isHot ? 'w-full md:w-48 h-32' : 'w-full h-40'} bg-gray-100 flex items-center justify-center flex-shrink-0 relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                    <!-- Loading State / Fallback -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-400 z-0">
                         <i class="fas fa-globe text-4xl mb-2 opacity-50"></i>
                         <div class="text-xs font-mono opacity-70 truncate max-w-[150px]">${domain}</div>
                     </div>
+                    <!-- Screenshot Image -->
+                    <img src="${screenshotUrl}" alt="${web.title}" class="absolute inset-0 w-full h-full object-cover z-10 opacity-0 transition-opacity duration-500" onload="this.style.opacity='1'" onerror="this.style.display='none'">
+                    
                     <!-- Overlay Link -->
-                    <a href="${web.url}" target="_blank" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition text-white font-bold no-underline z-10">
+                    <a href="${web.url}" target="_blank" class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition text-white font-bold no-underline z-20">
                         訪問網站 <i class="fas fa-external-link-alt ml-2"></i>
                     </a>
                 </div>
             `;
 
-            const btnClass = isVoted 
-                ? "bg-red-50 text-red-500 border border-red-200 w-full py-2 rounded-lg font-bold text-sm hover:bg-red-100 transition dark:bg-red-900/20 dark:border-red-800"
-                : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 w-full py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white";
-
-            const btnText = isVoted ? `已投票 (${web.votes})` : `投票 (${web.votes})`;
-            const btnIcon = isVoted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-thumbs-up"></i>';
+            // Button Logic
+            let btnClass, btnText, btnIcon, btnAction;
+            
+            if (isHot) {
+                // Hot Website: Display vote count only, no action
+                btnClass = "bg-yellow-50 text-yellow-700 border border-yellow-200 w-full py-2 rounded-lg font-bold text-sm cursor-default";
+                btnText = `${web.votes} 票`;
+                btnIcon = '<i class="fas fa-trophy"></i>';
+                btnAction = ""; // No action
+            } else if (!isVotingEnabled) {
+                // Group not full
+                btnClass = "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 w-full py-2 rounded-lg font-bold text-sm dark:bg-gray-700 dark:border-gray-600";
+                btnText = "等待分組滿員";
+                btnIcon = '<i class="fas fa-clock"></i>';
+                btnAction = "";
+            } else {
+                // Normal Voting
+                btnClass = isVoted 
+                    ? "bg-red-50 text-red-500 border border-red-200 w-full py-2 rounded-lg font-bold text-sm hover:bg-red-100 transition dark:bg-red-900/20 dark:border-red-800"
+                    : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200 w-full py-2 rounded-lg font-bold text-sm transition dark:bg-green-900/30 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white";
+                btnText = isVoted ? `已投票 (${web.votes})` : `投票 (${web.votes})`;
+                btnIcon = isVoted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-thumbs-up"></i>';
+                btnAction = `onclick="handleVote('${web.id}')"`;
+            }
 
             if (isHot) {
                 card.innerHTML = `
@@ -587,7 +659,7 @@
                         </h3>
                         <p class="text-gray-600 mb-4 dark:text-gray-300">${web.desc}</p>
                         <div class="flex items-center gap-4 justify-center md:justify-start">
-                            <button onclick="handleVote('${web.id}')" class="${btnClass} max-w-[150px]">
+                            <button ${btnAction} class="${btnClass} max-w-[150px]">
                                 ${btnIcon} ${btnText}
                             </button>
                             <span class="text-xs text-gray-400">推薦人：${web.createdBy}</span>
@@ -603,7 +675,7 @@
                         <p class="text-sm text-gray-500 mb-4 line-clamp-2 flex-grow dark:text-gray-400" title="${web.desc}">${web.desc}</p>
                         
                         <div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-                            <button onclick="handleVote('${web.id}')" class="${btnClass} mb-2">
+                            <button ${btnAction} class="${btnClass} mb-2">
                                 ${btnIcon} ${btnText}
                             </button>
                             <div class="flex justify-between items-center text-xs text-gray-400">

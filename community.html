@@ -50,11 +50,8 @@
             <!-- Desktop Menu -->
             <ul class="hidden md:flex space-x-6 items-center">
                 <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
-                <li><a href="origin.html" class="hover:text-green-200 transition">緣起</a></li>
-                <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
                 <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
                 <li><a href="community.html" class="hover:text-green-200 transition font-bold border-b-2 border-white">社群</a></li>
-                <li><a href="resources.html" class="hover:text-green-200 transition">資源</a></li>
                 <li>
                     <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-green-600 transition" aria-label="Toggle Dark Mode">
                         <i class="fas fa-moon dark:hidden"></i>
@@ -73,11 +70,8 @@
         <div id="mobile-menu" class="hidden md:hidden bg-green-800 absolute top-full left-0 w-full shadow-lg border-t border-green-700">
             <ul class="flex flex-col p-4 space-y-4">
                 <li><a href="index.html" class="block hover:text-green-200 transition border-b border-green-700 pb-2">首頁</a></li>
-                <li><a href="origin.html" class="block hover:text-green-200 transition border-b border-green-700 pb-2">緣起</a></li>
-                <li><a href="build_log.html" class="block hover:text-green-200 transition border-b border-green-700 pb-2">建造紀錄</a></li>
                 <li><a href="vote.html" class="block hover:text-green-200 transition border-b border-green-700 pb-2">投票</a></li>
                 <li><a href="community.html" class="block hover:text-green-200 transition border-b border-green-700 pb-2 font-bold">社群</a></li>
-                <li><a href="resources.html" class="block hover:text-green-200 transition border-b border-green-700 pb-2">資源</a></li>
                 <li>
                     <button onclick="toggleDarkMode()" class="flex items-center gap-2 hover:text-green-200 transition w-full text-left py-2">
                         <i class="fas fa-moon dark:hidden"></i>
@@ -188,14 +182,8 @@
                     <i class="fas fa-users text-green-600 mr-2"></i> 與 FL 一起生長：社群共創板
                 </h2>
                 
-                <!-- Quick Templates -->
-                <div class="mb-4 flex flex-wrap gap-2">
-                    <span class="text-xs text-gray-500 flex items-center mr-1">一鍵帶入模板：</span>
-                    <button onclick="fillTemplate('我在做 ______ 時遇到 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">遇到困難</button>
-                    <button onclick="fillTemplate('如果有人用 ______ 提示詞想得到 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">Prompt分享</button>
-                    <button onclick="fillTemplate('我建議 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">給建議</button>
-                    <button onclick="fillTemplate('發現一個 Bug：在 ______ 點擊 ______ 會 ______')" class="text-xs bg-gray-100 hover:bg-green-100 hover:text-green-700 px-2 py-1 rounded transition border border-gray-200">回報Bug</button>
-                </div>
+                <!-- Quick Templates (Removed) -->
+                <!-- <div class="mb-4 flex flex-wrap gap-2"> ... </div> -->
 
                 <form id="comment-form" class="space-y-4">
                     <div class="flex gap-4">

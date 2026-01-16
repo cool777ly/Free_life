@@ -31,16 +31,14 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
 
-    <!-- Navigation -->
+        <!-- Navigation -->
     <nav class="bg-green-700 text-white p-4 shadow-md fixed w-full top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-wider">FL</h1>
             <ul class="flex space-x-6">
                 <li><a href="index.html" class="hover:text-green-200 transition">首頁</a></li>
-                <li><a href="build_log.html" class="hover:text-green-200 transition">建造紀錄</a></li>
                 <li><a href="vote.html" class="hover:text-green-200 transition">投票</a></li>
                 <li><a href="community.html" class="hover:text-green-200 transition">社群</a></li>
-                <li><a href="resources.html" class="hover:text-green-200 transition">資源</a></li>
             </ul>
         </div>
     </nav>
@@ -86,180 +84,11 @@
                 </a>
             </div>
 
-            <!-- Weekly Update Summary & Preview -->
-            <div class="bg-white/80 backdrop-blur-sm border border-green-100 rounded-2xl p-6 max-w-2xl mx-auto shadow-sm text-left mb-12">
-                <div class="flex items-start gap-4">
-                    <div class="bg-green-100 text-green-600 p-3 rounded-full hidden sm:block">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-800 mb-2">🚀 本週重點：Firestore 實時同步上線</h3>
-                        <p class="text-sm text-gray-600 mb-3">
-                            投票系統現在支援即時（Real-time）數據同步，你的每一票都能秒速回饋到社群智慧牆上。
-                        </p>
-                        <div class="text-xs text-blue-600 font-bold bg-blue-50 inline-block px-2 py-1 rounded mb-2">
-                            下週預告：【自動化實戰】AI Agent 自動篩選熱門提案
-                        </div>
-                        <a href="build_log.html" class="text-sm text-green-600 hover:text-green-800 font-bold block mt-1">
-                            智慧在互動中增長，點擊查看本週最新的 Build Log →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stats Bar -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto border-t border-gray-100 pt-10">
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-gray-900">3</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">更新次數</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-gray-900">15+</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">決策投票</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-gray-900">5+</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">社群互動</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-green-600">Day 3</div>
-                    <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">運行天數</div>
-                </div>
-            </div>
+            <!-- Weekly Update Summary & Preview (Hidden as per request) -->
+            <!-- Stats Bar (Hidden as per request) -->
+            
         </div>
     </header>
-
-    <!-- Interactive Events Section -->
-    <section class="max-w-6xl mx-auto py-12 px-4">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">
-            <i class="fas fa-gamepad text-green-600 mr-2"></i> 本週互動活動
-        </h2>
-        <div class="grid md:grid-cols-3 gap-6">
-            <!-- Event 1 -->
-            <div class="bg-gradient-to-br from-purple-50 to-white p-6 rounded-2xl border border-purple-100 hover:shadow-lg transition group">
-                <div class="text-3xl mb-4 group-hover:scale-110 transition-transform">🏃</div>
-                <h3 class="font-bold text-gray-800 mb-2">提案馬拉松</h3>
-                <p class="text-sm text-gray-600 mb-4">針對「AI 助手如何優化日程」提交你的需求。獲讚最高者可獲得一對一諮詢。</p>
-                <a href="vote.html" class="text-sm font-bold text-purple-600 hover:text-purple-800">
-                    去提案 <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-            <!-- Event 2 -->
-            <div class="bg-gradient-to-br from-red-50 to-white p-6 rounded-2xl border border-red-100 hover:shadow-lg transition group">
-                <div class="text-3xl mb-4 group-hover:scale-110 transition-transform">🐛</div>
-                <h3 class="font-bold text-gray-800 mb-2">Bug 獵人週</h3>
-                <p class="text-sm text-gray-600 mb-4">幫助我們完善新上線的 Firestore 投票系統。回報任何顯示錯誤，領取「核心貢獻者」勳章。</p>
-                <a href="community.html" class="text-sm font-bold text-red-600 hover:text-red-800">
-                    回報 Bug <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-            <!-- Event 3 -->
-            <div class="bg-gradient-to-br from-blue-50 to-white p-6 rounded-2xl border border-blue-100 hover:shadow-lg transition group">
-                <div class="text-3xl mb-4 group-hover:scale-110 transition-transform">🧩</div>
-                <h3 class="font-bold text-gray-800 mb-2">靈感拆解會</h3>
-                <p class="text-sm text-gray-600 mb-4">分享你最常使用的 AI 提示詞。我們將選出 3 組放入官方 Prompt 庫。</p>
-                <a href="community.html" class="text-sm font-bold text-blue-600 hover:text-blue-800">
-                    分享 Prompt <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Community Buzz Wall Section -->
-    <section class="bg-gray-50 py-16 px-4">
-        <div class="max-w-5xl mx-auto">
-            <div class="flex justify-between items-end mb-10">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">社群智慧火花</h2>
-                    <p class="text-gray-500">聽聽大家怎麼說，或者貢獻你的觀點。</p>
-                </div>
-                <a href="community.html" class="hidden md:inline-block text-green-600 font-bold hover:underline">
-                    加入對話，貢獻你的觀點 →
-                </a>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Buzz Card 1 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 relative">
-                    <i class="fas fa-quote-left text-green-100 text-4xl absolute top-4 left-4"></i>
-                    <p class="text-gray-600 italic relative z-10 mb-4 pt-4">
-                        「這個自動化流程節省了我每天 2 小時的重複勞動... 如果能結合 Notion API 就更完美了！」
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-500">U1</div>
-                        <div>
-                            <div class="text-sm font-bold text-gray-900">@Alex_Dev</div>
-                            <div class="text-xs text-gray-400">2 小時前</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Buzz Card 2 -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 relative">
-                    <i class="fas fa-quote-left text-blue-100 text-4xl absolute top-4 left-4"></i>
-                    <p class="text-gray-600 italic relative z-10 mb-4 pt-4">
-                        「沒想到 LocalStorage 還能這樣用，對於 MVP 驗證來說確實是個聰明的選擇，期待 Firestore 的表現。」
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs font-bold text-gray-500">U2</div>
-                        <div>
-                            <div class="text-sm font-bold text-gray-900">@Sarah_Product</div>
-                            <div class="text-xs text-gray-400">5 小時前</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-8 text-center md:hidden">
-                <a href="community.html" class="text-green-600 font-bold hover:underline">
-                    加入對話，貢獻你的觀點 →
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Milestones Section (New) -->
-    <section class="max-w-6xl mx-auto py-20 px-4">
-        <h2 class="text-3xl font-bold text-gray-900 mb-12 flex items-center">
-            <i class="fas fa-flag-checkered text-green-600 mr-3"></i> 實驗里程碑
-        </h2>
-        <div class="grid md:grid-cols-5 gap-4">
-            <!-- M1 -->
-            <div class="bg-green-50 p-6 rounded-2xl border border-green-100 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl text-green-600"><i class="fas fa-rocket"></i></div>
-                <div class="text-xs font-bold text-green-600 mb-2">2026-01-05</div>
-                <h3 class="font-bold text-gray-800 mb-2">實驗啟動</h3>
-                <p class="text-sm text-gray-600">網站上線，Hello World。</p>
-            </div>
-            <!-- M2 -->
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 relative overflow-hidden shadow-sm">
-                <div class="absolute top-0 right-0 p-2 opacity-5 text-6xl text-gray-400"><i class="fas fa-vote-yea"></i></div>
-                <div class="text-xs font-bold text-green-600 mb-2">Day 2</div>
-                <h3 class="font-bold text-gray-800 mb-2">投票權下放</h3>
-                <p class="text-sm text-gray-600">LocalStorage 投票系統。</p>
-            </div>
-            <!-- M3 -->
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 relative overflow-hidden shadow-sm">
-                <div class="absolute top-0 right-0 p-2 opacity-5 text-6xl text-gray-400"><i class="fas fa-chart-bar"></i></div>
-                <div class="text-xs font-bold text-green-600 mb-2">Day 3</div>
-                <h3 class="font-bold text-gray-800 mb-2">數據感知</h3>
-                <p class="text-sm text-gray-600">前端自動監測熱門想法。</p>
-            </div>
-            <!-- M4 (Empty) -->
-            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 relative border-dashed flex items-center justify-center text-center">
-                <div>
-                    <div class="text-gray-400 mb-2"><i class="fas fa-lock"></i></div>
-                    <p class="text-xs text-gray-400">即將解鎖</p>
-                </div>
-            </div>
-            <!-- M5 (Empty) -->
-            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 relative border-dashed flex items-center justify-center text-center">
-                <div>
-                    <div class="text-gray-400 mb-2"><i class="fas fa-lock"></i></div>
-                    <p class="text-xs text-gray-400">即將解鎖</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Origin Story Section (Prominent) -->
     <section class="max-w-5xl mx-auto py-8 px-4">
@@ -289,132 +118,14 @@
         </div>
     </section>
 
-    <!-- Core Principles Section -->
-    <section class="max-w-5xl mx-auto py-16 px-4 animate-grow" style="animation-delay: 0.2s;">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">實驗核心原則</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group border-t-4 border-green-500">
-                <div class="text-green-600 text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-hammer"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">真實建造</h3>
-                <p class="text-gray-600">不展示精修的結果，而是還原粗糙的建造過程。每一次迭代，都是真實的足跡。</p>
-            </div>
-            
-            <!-- Card 2 -->
-            <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group border-t-4 border-green-500">
-                <div class="text-green-600 text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">人機共創</h3>
-                <p class="text-gray-600">這不是 AI 取代人類的故事，而是人類如何運用 AI 突破邊界、實現想法的實驗。</p>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group border-t-4 border-green-500">
-                <div class="text-green-600 text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-seedling"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-3">持續生長</h3>
-                <p class="text-gray-600">開始時它是空白的，甚至充滿 Bug。但它會像有機體一樣，在反饋中持續進化。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Recent Updates Section (Redesigned) -->
-    <section class="max-w-4xl mx-auto py-16 px-4 animate-grow" style="animation-delay: 0.4s;">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">近期更新 / Recent Updates</h2>
-        
-        <div class="space-y-4">
-            <!-- Update 4 (Latest) -->
-            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-green-600 group flex justify-between items-center">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">架構</span>
-                        <span class="text-xs text-gray-400">Day 4</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">Firestore 實戰：解決靜態網頁與動態資料庫的通訊難題</h3>
-                    <p class="text-sm text-gray-500 mt-1 line-clamp-1">從 LocalStorage 到 Firestore，我們終於實現了真正的社群同步。</p>
-                </div>
-                <div class="text-gray-300 group-hover:text-green-500 transition">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-
-            <!-- Update 3 -->
-            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-green-500 group flex justify-between items-center">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded">技術</span>
-                        <span class="text-xs text-gray-400">Day 3</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-green-700 transition">感知社群：前端自動化與成長迴圈</h3>
-                    <p class="text-sm text-gray-500 mt-1 line-clamp-1">如何讓網站自己「看見」熱門想法並自動更新首頁？</p>
-                </div>
-                <div class="text-gray-300 group-hover:text-green-500 transition">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-
-            <!-- Update 2 -->
-            <a href="build_log.html" class="block bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border-l-4 border-blue-500 group flex justify-between items-center">
-                <div>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">互動</span>
-                        <span class="text-xs text-gray-400">Day 2</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-700 transition">權力下放：LocalStorage 去中心化投票</h3>
-                    <p class="text-sm text-gray-500 mt-1 line-clamp-1">沒有後端也能做投票？防刷票機制的實作細節。</p>
-                </div>
-                <div class="text-gray-300 group-hover:text-blue-500 transition">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-        </div>
-        
-        <div class="text-center mt-10">
-            <a href="build_log.html" class="inline-flex items-center bg-gray-100 text-gray-600 font-semibold hover:bg-green-600 hover:text-white px-6 py-3 rounded-full transition">
-                瀏覽所有日誌 <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- FAQ Section (New) -->
-    <section class="max-w-4xl mx-auto py-16 px-4">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">常見問題 / FAQ</h2>
-        <div class="space-y-4">
-            <!-- Q1 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-lg text-gray-900 mb-2 flex items-center">
-                    <span class="bg-green-100 text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3">Q</span>
-                    這個網站是什麼？
-                </h3>
-                <p class="text-gray-600 pl-9">這是一個「一人 + AI」的共創實驗室。我記錄下每一個開發細節（Build Log），並透過社群投票（Vote）來決定網站的下一個功能。</p>
-            </div>
-            <!-- Q2 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-lg text-gray-900 mb-2 flex items-center">
-                    <span class="bg-green-100 text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3">Q</span>
-                    我可以在這裡學到什麼？
-                </h3>
-                <p class="text-gray-600 pl-9">你可以學到如何利用 AI 工具（如 Cursor, Trae）從零構建產品、前端技術實戰（Tailwind, Firebase），以及一人開發者的生存心法。</p>
-            </div>
-            <!-- Q3 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-lg text-gray-900 mb-2 flex items-center">
-                    <span class="bg-green-100 text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3">Q</span>
-                    我可以在怎麼參與？
-                </h3>
-                <p class="text-gray-600 pl-9">最簡單的方式是去 <a href="vote.html" class="text-green-600 underline font-bold">投票頁</a> 支持你喜歡的功能。如果你有技術背景，歡迎在社群頁指導我；如果你是普通用戶，歡迎分享你的使用體驗。</p>
-            </div>
-            <!-- Q4 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="font-bold text-lg text-gray-900 mb-2 flex items-center">
-                    <span class="bg-green-100 text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-xs mr-3">Q</span>
-                    我是第一次來，該看哪裡？
-                </h3>
-                <p class="text-gray-600 pl-9">建議先看 <a href="origin.html" class="text-green-600 underline font-bold">起源故事</a> 了解為什麼開始，然後去 <a href="build_log.html" class="text-green-600 underline font-bold">建造日誌</a> 看看我們已經走了多遠。</p>
+    <!-- Community Buzz Wall Section -->
+    <section class="bg-gray-50 py-16 px-4">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">大家喜歡的是什麼呢</h2>
+            <div class="mt-8">
+                <a href="vote.html" class="inline-block text-green-600 font-bold hover:underline text-xl">
+                    去投票吧 →
+                </a>
             </div>
         </div>
     </section>
@@ -422,48 +133,10 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-400 text-center py-12 mt-12">
         <div class="container mx-auto px-4">
-            
-            <div class="grid md:grid-cols-3 gap-12 text-left mb-12 border-b border-gray-700 pb-12">
-                <!-- About -->
-                <div>
-                    <h3 class="text-white font-bold mb-4">關於 Free_life</h3>
-                    <p class="text-sm leading-relaxed">
-                        這是一個記錄一人與 AI 如何透過共創實驗打造產品的過程。我們相信技術應該服務於生活，讓每個人都能找到屬於自己的自由流動。
-                    </p>
-                </div>
-                <!-- FAQ Quick Links -->
-                <div>
-                    <h3 class="text-white font-bold mb-4">常見問題 (FAQ)</h3>
-                    <ul class="text-sm space-y-2">
-                        <li><a href="#" class="hover:text-white transition">● 這是什麼樣的實驗？</a></li>
-                        <li><a href="vote.html" class="hover:text-white transition">● 我可以參與開發嗎？</a></li>
-                        <li><a href="origin.html" class="hover:text-white transition">● 為什麼要公開建造過程？</a></li>
-                    </ul>
-                </div>
-                <!-- Newsletter Simulation -->
-                <div>
-                    <h3 class="text-white font-bold mb-4">獲取實戰報告</h3>
-                    <p class="text-sm mb-4">每週五發送「自動化實戰報告」，包含本週最強 Prompt 與實戰解析。</p>
-                    <div class="flex gap-2">
-                        <input type="email" placeholder="您的 Email" class="bg-gray-700 border-none rounded-lg px-4 py-2 text-sm flex-1 focus:ring-2 focus:ring-green-500">
-                        <button class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-green-700 transition">訂閱</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social Share -->
-            <div class="mb-8">
-                <p class="text-sm mb-3 text-gray-300">邀請朋友見證生長 🌱</p>
-                <!-- AddThis Inline Share Toolbox -->
-                <div class="addthis_inline_share_toolbox text-center"></div>
-            </div>
-
+            <!-- Simplified Footer -->
             <div class="mb-4">
                 <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-sm">🚧 網站持續進化中 | This site is evolving</span>
             </div>
-            <p class="mb-2 text-sm">
-                <a href="origin.html" class="hover:text-white transition underline">為什麼會有這個網站？</a>
-            </p>
             <p class="text-xs">&copy; 2026 FL. Last updated: 2026-01-12</p>
         </div>
     </footer>
