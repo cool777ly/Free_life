@@ -530,8 +530,13 @@
 
         function createWebsiteCard(web, isHot, index) {
             const isVoted = !!userVotes[web.id];
+            
             // Check ownership
-            const isOwner = currentUser && (web.creatorId === currentUser.uid || web.createdBy === currentUser.displayName); // Fallback to name for legacy data
+            // Logic: Must match UID. For legacy data without creatorId, we fallback to display name matching (less secure but helpful for transition)
+            const isOwner = currentUser && (
+                web.creatorId === currentUser.uid || 
+                (!web.creatorId && web.createdBy === currentUser.displayName)
+            );
             
             const card = document.createElement('div');
             // 小框樣式：模擬網頁預覽
@@ -540,15 +545,15 @@
                 : "bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition overflow-hidden flex flex-col dark:bg-gray-800 dark:border-gray-700 h-full relative group";
 
             // Edit Button (Only visible to owner)
+            // Style: Visible on hover (group-hover)
             const editBtn = isOwner ? `
-                <button onclick="openEditModal('${web.id}', '${web.title}', '${web.url}', '${web.desc}')" 
-                        class="absolute top-2 right-2 z-20 bg-white/90 text-gray-500 p-2 rounded-full shadow hover:text-blue-600 hover:bg-white transition opacity-0 group-hover:opacity-100" title="編輯網頁">
-                    <i class="fas fa-edit"></i>
+                <button onclick="event.stopPropagation(); openEditModal('${web.id}', '${web.title}', '${web.url}', '${web.desc}')" 
+                        class="absolute top-3 right-3 z-30 bg-gray-100 text-gray-600 w-8 h-8 rounded-full flex items-center justify-center shadow-sm hover:bg-green-600 hover:text-white transition opacity-0 group-hover:opacity-100" title="編輯網頁">
+                    <i class="fas fa-pen text-xs"></i>
                 </button>
             ` : '';
 
             // Website Preview Placeholder (Visual "Small Frame")
-            // Since we can't iframe easily, we use a styled div with domain initial or icon
             const domain = new URL(web.url).hostname;
             const previewColorClass = isHot ? "bg-red-50 text-red-500" : "bg-gray-100 text-gray-500";
             
